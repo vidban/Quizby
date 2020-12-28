@@ -3,6 +3,7 @@ import os
 from flask import Flask, session, g,  render_template
 from flask_debugtoolbar import DebugToolbarExtension
 
+from forms import LoginForm
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
 app = Flask(__name__)
@@ -47,3 +48,23 @@ def do_logout():
 def home():
     """Render Homepage"""
     return render_template("base.html")
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    """Handle user login."""
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.authenticate(form.username.data,
+                                 form.password.data)
+
+        if user:
+            do_login(user)
+            flash(f"Hello, {user.username}!", "success")
+            return redirect("/")
+
+        flash("Invalid credentials.", 'danger')
+
+    return render_template('users/login.html', form=form)
