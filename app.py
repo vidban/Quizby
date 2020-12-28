@@ -1,17 +1,27 @@
 import os
 
-from flask import Flask, session, g,  render_template
+from flask import Flask, session, g,  render_template, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from forms import LoginForm
+from models import db, connect_db, User
+
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
 app = Flask(__name__)
 
+# Get DB_URI from environ variable or,
+# if not set there, use development local db.
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 'postgres:///quizby')
+
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
+connect_db(app)
 
 ##############################################################################
 # User signup/login/logout

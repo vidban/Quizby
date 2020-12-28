@@ -1,5 +1,9 @@
-/* **************Navbar**************** */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');/* **************Navbar**************** */
+body{
+  background-color: #def2f1;
+  height: 100vh;
+}
+/* **************Navbar*********** */
 .navbar {
 	background-color: #333;
 	height: 50px;
@@ -47,11 +51,6 @@
    a background color.
  */
 
-.onboarding > .navbar {
-	background: rgb(23,37,42);
-	background: linear-gradient(90deg, rgba(23,37,42,1) 0%, rgba(43,122,120,1) 42%, rgba(58,175,169,1) 100%);
-  }
-  
   .onboarding .navbar-header {
 	margin: 0 auto;
   }
@@ -69,15 +68,51 @@
 	right: 16px;
   }
   
-  .onboarding > .navbar a {
-	color: #fff;
+  .onboarding .navbar a {
+	color: #def2f1;
   }
   
   .onboarding {
-	background-color: #3aafa9;
+  background-color: #3aafa9;
+  font-family: 'Montserrat', sans-serif;
   }
   
-  nav + .container {
-	margin-bottom: 1rem;
+
+  /* ************ Login***************** */
+
+  .login-main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-main .join-message{
+    color: #333;
+    text-align: center;
+  }
+
+  .login-main .login{
+    border-radius: 35px;
+    background-color: #def2f1;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-main .login-form{
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  .login-main .input-group-text{
+    color: #17252A;
+    background-color: #3aafa9;
+  }
+
+  .login-main .btn{
+    background-color: #333;
+    color: #fff;
   }
   
