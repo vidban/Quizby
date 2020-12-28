@@ -1,7 +1,9 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, session, g,  render_template
 from flask_debugtoolbar import DebugToolbarExtension
+
+CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
 app = Flask(__name__)
 
