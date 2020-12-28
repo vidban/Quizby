@@ -1,0 +1,49 @@
+/* **************Navbar**************** */
+
+.navbar {
+	background-color: #333;
+	height: 50px;
+	border-bottom: 1px solid rgba(240, 232, 232, 0.25);
+	margin-bottom: 1rem;
+	position: relative;
+	z-index: 9999;
+  }
+  
+  .navbar a {
+	color: #2b7a78;
+	font-size: 1.2em;
+	font-weight: bold;
+  }
+  
+  .navbar a:hover {
+	color: #3aafa9;
+  }
+  
+  .navbar-brand {
+	display: flex;
+	align-items: center;
+  }
+  
+  .navbar-brand > img {
+	display: inline-block;
+	margin-bottom: 2px;
+	margin-right: 5px;
+	width: 40px;
+	border-radius: 2px;
+	background: transparent;
+  }
+  
+  .nav > li > a > img {
+	width: 32px;
+	border-radius: 32px;
+  }
+  
+  ul.nav.navbar-nav {
+	align-items: center;
+  }
+  
+  ul.nav.navbar-nav li {
+	margin: 0 0.5rem;
+	display: flex;
+  }
+  
