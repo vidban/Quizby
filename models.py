@@ -95,6 +95,7 @@ class User(db.Model):
             username=username,
             email=email,
             password=hashed_pwd,
+            image_url=image_url,
         )
 
         db.session.add(user)

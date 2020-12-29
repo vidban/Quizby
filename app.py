@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, session, g,  render_template, flash, session
+from flask import Flask, session, g,  render_template, flash, session, redirect
 from flask_debugtoolbar import DebugToolbarExtension
+from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm
+from forms import LoginForm, UserAddForm
 from models import db, connect_db, User
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
@@ -78,3 +79,33 @@ def login():
         flash("Invalid credentials.", 'danger')
 
     return render_template('users/login.html', form=form)
+
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    """Handle user signup."""
+
+    if CURR_USER_KEY in session:
+        del session[curr]
+    form = UserAddForm()
+
+    if form.validate_on_submit():
+        try:
+            user = User.signup(
+                username=form.username.data,
+                email=form.email.data,
+                password=form.password.data,
+                image_url=form.image_url.data or User.image_url.default.arg,
+            )
+            db.session.commit()
+
+        except IntegrityError:
+            flash("Username already taken", 'danger')
+            return render_template('users/signup.html', form=form)
+
+        do_login(user)
+
+        return redirect('/')
+
+    else:
+        return render_template('users/signup.html', form=form)
