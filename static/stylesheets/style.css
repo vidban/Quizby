@@ -23,11 +23,14 @@ body{
   .navbar a {
 	color: #2b7a78;
 	font-size: 1.2em;
-	font-weight: bold;
+  font-weight: bold;
+  text-decoration: none;
   }
   
-  .navbar a:hover {
-	color: #3aafa9;
+  .navbar a:hover,
+  .navbar a:active {
+  color: #3aafa9;
+  text-decoration: underline;
   }
   
   .navbar-brand {
@@ -44,16 +47,12 @@ body{
 	background: transparent;
   }
 
-  .navbar-collapse{
-    flex-grow: unset;
-  }
-  
-  ul.navbar-nav {
+  ul.nav.navbar-nav {
   align-items: center;
   float: right;
   }
   
-  ul.navbar-nav li {
+  ul.nav.navbar-nav li {
 	margin: 0 1.0rem;
 	display: flex;
   }
@@ -75,7 +74,7 @@ body{
 	display: none;
   }
   
-  .onboarding .navbar-nav.navbar-right {
+  .onboarding .nav.navbar-nav.navbar-right {
 	position: absolute;
 	right: 16px;
   }
