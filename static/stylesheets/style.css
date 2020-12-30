@@ -43,12 +43,17 @@ body{
 	border-radius: 2px;
 	background: transparent;
   }
-  
-  ul.nav.navbar-nav {
-	align-items: center;
+
+  .navbar-collapse{
+    flex-grow: unset;
   }
   
-  ul.nav.navbar-nav li {
+  ul.navbar-nav {
+  align-items: center;
+  float: right;
+  }
+  
+  ul.navbar-nav li {
 	margin: 0 1.0rem;
 	display: flex;
   }
@@ -70,7 +75,7 @@ body{
 	display: none;
   }
   
-  .onboarding .nav.navbar-nav.navbar-right {
+  .onboarding .navbar-nav.navbar-right {
 	position: absolute;
 	right: 16px;
   }
