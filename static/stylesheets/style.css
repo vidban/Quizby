@@ -144,7 +144,7 @@ body{
   top: 0;
   width: 100vw;
   left: 0;
-  background-color: #3aaf89;
+  background-color: #3aafa9;
   text-align: center;
   color: #17252a;
   padding: 0 1rem;
@@ -152,9 +152,6 @@ body{
 
 .home-hero .welcome-message{
   width: 100%;
-}
 
-.home-hero h1 {
-  margin-bottom: 4rem;
 }
 

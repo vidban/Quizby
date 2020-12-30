@@ -57,8 +57,11 @@ def do_logout():
 
 @app.route("/")
 def home():
-    """Render Homepage"""
-    return render_template("home-quizby.html")
+    """Render Homepage based on user login status"""
+    if g.user:
+        return render_template('users/home.html')
+    else:
+        return render_template("home-quizby.html")
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -73,7 +76,6 @@ def login():
 
         if user:
             do_login(user)
-            flash(f"Hello, {user.username}!", "success")
             return redirect("/")
 
         flash("Invalid credentials.", 'danger')
