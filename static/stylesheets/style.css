@@ -3,6 +3,14 @@ body{
   background-color: #def2f1;
   height: 100vh;
 }
+
+.btn{
+  border-radius: 50px;
+}
+
+.btn:hover{
+  cursor: pointer;
+}
 /* **************Navbar*********** */
 .navbar {
 	background-color: #333;
@@ -152,6 +160,21 @@ body{
 
 .home-hero .welcome-message{
   width: 100%;
+}
 
+.home-hero .btn{
+  width: 150px;
+  color: #def2f1;
+  background-color: #17252a;
+  border-color: #17252a;
+}
+
+.home-hero small{
+  display: block;
+}
+
+.home-hero small a{
+  color: #17252a;
+  text-decoration: underline;
 }
 
