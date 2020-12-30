@@ -182,3 +182,8 @@ body{
   text-decoration: underline;
 }
 
+  /* ************ base ***************** */
+
+.nav .dropdown-menu{
+  left: -100% !important;
+}
