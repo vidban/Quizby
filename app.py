@@ -109,3 +109,13 @@ def signup():
 
     else:
         return render_template('users/signup.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    """Handle logout of user."""
+
+    do_logout()
+
+    flash("You have successfully logged out.", "success")
+    return redirect("/")
