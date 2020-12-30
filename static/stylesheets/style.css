@@ -77,9 +77,10 @@ body{
   }
   
 
-  /* ************ Login***************** */
+  /* ************ Login & Signup***************** */
 
-  .login-main{
+  .login-main,
+  .signup-main{
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -91,11 +92,13 @@ body{
     text-align: center;
   }
 
-  .login-main>div{
-    margin-top:-15em;
+  .login-main>div,
+  .signup-main>div{
+    text-align: center;
   }
   
-  .login-main .login{
+  .login-main .login,
+  .signup-main .signup{
     border-radius: 35px;
     background-color: #def2f1;
     padding: 5%;
@@ -105,9 +108,15 @@ body{
     align-items: center;
   }
 
-  .login-main .login-form{
+  .login-main .login-form,
+  .signup-main .signup-form{
     width: 80%;
     margin: 10px auto;
+  }
+
+  .login-main .input_group,
+  .signup-main .input-group{
+    margin: 5px 0;
   }
 
   .login-main .input-group-text{
@@ -115,12 +124,15 @@ body{
     background-color: #3aafa9;
   }
 
-  .login-main .btn{
+  .login-main .btn,
+  .signup-main .btn{
     background-color: #333;
     color: #fff;
+    width: 60%;
+    margin: 20px auto 0 auto;
   }
   
-/* ============================ Signed out home */
+  /* ************ home-quizby***************** */
 
 .home-hero {
   height: 100vh;
