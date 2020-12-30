@@ -59,9 +59,9 @@ def do_logout():
 def home():
     """Render Homepage based on user login status"""
     if g.user:
-        return render_template('users/home.html')
+        return render_template('users/dashboard.html')
     else:
-        return render_template("home-quizby.html")
+        return render_template("home-quizby.html", page="home")
 
 
 @app.route('/login', methods=["GET", "POST"])
