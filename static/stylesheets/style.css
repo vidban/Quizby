@@ -12,13 +12,19 @@ body{
 .btn:hover{
   cursor: pointer;
 }
+
+.container-fluid{
+  padding-left:0;
+}
+
 /* **************Navbar*********** */
 .navbar {
 	background-color: #333;
 	height: 62px;
 	border-bottom: 1px solid rgba(240, 232, 232, 0.25);
 	position: relative;
-	z-index: 9999;
+  z-index: 9999;
+  padding-left: .75rem;
   }
   
   .navbar a{
@@ -201,9 +207,40 @@ body{
   left: -100% !important;
 }
 
-/* ************ dashboard-nav ***************** */
+/* ************ dashboard ***************** */
 
-.dashboard-nav{
-   margin-left:0;
+.dashboard{
+  width: 100%;
+  min-height: 94vh;
+  display: flex;
+}
+.dashboard .sidebar{
+  min-height: 100%;
+  position: sticky;
+  padding: 30px 10px;
+  box-shadow: inset -7px 0px 15px -3px #2b787a;
+  background-color: transparent;
+}
 
+.dashboard .sidebar ul{
+  width: 100%;
+  list-style: none;
+  margin:0;
+  font-size: 1.6em;
+}
+
+.dashboard .sidebar ul .sidebar-item{
+  width: 100%;
+  margin: 20px 0;
+}
+
+.dashboard .sidebar ul li a{
+  text-decoration: none;
+  color: #17252a;
+  padding: 5px;
+}
+
+.dashboard .main-content{
+  width: 68%;
+  padding: 20px 10px;
 }

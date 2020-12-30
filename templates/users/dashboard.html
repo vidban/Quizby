@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="dashboard-nav">
-	<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<div class="dashboard">
+	<aside class="sidebar col-2 col-md-2 col-lg-2">
 		<div class="sidebar-sticky">
-			<ul class="nav flex-column">
-				<li class="nav-item">
-					<a href="#" class="nav-link active">My Stats</a>
+			<ul class="flex-column ">
+				<li class="sidebar-item">
+					<i class="fas fa-chart-bar"></i>
+					<a href="#" class="sidebar-link">Stats</a>
 				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link active">My Quizzes</a>
+				<li class="sidebar-item">
+					<i class="fas fa-book-open"></i>
+					<a href="#" class="sidebar-link">Quizzes</a>
 				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link active">My Questions</a>
+				<li class="sidebar-item">
+					<i class="fa fa-question"></i>
+					<a href="#" class="sidebar-link">Questions</a>
 				</li>
 			</ul>
 		</div>
-	</nav>
-
+	</aside>
+	<main class="main-content col-10 col-md-10 col-lg-10">
+		<h1>Welcome {{g.user.username}}</h1>
+	</main>
 </div>
 
-	<h1>Welcome {{g.user.username}}</h1>
 
 {% endblock %}
