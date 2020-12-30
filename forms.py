@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[Length(min=6)])
 
 
-class UserAddForm(FlaskForm):
+class AddUserForm(FlaskForm):
     """Form for adding users."""
 
     username = StringField('Username', validators=[

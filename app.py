@@ -4,7 +4,7 @@ from flask import Flask, session, g,  render_template, flash, session, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, UserAddForm
+from forms import LoginForm, AddUserForm
 from models import db, connect_db, User
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
@@ -89,7 +89,7 @@ def signup():
 
     if CURR_USER_KEY in session:
         del session[curr]
-    form = UserAddForm()
+    form = AddUserForm()
 
     if form.validate_on_submit():
         try:
@@ -134,3 +134,11 @@ def users_quizzes_dashboard(user_id):
 @app.route('/users/<int:user_id>/questions')
 def users_questions_dashboard(user_id):
     return render_template('users/questions.html')
+
+
+##############################################################################
+# Questions Routes
+
+@app.route("/questions")
+def questions():
+    return render_template('questions.html')
