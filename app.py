@@ -58,7 +58,7 @@ def do_logout():
 @app.route("/")
 def home():
     """Render Homepage"""
-    return render_template("base.html")
+    return render_template("home-quizby.html")
 
 
 @app.route('/login', methods=["GET", "POST"])

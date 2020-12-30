@@ -8,7 +8,6 @@ body{
 	background-color: #333;
 	height: 50px;
 	border-bottom: 1px solid rgba(240, 232, 232, 0.25);
-	margin-bottom: 1rem;
 	position: relative;
 	z-index: 9999;
   }
@@ -85,12 +84,17 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   .login-main .join-message{
     color: #333;
     text-align: center;
   }
 
+  .login-main>div{
+    margin-top:-15em;
+  }
+  
   .login-main .login{
     border-radius: 35px;
     background-color: #def2f1;
@@ -116,3 +120,29 @@ body{
     color: #fff;
   }
   
+/* ============================ Signed out home */
+
+.home-hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  left: 0;
+  background-color: #3aaf89;
+  text-align: center;
+  color: #17252a;
+  padding: 0 1rem;
+}
+
+.home-hero .welcome-message{
+  width: 100%;
+}
+
+.home-hero h1 {
+  margin-bottom: 4rem;
+}
+
