@@ -7,21 +7,21 @@
 			<ul class="flex-column ">
 				<li class="sidebar-item">
 					<i class="fas fa-chart-bar"></i>
-					<a href="#" class="sidebar-link">Stats</a>
+					<a href="/users/{{g.user.id}}/stats" class="sidebar-link">Stats</a>
 				</li>
 				<li class="sidebar-item">
 					<i class="fas fa-book-open"></i>
-					<a href="#" class="sidebar-link">Quizzes</a>
+					<a href="/users/{{g.user.id}}/quizzes" class="sidebar-link">Quizzes</a>
 				</li>
 				<li class="sidebar-item">
 					<i class="fa fa-question"></i>
-					<a href="#" class="sidebar-link">Questions</a>
+					<a href="/users/{{g.user.id}}/questions" class="sidebar-link">Questions</a>
 				</li>
 			</ul>
 		</div>
 	</aside>
 	<main class="main-content col-10 col-md-10 col-lg-10">
-		<h1>Welcome {{g.user.username}}</h1>
+		{% block main%}{% endblock %}
 	</main>
 </div>
 

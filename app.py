@@ -53,10 +53,10 @@ def do_logout():
 
 
 ##############################################################################
-# Routes
+# Login/Logout/Signup Routes
 
 @app.route("/")
-def home():
+def home_dashboard():
     """Render Homepage based on user login status"""
     if g.user:
         return render_template('users/dashboard.html')
@@ -121,3 +121,21 @@ def logout():
 
     flash("You have successfully logged out.", "success")
     return redirect("/")
+
+##############################################################################
+# User Routes
+
+
+@app.route('/users/<int:user_id>/stats')
+def users_stats(user_id):
+    return render_template('users/statistics.html')
+
+
+@app.route('/users/<int:user_id>/quizzes')
+def users_quizzes(user_id):
+    return render_template('users/quizzes.html')
+
+
+@app.route('/users/<int:user_id>/questions')
+def users_questions(user_id):
+    return render_template('users/questions.html')

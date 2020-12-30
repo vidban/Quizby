@@ -1,3 +1,4 @@
+<!-- {% from "macros.html" import nav_link with context %} -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +28,7 @@
         {% if not g.user and  page=="home"%}
         <li class="description">Optimize your learning!</li>
         {% elif g.user%}
-        <li><a href="/">Dashboard</a></li>
+        {{ nav_link('home_dashboard','Dashboard')}}
         <li><a href="#">Create</a></li>
         <li><a href="#">Add Questions</a></li>
         <li><a href="#">Explore</a></li>

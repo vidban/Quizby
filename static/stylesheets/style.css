@@ -33,11 +33,16 @@ body{
   font-weight: bold;
   text-decoration: none;
   }
+
+  .navbar .active a{
+    color:#3aafa9;
+    text-decoration: underline;
+    font-size: 1.3em;
+  }
   
   .navbar a:hover,
   .navbar a:active {
   color: #3aafa9;
-  text-decoration: underline;
   }
   
   .navbar-brand {
