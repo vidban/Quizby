@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="questions">
-	<h2>Add questions here!</h2>
+	<form action="/questions">
+	  <div class="input-group">
+		<input name="q" class="form-control" placeholder="Search Quizby" id="search">  
+		<div class="input-group-append">
+		  <div class="input-group-text">
+			<button class="btn btn-default">
+				<span class="fa fa-search"></span>
+			  </button>
+		  </div>
+		</div>
+	  </div>
+	</form>
 </div>
 {% endblock %}

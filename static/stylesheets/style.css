@@ -249,3 +249,15 @@ body{
   width: 68%;
   padding: 20px 10px;
 }
+
+
+/* ************ questions ***************** */
+.questions{
+  padding: 3% 10%;
+  margin: auto;
+}
+
+.questions form{
+  width: 100%;
+}
+
