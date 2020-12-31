@@ -1,11 +1,11 @@
 import os
 
-from flask import Flask, session, g,  render_template, flash, session, redirect
+from flask import Flask, session, g,  render_template, flash, session, redirect, request
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, AddUserForm
-from models import db, connect_db, User
+from forms import LoginForm, AddUserForm, AddQuestionForm
+from models import db, connect_db, User, Question
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
@@ -14,7 +14,7 @@ app = Flask(__name__)
 # Get DB_URI from environ variable or,
 # if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    'DATABASE_URL', 'postgres:///quizby')
+    'DATABASE_URL', 'postgres://postgres:pgwebdev@localhost:5432/quizby')
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -88,7 +88,7 @@ def signup():
     """Handle user signup."""
 
     if CURR_USER_KEY in session:
-        del session[curr]
+        del session[CURR_USER_KEY]
     form = AddUserForm()
 
     if form.validate_on_submit():
@@ -141,4 +141,38 @@ def users_questions_dashboard(user_id):
 
 @app.route("/questions")
 def questions():
-    return render_template('questions.html')
+    """ Page with listing of questions """
+
+    search = request.args.get('q')
+
+    if not search:
+        questions = Question.query.all()
+    else:
+        questions = Question.query.filter(
+            User.username.like(f"%{search}%")).all()
+    return render_template('questions/questions.html', questions=questions)
+
+
+@app.route("/questions/add", methods=["GET", "POST"])
+def add_question():
+    """ Add question form"""
+
+    form = AddQuestionForm()
+
+    if form.validate_on_submit():
+        new_question = Question(
+            question=form.data.question,
+            mult_choice=form.data.mult_choice,
+            answer_one=form.data.answer_one,
+            answer_two=form.data.answer_two,
+            answer_three=form.data.answer_three,
+            answer_four=form.data.answer_four,
+            text_answer=form.data.text_answer,
+        )
+
+        db.session.add(new_question)
+        db.session.commit()
+
+        return redirect('/questions')
+    else:
+        return render_template('questions/add.html', form=form)

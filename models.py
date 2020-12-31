@@ -101,6 +101,44 @@ class User(db.Model):
         db.session.add(user)
         return user
 
+    def __repr__(self):
+        return f"<User {self.username} {self.email} {self.firstname} {self.lastname}>"
+
+
+class Question(db.Model):
+    """Questions available"""
+
+    __tablename__ = 'questions'
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True)
+
+    question = db.Column(db.Text())
+
+    mult_choice = db.Column(db.Boolean)
+
+    answer_one = db.Column(db.String(50))
+    answer_two = db.Column(db.String(50))
+    answer_three = db.Column(db.String(50))
+    answer_four = db.Column(db.String(50))
+
+    text_answer = db.Column(
+        db.String(200),
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id'),
+        nullable=False
+    )
+    category = db.Column(db.Text())
+
+    user = db.relationship('User', backref='questions')
+
+    def __repr__(self):
+        return f"<Question {self.question} {self.mult_choice} {self.user_id}>"
+
 
 def connect_db(app):
     """Connect this database to provided Flask app."""

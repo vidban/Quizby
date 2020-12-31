@@ -13,5 +13,11 @@
 		</div>
 	  </div>
 	</form>
+	<div class="question-list">
+		{% if not questions %}
+			<h2>No questions available yet</h2>
+			<button><a href="/questions/add">Add a question</a></button>
+		{% endif %}
+	</div>
 </div>
 {% endblock %}

@@ -261,3 +261,15 @@ body{
   width: 100%;
 }
 
+
+/* ************ add -questions ***************** */
+.add-question{
+  
+}
+
+.add-question form{
+  background-color: #fff;
+  border-radius: 35px;
+
+}
+

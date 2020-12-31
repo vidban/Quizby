@@ -18,3 +18,7 @@ Click [here](https://docs.google.com/document/d/1UX03vmtLDEaC_aLBhUG15_K6iTjF3O1
 ## API used:
 
 [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+
+## Theme
+
+[#24 - Clean and Modern](https://visme.co/blog/website-color-schemes/)
