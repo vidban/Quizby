@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="questions">
+	<button><a href="/questions/add">Add a question</a></button>
 	<form action="/questions">
 	  <div class="input-group">
 		<input name="q" class="form-control" placeholder="Search Quizby" id="search">  
@@ -16,7 +17,6 @@
 	<div class="question-list">
 		{% if not questions %}
 			<h2>No questions available yet</h2>
-			<button><a href="/questions/add">Add a question</a></button>
 		{% endif %}
 	</div>
 </div>
