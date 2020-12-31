@@ -105,6 +105,22 @@ class User(db.Model):
         return f"<User {self.username} {self.email} {self.firstname} {self.lastname}>"
 
 
+class Answer(db.Model):
+    """Answers for available questions"""
+
+    __tablename__ = "answers"
+
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.String)
+    correct = db.Column(db.Boolean)
+    question_id = db.Column(
+        db.Integer,
+        db.ForeignKey('questions.id'),
+        nullable=False
+    )
+    question = db.relationship('Question', backref="answers")
+
+
 class Question(db.Model):
     """Questions available"""
 
@@ -114,18 +130,9 @@ class Question(db.Model):
         db.Integer,
         primary_key=True)
 
-    question = db.Column(db.Text())
+    question = db.Column(db.Text, unique=True)
 
     mult_choice = db.Column(db.Boolean)
-
-    answer_one = db.Column(db.String(50))
-    answer_two = db.Column(db.String(50))
-    answer_three = db.Column(db.String(50))
-    answer_four = db.Column(db.String(50))
-
-    text_answer = db.Column(
-        db.String(200),
-    )
 
     user_id = db.Column(
         db.Integer,

@@ -1,11 +1,11 @@
 import os
 
-from flask import Flask, session, g,  render_template, flash, session, redirect, request
+from flask import Flask, session, g,  render_template, flash, session, redirect, request, json
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
 from forms import LoginForm, AddUserForm, AddQuestionForm
-from models import db, connect_db, User, Question
+from models import db, connect_db, User, Question, Answer
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
@@ -161,16 +161,55 @@ def add_question():
 
     if form.validate_on_submit():
         new_question = Question(
-            question=form.data.question,
-            mult_choice=form.data.mult_choice,
-            answer_one=form.data.answer_one,
-            answer_two=form.data.answer_two,
-            answer_three=form.data.answer_three,
-            answer_four=form.data.answer_four,
-            text_answer=form.data.text_answer,
+            question=form.question.data,
+            mult_choice=form.mult_choice.data,
+            category=form.category.data,
+            user_id=g.user.id
         )
-
         db.session.add(new_question)
+        db.session.commit()
+
+        question = Question.query.filter_by(
+            question=form.question.data).first()
+        print(f"********************{question}")
+
+        if form.mult_choice.data == True:
+            answer_1 = Answer(
+                answer=form.answer_one.data["answer"],
+                correct=form.answer_one.data["correct"],
+                question_id=question.id
+            )
+            answer_2 = Answer(
+                answer=form.answer_two.data["answer"],
+                correct=form.answer_two.data["correct"],
+                question_id=question.id
+            )
+            answer_3 = Answer(
+                answer=form.answer_three.data["answer"],
+                correct=form.answer_three.data["correct"],
+                question_id=question.id
+            )
+            answer_4 = Answer(
+                answer=form.answer_four.data["answer"],
+                correct=form.answer_four.data["correct"],
+                question_id=question.id
+            )
+
+            db.session.add_all([
+                new_question,
+                answer_1,
+                answer_2,
+                answer_3,
+                answer_4]
+            )
+        else:
+            answer = Answer(
+                answer=form.text_answer.data,
+                correct=True,
+                question_id=question.id
+            )
+            db.session.add(answer)
+
         db.session.commit()
 
         return redirect('/questions')
