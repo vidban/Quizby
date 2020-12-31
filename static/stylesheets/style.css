@@ -7,6 +7,9 @@ body{
 
 .btn{
   border-radius: 50px;
+  color: #def2f1;
+  background-color: #17252a;
+  border-color: #17252a;
 }
 
 .btn:hover{
@@ -223,7 +226,7 @@ body{
   min-height: 100%;
   position: sticky;
   padding: 30px 10px;
-  box-shadow: inset -7px 0px 15px -3px #2b787a;
+  box-shadow: 7px 0px 15px -3px #2b787a;
   background-color: transparent;
 }
 
@@ -261,6 +264,28 @@ body{
   width: 100%;
 }
 
+.questions button a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.questions button{
+  transition: all .3s;
+}
+
+.questions button:hover{
+  transform: scale(1.2);
+}
+
+.question-list{
+  font-size: 1.3em;
+}
+
+.question-list button{
+  background-color: #3aafa9;
+  border-radius: unset;
+}
+
 
 /* ************ add -questions ***************** */
 .add-question{
@@ -270,6 +295,6 @@ body{
 .add-question form{
   background-color: #fff;
   border-radius: 35px;
-
 }
+
 

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="questions">
-	<button><a href="/questions/add">Add a question</a></button>
+	<button class= "btn btn-block btn-lg mb-2" type="button" data-toggle="tooltip" data-placement="right" title="Add a new question">
+		<a href="/questions/add"><i class="fas fa-plus"></i></a>
+	</button>
 	<form action="/questions">
 	  <div class="input-group">
 		<input name="q" class="form-control" placeholder="Search Quizby" id="search">  
@@ -17,6 +19,25 @@
 	<div class="question-list">
 		{% if not questions %}
 			<h2>No questions available yet</h2>
+		{% else %}
+		<ul class="list-group mt-2">
+			{% for question in questions %}
+				<li class="list-group-item d-flex justify-content-between">
+					<p>{{question.question}}</p>
+					<div class="">
+						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
+							<a href=""><i class="fas fa-plus"></i></a>
+						</button>
+						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
+							<a href=""><i class="fas fa-heart"></i></a>
+						</button>
+						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="delete">
+							<a href=""><i class="fas fa-trash"></i></a>
+						</button>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
 		{% endif %}
 	</div>
 </div>
