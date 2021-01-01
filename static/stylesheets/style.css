@@ -7,7 +7,7 @@ body{
 
 .btn{
   border-radius: 35px;
-  color: #def2f1;
+  color: #def2f1 !important;
   background-color: #17252a;
   border-color: #17252a;
 }
@@ -328,6 +328,10 @@ body{
   margin: 0 5px;
 }
 
+.add-question form .fields .input-group label[for$=correct]{
+  font-size: 1.3em;
+}
+
 .add-question form .input-group label#question{
   width: 25%;
 
@@ -346,6 +350,7 @@ body{
 .add-question form .input-group input[type=checkbox]{
   height: 30px;
   width: 30px;
+  background-color: #2b7a78;
 }
 
 label[for=answer]{
