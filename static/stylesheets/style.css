@@ -375,4 +375,10 @@ label[for=answer]{
   margin: 5% auto 0;
   border-radius: 25px;
   padding: 5%;
+  text-align: center;
+}
+
+.profile img{
+  width: 200px;
+  height: 200px;
 }

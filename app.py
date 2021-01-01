@@ -127,7 +127,18 @@ def logout():
 # User Routes
 
 
-@app.route('/users/profile', methods=["GET", "POST"])
+@app.route('/users/profile')
+def view_user_profile():
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/"
+                        )
+    user = g.user
+
+    return render_template('/users/profile/view.html', user=user)
+
+
+@app.route('/users/profile/edit', methods=["GET", "POST"])
 def user_profile():
     """show/update user profile"""
 
@@ -149,16 +160,17 @@ def user_profile():
                 f = form.image_url.data
                 filename = secure_filename(f.filename)
                 f.save('static/images/uploads/'+filename)
+                user.image_url = form.image_url.data
 
                 flash('Image uploaded successfully', 'success')
             else:
-                user.image_url = '/static/images/default-pic.png'
+                user.image_url = 'default-pic.png'
             db.session.commit()
             return redirect('/')
 
         flash("Wrong password, please try again.", 'danger')
 
-    return render_template('users/profile.html', form=form)
+    return render_template('users/profile/edit.html', form=form)
 
 
 @app.route('/users/<int:user_id>/quizzes')

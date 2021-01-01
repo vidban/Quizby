@@ -49,11 +49,6 @@ class User(db.Model):
         default="/static/images/default-pic.png",
     )
 
-    header_image_url = db.Column(
-        db.Text,
-        default="/static/images/quizby-hero1.jpg"
-    )
-
     level = db.Column(
         db.Integer,
     )
