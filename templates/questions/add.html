@@ -2,24 +2,28 @@
 {% block content %}
 <div class="add-question p-4">
 	<div class="col">
-		<h2><b>Add question</b></h2>
-		<form method="POST">
+		<form method="POST" class="p-5">
+			<span class="text-center"><b>Add question</b></span>
 			{{ form.hidden_tag() }}
-			{% for field in form if field.widget.input_type != 'hidden' %}
-				<div class="form-group">
-					{{field.label.text}}
-					{{ field }}
-					<small>
-						{% for error in field.errors %}
-						<span class="text-danger">{{ error }}</span>
-						{% endfor %}
-					</small>
-				</div>	
+			<div class="fields">
+				{% for field in form if field.widget.input_type != 'hidden' %}
+					<div class="input-group mb-2">
+						<label id="{{field.id}}">{{field.label.text}}</label>
+						{{ field(placeholder=field.description) }}
+						<small class="form-text text-muted">
+							{% for error in field.errors %}
+							<span class="text-danger">{{ error }}</span>
+							{% endfor %}
+						</small>
+					</div>	
 			{% endfor %}
 		
+			</div>
+
 			<button class="btn btn-block btn-lg">Submit</button>
 		  </form>
 	</div>
 </div>
 
 {% endblock %}
+

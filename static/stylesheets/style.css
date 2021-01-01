@@ -6,7 +6,7 @@ body{
 }
 
 .btn{
-  border-radius: 50px;
+  border-radius: 35px;
   color: #def2f1;
   background-color: #17252a;
   border-color: #17252a;
@@ -171,8 +171,6 @@ body{
 
   .login-main .btn,
   .signup-main .btn{
-    background-color: #333;
-    color: #fff;
     width: 60%;
     margin: 20px auto 0 auto;
   }
@@ -200,9 +198,6 @@ body{
 
 .home-hero .btn{
   width: 150px;
-  color: #def2f1;
-  background-color: #17252a;
-  border-color: #17252a;
 }
 
 .home-hero small{
@@ -266,7 +261,7 @@ body{
 
 .questions button a{
   text-decoration: none;
-  color: inherit;
+  color: #def2f1;
 }
 
 .questions button{
@@ -288,13 +283,81 @@ body{
 
 
 /* ************ add -questions ***************** */
-.add-question{
-  
-}
 
 .add-question form{
   background-color: #fff;
-  border-radius: 35px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-question form span{
+  font-size: 2.5em;
+  width: 100%;
+  margin-bottom: 10%;
+}
+.add-question form .fields{
+  width: 100%;
+}
+
+.add-question form .fields .input-group{
+  display: flex;
+  flex-wrap: wrap;  
+  justify-content: center;
+  align-items: center;
+  margin: 5px auto;
+}
+
+.add-question form .fields .input-group:nth-child(4)>label{
+  width: 25%;
+}
+.add-question form .fields .input-group:nth-child(5)>label{
+  width: 25%;
+}.add-question form .fields .input-group:nth-child(6)>label{
+  width: 25%;
+}.add-question form .fields .input-group:nth-child(7)>label{
+  width: 25%;
+}
+
+.add-question form .fields .input-group label{
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.add-question form .input-group label#question{
+  width: 25%;
+
+}
+
+.add-question form .input-group textarea#question{
+  width: 70%;
+}
+
+.add-question form .input-group textarea{
+  min-width: 50%;
+  min-height: 100px;
 }
 
 
+.add-question form .input-group input[type=checkbox]{
+  height: 30px;
+  width: 30px;
+}
+
+label[for=answer]{
+  display: none;
+}
+
+.add-question form .input-group table tbody{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.add-question form .input-group table input{
+  height: 50px;
+}

@@ -22,13 +22,14 @@ class AddUserForm(FlaskForm):
 
 class AnswerForm(FlaskForm):
     """Form for adding answer options with correct choice option"""
-    answer = StringField('Answer')
-    correct = BooleanField('Correct')
+    answer = StringField(id='answer')
+    correct = BooleanField('Correct?')
 
 
 class AddQuestionForm(FlaskForm):
     """ Form for adding questions."""
-
+    category = StringField('Category', validators=[
+                           DataRequired()], description="Enter Category here")
     question = TextAreaField('Question', validators=[
                              DataRequired(), Length(max=200)])
     mult_choice = BooleanField('Multiple choice?')
@@ -36,5 +37,5 @@ class AddQuestionForm(FlaskForm):
     answer_two = FormField(AnswerForm)
     answer_three = FormField(AnswerForm)
     answer_four = FormField(AnswerForm)
-    text_answer = TextAreaField('Answer')
-    category = StringField('Category', validators=[DataRequired()])
+    text_answer = TextAreaField(
+        'Answer', description='Enter the answer here...')
