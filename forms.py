@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, BooleanField, IntegerField, SelectField, FormField
+from wtforms import StringField, PasswordField, TextAreaField, BooleanField, IntegerField, SelectField, FormField, FileField
 from wtforms.validators import DataRequired, Email, Length
+from flask_wtf.file import FileAllowed
 
 
 class LoginForm(FlaskForm):
@@ -16,6 +17,20 @@ class AddUserForm(FlaskForm):
 
     username = StringField('Username', validators=[
                            DataRequired()], render_kw={'autofocus': True})
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[Length(min=6)])
+
+
+class EditUserForm(FlaskForm):
+    """ Form for editing a user"""
+
+    username = StringField('Username', validators=[
+                           DataRequired()], render_kw={'autofocus': True})
+    firstname = StringField('First Name')
+    lastname = StringField('Last Name')
+    image_url = FileField('image', validators=[
+        FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')
+    ])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[Length(min=6)])
 

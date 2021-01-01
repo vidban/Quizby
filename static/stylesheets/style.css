@@ -366,3 +366,13 @@ label[for=answer]{
 .add-question form .input-group table input{
   height: 50px;
 }
+
+/* ************ profile ***************** */
+
+.profile{
+  background-color: #def2f1;
+  width: 80%;
+  margin: 5% auto 0;
+  border-radius: 25px;
+  padding: 5%;
+}

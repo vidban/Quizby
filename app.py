@@ -4,8 +4,9 @@ from flask import Flask, session, g,  render_template, flash, session, redirect,
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, AddUserForm, AddQuestionForm
+from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
 from models import db, connect_db, User, Question, Answer
+from werkzeug.utils import secure_filename
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
@@ -124,6 +125,40 @@ def logout():
 
 ##############################################################################
 # User Routes
+
+
+@app.route('/users/profile', methods=["GET", "POST"])
+def user_profile():
+    """show/update user profile"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/"
+                        )
+    user = g.user
+    form = EditUserForm(obj=user)
+
+    if form.validate_on_submit():
+        if User.authenticate(user.username, form.password.data):
+            user.username = form.username.data
+            user.email = form.email.data
+            user.firstname = form.firstname.data
+            user.lastname = form.lastname.data
+            # If image file provided, save image data
+            if form.image_url.data:
+                f = form.image_url.data
+                filename = secure_filename(f.filename)
+                f.save('static/images/uploads/'+filename)
+
+                flash('Image uploaded successfully', 'success')
+            else:
+                user.image_url = '/static/images/default-pic.png'
+            db.session.commit()
+            return redirect('/')
+
+        flash("Wrong password, please try again.", 'danger')
+
+    return render_template('users/profile.html', form=form)
 
 
 @app.route('/users/<int:user_id>/quizzes')
