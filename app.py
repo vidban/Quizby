@@ -180,7 +180,13 @@ def users_quizzes_dashboard(user_id):
 
 @app.route('/users/<int:user_id>/questions')
 def users_questions_dashboard(user_id):
-    return render_template('users/questions.html')
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    questions = Question.query.filter_by(user_id=g.user.id)
+    return render_template('users/questions.html', questions=questions)
 
 
 ##############################################################################
@@ -196,13 +202,17 @@ def questions():
         questions = Question.query.all()
     else:
         questions = Question.query.filter(
-            User.username.like(f"%{search}%")).all()
+            Question.question.like(f"%{search}%")).all()
     return render_template('questions/questions.html', questions=questions)
 
 
 @app.route("/questions/add", methods=["GET", "POST"])
 def add_question():
     """ Add question form"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
 
     form = AddQuestionForm()
 
