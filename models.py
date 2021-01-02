@@ -78,7 +78,7 @@ class User(db.Model):
         return False
 
     @classmethod
-    def signup(cls, username, email, password, image_url):
+    def signup(cls, username, email, password):
         """Sign up user.
 
         Hashes password and adds user to system.
@@ -90,14 +90,13 @@ class User(db.Model):
             username=username,
             email=email,
             password=hashed_pwd,
-            image_url=image_url,
         )
 
         db.session.add(user)
         return user
 
     def __repr__(self):
-        return f"<User {self.username} {self.email} {self.firstname} {self.lastname}>"
+        return f"<User {self.username} {self.email}>"
 
 
 class Answer(db.Model):

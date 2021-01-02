@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="questions">
+	<h1 class="text-center">All Questions</h1>
 	<button class= "btn btn-block btn-lg mb-2" type="button" data-toggle="tooltip" data-placement="right" title="Add a new question">
 		<a href="/questions/add"><i class="fas fa-plus"></i></a>
 	</button>
 	<form action="/questions">
 	  <div class="input-group">
-		<input name="q" class="form-control" placeholder="Search Quizby" id="search">  
+		<input name="q" class="form-control" placeholder="Search questions" id="search">  
 		<div class="input-group-append">
 		  <div class="input-group-text">
 			<button class="btn btn-default">
@@ -29,7 +30,7 @@
 							<a href=""><i class="fas fa-plus"></i></a>
 						</button>
 						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
-							<a href=""><i class="fas fa-heart"></i></a>
+							<a href=""><i class="fas fa-star"></i></a>
 						</button>
 						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="delete">
 							<a href=""><i class="fas fa-trash"></i></a>
