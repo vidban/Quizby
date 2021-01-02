@@ -160,7 +160,7 @@ def user_profile():
                 f = form.image_url.data
                 filename = secure_filename(f.filename)
                 f.save('static/images/uploads/'+filename)
-                user.image_url = form.image_url.data
+                user.image_url = f"/static/images/uploads/{filename}"
 
                 flash('Image uploaded successfully', 'success')
             else:
