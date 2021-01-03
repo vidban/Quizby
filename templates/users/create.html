@@ -8,9 +8,11 @@
 			<div class="create-image-inner text-center">
 				<h3>Quiz Cover</h3>
 				<p>Choose and image using the options below</p>
-				<button class="m-2" type=button data-bs-toggle="modal" data-bs-target="#uploadImage">
-					<i class="fas fa-camera"></i>
-					Upload Image
+				<button class= "m-2" type="button" >
+					<a href="/search">
+						<i class="fas fa-camera"></i>
+						Upload Image
+					</a>
 				</button>
 				<button class="m-2" type=button data-bs-toggle="modal" data-bs-target="#enterURL">
 					<i class="fas fa-camera"></i>
@@ -21,35 +23,8 @@
 		<button class="btn btn-block btn-lg">Create Quiz</button>
 	  </form>
 </div>
-
-<!-- Upload Image Modal -->
-<div class="upload-image-modal modal fade" id="uploadImage" tabindex="-1" aria-labelledby="uploadImageLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-	  <div class="modal-content">
-		<div class="modal-body">
-			<form action="/search/unsplash">
-				<div class="input-group">
-				  <input name="image-query" class="form-control" placeholder="Search for Images" id="search-image">  
-				  <div class="input-group-append">
-					<div class="input-group-text">
-					  <button class="btn btn-default">
-						  <span class="fa fa-search"></span>
-						</button>
-					</div>
-				  </div>
-				</div>
-			</form>
-		</div>
-		<div class="text-center">
-			<h5>Images By:</h5>
-			<h4>Unsplash</h4>
-		</div>
-	  </div>
-	</div>
-  </div>
-
 <!-- Enter URL Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -65,5 +40,10 @@
 		</div>
 	  </div>
 	</div>
-  </div>
+  </div> -->
+
+  {% block modal %}
+
+  {% endblock %}
 {% endblock%}
+

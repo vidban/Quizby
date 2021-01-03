@@ -1,0 +1,44 @@
+{% extends 'users/create.html'%}
+
+{% block modal%}
+<div class="search-unsplash">
+	<div class="upload-image-modal" id="uploadImage" tabindex="-1" aria-labelledby="uploadImageLabel" aria-hidden="true">
+		<div class="modal-dialog p-5">
+			<div class="modal-content p-2">
+				<div class="modal-body">
+					<form action="/search/unsplash">
+						<div class="input-group">
+							<input name="image-query" class="form-control" placeholder="Search for Images" id="search-image">  
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<button class="btn btn-default">
+										<span class="fa fa-search"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="images text-center">
+					{% if images %}
+						{% for img in images %}
+						<div class="image">
+							<img src="{{img[0]}}" alt="unsplash image">
+							<small>By: <a href="{{img[2]}}">{{img[1]}}</a></small>
+						</div>
+						{% endfor %}
+					{% else %}
+					<h5>Images By:</h5>
+					<h4>Unsplash</h4>
+					{% endif %}
+				</div>
+				<a class="upload-cancel" href="/create">
+					<button class="btn" type="button">Cancel</button>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

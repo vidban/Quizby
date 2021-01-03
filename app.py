@@ -311,12 +311,33 @@ def create():
 ############################################################################
 # API Routes
 
+@app.route('/search')
+def search():
+    """ render the image search modal for the API search for creating a quiz"""
+
+    return render_template("users/search.html")
+
+
 @app.route('/search/unsplash')
 def search_unsplash():
-    """ Search the unsplash API for images"""
-    query = request.args["image-query"]
-    res = requests.get(f"{UNSPLASH_API_URL}/search/photos/",
-                       params={'client_id': UNSPLASH_API_KEY, "query": query})
-    data = res.json()
-    img = data["results"][0]["urls"]["regular"]
- 
+    """Search the unsplash API for images"""
+
+    if request.args:
+        query = request.args["image-query"]
+        res = requests.get(f"{UNSPLASH_API_URL}/search/photos/",
+                           params={'client_id': UNSPLASH_API_KEY, "query": query, "w": "400"})
+        data = res.json()
+        images = []
+        if len(data["results"]) > 12:
+            for i in range(12):
+                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
+                               ["user"]["username"], data["results"][i]["links"]["self"]])
+        else:
+            for i in range(len(data["results"])):
+                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
+                               ["user"]["username"], data["results"][i]["links"]["self"]])
+
+        return render_template("users/search.html", images=images)
+    else:
+        flash("Please enter a search term", "danger")
+        return render_template("users/search.html")
