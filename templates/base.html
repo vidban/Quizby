@@ -33,11 +33,11 @@
         {{ nav_link('create', 'Create')}}
         <li><a href="#">Explore</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
+          <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src={{g.user.image_url}} alt="profile image" class="profile-img d-block">
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/users/profile">{{g.user.username}}</a></li>
+            <li><a class="dropdown-item" href="/users/profile">Settings</a></li>
             <li><a class="dropdown-item" href="/logout">Log out</a></li>
           </ul>
         </li>

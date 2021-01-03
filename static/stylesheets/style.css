@@ -86,6 +86,12 @@ body{
     font-size: 1.6em;
     font-weight: bold;
   }
+
+  .nav .dropdown .profile-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
   
   /* on "onboarding" pages (signup & login), the navbar is
    different: no search box, the logo is centered, and it has
@@ -396,6 +402,7 @@ label[for=answer]{
 .profile img{
   width: 200px;
   height: 200px;
+  border-radius: 50% !important;
 }
 
 /* ************ create ***************** */
