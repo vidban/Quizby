@@ -7,7 +7,3 @@ $(document).on("change", "#mult_choice", function () {
     $("label[id^=answer]").parent().hide();
   }
 });
-
-$(document).on("ready", ".add-question", function () {
-  $("#text_answer").parent().hide();
-});

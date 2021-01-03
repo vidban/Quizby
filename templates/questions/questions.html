@@ -2,9 +2,11 @@
 {% block content %}
 <div class="questions">
 	<h1 class="text-center">All Questions</h1>
-	<button class= "btn btn-block btn-lg mb-2" type="button" data-toggle="tooltip" data-placement="right" title="Add a new question">
-		<a href="/questions/add"><i class="fas fa-plus"></i></a>
-	</button>
+	<form action="/questions/add" style="display:inline-block;">
+		<button class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
+			<i class="fas fa-plus"></i>
+		</button>
+	</form>
 	<form action="/questions">
 	  <div class="input-group">
 		<input name="q" class="form-control" placeholder="Search questions by category" id="search">  

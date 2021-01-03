@@ -234,34 +234,34 @@ def add_question():
             question=form.question.data).first()
 
         if form.mult_choice.data == True:
-            answer_1 = Answer(
-                answer=form.answer_one.data["answer"],
-                correct=form.answer_one.data["correct"],
-                question_id=question.id
-            )
-            answer_2 = Answer(
-                answer=form.answer_two.data["answer"],
-                correct=form.answer_two.data["correct"],
-                question_id=question.id
-            )
-            answer_3 = Answer(
-                answer=form.answer_three.data["answer"],
-                correct=form.answer_three.data["correct"],
-                question_id=question.id
-            )
-            answer_4 = Answer(
-                answer=form.answer_four.data["answer"],
-                correct=form.answer_four.data["correct"],
-                question_id=question.id
-            )
-
-            db.session.add_all([
-                new_question,
-                answer_1,
-                answer_2,
-                answer_3,
-                answer_4]
-            )
+            if form.answer_one.data["answer"]:
+                answer_1 = Answer(
+                    answer=form.answer_one.data["answer"],
+                    correct=form.answer_one.data["correct"],
+                    question_id=question.id
+                )
+                db.session.add(answer_1)
+            if form.answer_two.data["answer"]:
+                answer_2 = Answer(
+                    answer=form.answer_two.data["answer"],
+                    correct=form.answer_two.data["correct"],
+                    question_id=question.id
+                )
+                db.session.add(answer_2)
+            if form.answer_three.data["answer"]:
+                answer_3 = Answer(
+                    answer=form.answer_three.data["answer"],
+                    correct=form.answer_three.data["correct"],
+                    question_id=question.id
+                )
+                db.session.add(answer_3)
+            if form.answer_four.data["answer"]:
+                answer_4 = Answer(
+                    answer=form.answer_four.data["answer"],
+                    correct=form.answer_four.data["correct"],
+                    question_id=question.id
+                )
+                db.session.add(answer_4)
         else:
             answer = Answer(
                 answer=form.text_answer.data,
