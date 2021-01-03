@@ -398,6 +398,40 @@ label[for=answer]{
   height: 200px;
 }
 
+/* ************ create ***************** */
+.create-image{
+  min-height: 250px;
+  background-color: #def2f1;
+  border-radius: 25px;
+}
+.create-image-inner{
+  min-height: 225px;
+  border: 4px dashed #17252a;
+  border-radius: 25px;
+  background-color: rgba(43, 120, 122, 0.25);
+  text-align: center;
+}
+
+.create-image-inner button{
+  display: inline-block;
+  max-width: 75px;
+  text-decoration: none;
+  color:#17252A;
+  box-shadow: 0px 0px 25px 0px #17252a;
+  border-radius: 5px;
+}
+
+.create-image-inner button i{
+  display: block;
+}
+
+.upload-image-modal .modal-body{
+  background-color: #def2f1;
+  color: #17252A;
+  border-radius: 10px;
+  
+}
+/* ************ end ***************** */
 
 .hidden{
   display: none;

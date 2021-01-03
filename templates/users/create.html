@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="create col col-sm-9 col-md-9 col-lg-7 m-auto mt-5">
+	<h1><b>Create a Quiz!</b></h1>
+	<form method="POST" id="create" class="create-quiz mt-5">
+		<div class="create-image col-3 col-md-4 col-lg-4 p-3">
+			<div class="create-image-inner text-center">
+				<h3>Quiz Cover</h3>
+				<p>Choose and image using the options below</p>
+				<button class="m-2" type=button data-bs-toggle="modal" data-bs-target="#uploadImage">
+					<i class="fas fa-camera"></i>
+					Upload Image
+				</button>
+				<button class="m-2" type=button data-bs-toggle="modal" data-bs-target="#enterURL">
+					<i class="fas fa-camera"></i>
+					Enter URL
+				</button>
+			</div>
+		</div>
+		<button class="btn btn-block btn-lg">Create Quiz</button>
+	  </form>
+</div>
+
+<!-- Upload Image Modal -->
+<div class="upload-image-modal modal fade" id="uploadImage" tabindex="-1" aria-labelledby="uploadImageLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+	  <div class="modal-content">
+		<div class="modal-body">
+			<form action="/search/unsplash">
+				<div class="input-group">
+				  <input name="image-query" class="form-control" placeholder="Search for Images" id="search-image">  
+				  <div class="input-group-append">
+					<div class="input-group-text">
+					  <button class="btn btn-default">
+						  <span class="fa fa-search"></span>
+						</button>
+					</div>
+				  </div>
+				</div>
+			</form>
+		</div>
+		<div class="text-center">
+			<h5>Images By:</h5>
+			<h4>Unsplash</h4>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+<!-- Enter URL Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  ...
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+{% endblock%}

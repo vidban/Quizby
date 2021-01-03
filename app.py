@@ -1,10 +1,13 @@
 import os
+import requests
+
+from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL
 
 from flask import Flask, session, g,  render_template, flash, session, redirect, request, json
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
+from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm, CreateQuizForm
 from models import db, connect_db, User, Question, Answer
 from werkzeug.utils import secure_filename
 
@@ -14,13 +17,12 @@ app = Flask(__name__)
 
 # Get DB_URI from environ variable or,
 # if not set there, use development local db.
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    'DATABASE_URL', 'postgres://postgres:pgwebdev@localhost:5432/quizby')
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL or 'postgres:///quizby'
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
+app.config['SECRET_KEY'] = SECRET_KEY or "it's a secret"
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
@@ -202,7 +204,6 @@ def questions():
 
     if not search:
         questions = Question.query.all()
-        print(f"**************{questions}")
     else:
         questions = Question.query.filter(
             Question.question.like(f"%{search}%")).all()
@@ -293,3 +294,29 @@ def delete_question(question_id):
     flash("Question deleted", "success")
 
     return redirect(f"/users/{g.user.id}/questions")
+
+############################################################################
+# Quizzes Routes
+
+
+@app.route('/create', methods=["GET", "POST"])
+def create():
+    """ Create a new quiz"""
+
+    form = CreateQuizForm()
+
+    return render_template("users/create.html", form=form)
+
+
+############################################################################
+# API Routes
+
+@app.route('/search/unsplash')
+def search_unsplash():
+    """ Search the unsplash API for images"""
+    query = request.args["image-query"]
+    res = requests.get(f"{UNSPLASH_API_URL}/search/photos/",
+                       params={'client_id': UNSPLASH_API_KEY, "query": query})
+    data = res.json()
+    img = data["results"][0]["urls"]["regular"]
+ 
