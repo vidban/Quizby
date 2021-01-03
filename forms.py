@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, BooleanField, IntegerField, SelectField, FormField, FileField
+from wtforms import StringField, PasswordField, TextAreaField, BooleanField, IntegerField, SelectField, FormField, FileField, RadioField
 from wtforms.validators import DataRequired, Email, Length
 from flask_wtf.file import FileAllowed
 
@@ -47,7 +47,8 @@ class AddQuestionForm(FlaskForm):
                            DataRequired()], description="Enter Category here")
     question = TextAreaField('Question', validators=[
                              DataRequired(), Length(max=200)])
-    mult_choice = BooleanField('Multiple choice?', default=True)
+    mult_choice = RadioField('Question Type:', choices=[(
+        'mc', 'Multiple Choice'),  ('p', 'Plain Q/A')], default='mc')
     answer_one = FormField(AnswerForm)
     answer_two = FormField(AnswerForm)
     answer_three = FormField(AnswerForm)
