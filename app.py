@@ -234,7 +234,7 @@ def add_question():
         question = Question.query.filter_by(
             question=form.question.data).first()
 
-        if form.mult_choice.data == True:
+        if form.mult_choice.data == 'mc':
             if form.answer_one.data["answer"]:
                 answer_1 = Answer(
                     answer=form.answer_one.data["answer"],
