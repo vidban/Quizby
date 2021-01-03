@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');/* **************Navbar**************** */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');**************Navbar**************** */
 body{
   background-color: #3aafa9;
   height: 100vh;
@@ -372,6 +372,14 @@ label[for=answer]{
 
 .add-question form .input-group table input{
   height: 50px;
+}
+
+.add-question form .input-group ul#mult_choice{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* ************ profile ***************** */

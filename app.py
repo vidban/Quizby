@@ -165,7 +165,7 @@ def user_profile():
             else:
                 user.image_url = 'default-pic.png'
             db.session.commit()
-            return redirect('/')
+            return redirect('/users/profile')
 
         flash("Wrong password, please try again.", 'danger')
 
