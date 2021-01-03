@@ -125,7 +125,7 @@ class Question(db.Model):
 
     question = db.Column(db.Text, unique=True)
 
-    mult_choice = db.Column(db.Boolean)
+    mult_choice = db.Column(db.String)
 
     user_id = db.Column(
         db.Integer,
