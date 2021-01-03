@@ -37,7 +37,7 @@ class EditUserForm(FlaskForm):
 
 class AnswerForm(FlaskForm):
     """Form for adding answer options with correct choice option"""
-    answer = StringField(id='answer')
+    answer = StringField(id='answer', validators=[DataRequired()])
     correct = BooleanField('Correct?')
 
 

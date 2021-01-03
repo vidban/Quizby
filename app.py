@@ -174,24 +174,27 @@ def user_profile():
 
 @app.route('/users/<int:user_id>/quizzes')
 def users_quizzes_dashboard(user_id):
+    """ get user's quizzes"""
+
     return render_template('users/quizzes.html')
 
 
 @app.route('/users/<int:user_id>/questions')
 def users_questions_dashboard(user_id):
+    """ Get user's questions"""
 
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    questions = Question.query.filter_by(user_id=g.user.id)
+    questions = Question.query.filter(Question.user_id == g.user.id).all()
     return render_template('users/questions.html', questions=questions)
 
 
-##############################################################################
+############################################################################
 # Questions Routes
 
-@app.route("/questions")
+@ app.route("/questions")
 def questions():
     """ Page with listing of questions """
 
@@ -199,19 +202,20 @@ def questions():
 
     if not search:
         questions = Question.query.all()
+        print(f"**************{questions}")
     else:
         questions = Question.query.filter(
             Question.question.like(f"%{search}%")).all()
     return render_template('questions/questions.html', questions=questions)
 
 
-@app.route("/questions/add", methods=["GET", "POST"])
+@ app.route("/questions/add", methods=["GET", "POST"])
 def add_question():
     """ Add question form"""
 
     if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+        flash("Please sign in to add questions", "danger")
+        return redirect("/login")
 
     form = AddQuestionForm()
 
@@ -222,12 +226,12 @@ def add_question():
             category=form.category.data,
             user_id=g.user.id
         )
+
         db.session.add(new_question)
         db.session.commit()
 
         question = Question.query.filter_by(
             question=form.question.data).first()
-        print(f"********************{question}")
 
         if form.mult_choice.data == True:
             answer_1 = Answer(
@@ -271,3 +275,21 @@ def add_question():
         return redirect('/questions')
     else:
         return render_template('questions/add.html', form=form)
+
+
+@ app.route('/questions/<int:question_id>/delete', methods=["POST"])
+def delete_question(question_id):
+    """ Delete a user's question """
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    q = Question.query.get_or_404(question_id)
+
+    db.session.delete(q)
+    db.session.commit()
+
+    flash("Question deleted", "success")
+
+    return redirect(f"/users/{g.user.id}/questions")

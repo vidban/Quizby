@@ -109,10 +109,9 @@ class Answer(db.Model):
     correct = db.Column(db.Boolean)
     question_id = db.Column(
         db.Integer,
-        db.ForeignKey('questions.id'),
+        db.ForeignKey('questions.id', ondelete='CASCADE'),
         nullable=False
     )
-    question = db.relationship('Question', backref="answers")
 
 
 class Question(db.Model):
@@ -130,12 +129,14 @@ class Question(db.Model):
 
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey('users.id'),
+        db.ForeignKey('users.id', ondelete='CASCADE'),
         nullable=False
     )
     category = db.Column(db.Text())
 
     user = db.relationship('User', backref='questions')
+    answers = db.relationship(
+        'Answer', backref="question", cascade="all,delete")
 
     def __repr__(self):
         return f"<Question {self.question} {self.mult_choice} {self.user_id}>"
