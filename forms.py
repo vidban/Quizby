@@ -47,7 +47,7 @@ class AddQuestionForm(FlaskForm):
                            DataRequired()], description="Enter Category here")
     question = TextAreaField('Question', validators=[
                              DataRequired(), Length(max=200)])
-    mult_choice = BooleanField('Multiple choice?')
+    mult_choice = BooleanField('Multiple choice?', default=True)
     answer_one = FormField(AnswerForm)
     answer_two = FormField(AnswerForm)
     answer_three = FormField(AnswerForm)

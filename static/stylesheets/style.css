@@ -308,7 +308,7 @@ body{
 }
 
 .add-question form .fields .input-group{
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;  
   justify-content: center;
   align-items: center;
@@ -337,12 +337,14 @@ body{
   font-size: 1.3em;
 }
 
-.add-question form .input-group label#question{
+.add-question form .input-group label#question,
+.add-question form .input-group label#text_answer{
   width: 25%;
 
 }
 
-.add-question form .input-group textarea#question{
+.add-question form .input-group textarea#question,
+.add-question form .input-group textarea#text_answer{
   width: 70%;
 }
 
@@ -388,3 +390,7 @@ label[for=answer]{
   height: 200px;
 }
 
+
+.hidden{
+  display: none;
+}

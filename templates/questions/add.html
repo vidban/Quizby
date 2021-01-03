@@ -7,7 +7,11 @@
 			{{ form.hidden_tag() }}
 			<div class="fields">
 				{% for field in form if field.widget.input_type != 'hidden' %}
+					{% if field.id=='text_answer' %}
+					<div class="input-group mb-2 hidden">
+					{% else %}
 					<div class="input-group mb-2">
+					{% endif %}
 						<label id="{{field.id}}">{{field.label.text}}</label>
 						{{ field(placeholder=field.description) }}
 						<small class="form-text text-muted">
