@@ -7,7 +7,7 @@ from flask import Flask, session, g,  render_template, flash, session, redirect,
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm, CreateQuizForm
+from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm, CreateQuizForm, QuizImageForm
 from models import db, connect_db, User, Question, Answer
 from werkzeug.utils import secure_filename
 
@@ -19,7 +19,10 @@ app = Flask(__name__)
 # if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL or 'postgres:///quizby'
 
-
+# Only allow requests that are up to 1MB in size (for images)
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+# Valid file extensions for uploaded images
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = SECRET_KEY or "it's a secret"
@@ -159,7 +162,12 @@ def user_profile():
             # If image file provided, save image data
             if form.image_url.data:
                 f = form.image_url.data
-                filename = secure_filename(f.filename)
+                file_ext = os.path.splitext(f.filename)[1]
+                # ensure that file extension is in allowed list
+                if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                    flash("Only '.jpg', '.png' & '.jpeg' extensions allowed!", "danger")
+                    abort(400)
+                filename = secure_filename(f"{g.user.id}{file_ext}")
                 f.save('static/images/uploads/'+filename)
                 user.image_url = f"/static/images/uploads/{filename}"
 
@@ -311,7 +319,7 @@ def create():
 ############################################################################
 # API Routes
 
-@app.route('/search')
+@app.route('/search', methods=["GET", "POST"])
 def search():
     """ render the image search modal for the API search for creating a quiz"""
 
@@ -331,11 +339,11 @@ def search_unsplash():
         if len(data["results"]) > 12:
             for i in range(12):
                 images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
-                               ["user"]["username"], data["results"][i]["links"]["self"]])
+                               ["user"]["username"], data["results"][i]["user"]["links"]["html"]])
         else:
             for i in range(len(data["results"])):
                 images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
-                               ["user"]["username"], data["results"][i]["links"]["self"]])
+                               ["user"]["username"], data["results"][i]["user"]["links"]["html"]])
 
         return render_template("users/search.html", images=images)
     else:
