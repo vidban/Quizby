@@ -7,8 +7,8 @@ from flask import Flask, session, g,  render_template, flash, session, redirect,
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm, CreateQuizForm, QuizImageForm
-from models import db, connect_db, User, Question, Answer
+from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm, CreateQuizForm
+from models import db, connect_db, User, Question, Answer, Quiz
 from werkzeug.utils import secure_filename
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
@@ -142,6 +142,25 @@ def view_user_profile():
     return render_template('/users/profile/view.html', user=user)
 
 
+@app.route('/users/<int:user_id>/quizzes')
+def users_quizzes_dashboard(user_id):
+    """ get user's quizzes"""
+
+    return render_template('users/quizzes.html')
+
+
+@app.route('/users/<int:user_id>/questions')
+def users_questions_dashboard(user_id):
+    """ Get user's questions"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    questions = Question.query.filter(Question.user_id == g.user.id).all()
+    return render_template('users/questions.html', questions=questions)
+
+
 @app.route('/users/profile/edit', methods=["GET", "POST"])
 def user_profile():
     """show/update user profile"""
@@ -181,28 +200,83 @@ def user_profile():
 
     return render_template('users/profile/edit.html', form=form)
 
-
-@app.route('/users/<int:user_id>/quizzes')
-def users_quizzes_dashboard(user_id):
-    """ get user's quizzes"""
-
-    return render_template('users/quizzes.html')
+############################################################################
+# Quizzes Routes
 
 
-@app.route('/users/<int:user_id>/questions')
-def users_questions_dashboard(user_id):
-    """ Get user's questions"""
+@app.route('/create', methods=["GET"])
+def create():
+    """ reder the create quiz template"""
 
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+    return render_template("users/create.html")
 
-    questions = Question.query.filter(Question.user_id == g.user.id).all()
-    return render_template('users/questions.html', questions=questions)
 
+@app.route('/create', methods=["POST"])
+def form_create():
+    """ Create a new quiz"""
+
+    quiz = Quiz(
+        user_id=g.user.id,
+        title=request.form["title"],
+        desc=request.form["description"],
+        image_by=request.form["img_by"],
+        image_by_profile=request.form["img_by_profile"],
+        image_desc=request.form["img_desc"],
+        image_url=request.files["img_url"].read()
+    )
+
+    db.session.add(quiz)
+    db.session.commit()
+
+    return redirect(f'/users/{g.user.id}/quizzes')
+
+
+####################
+# API search Routes
+
+
+@app.route('/search', methods=["GET", "POST"])
+def search():
+    """ render the image search modal for the API search for creating a quiz"""
+    if request.args:
+        quiz_image = {
+            "img_url": request.args["img-url"],
+            "img_by": request.args["img-by"],
+            "img_by_profile": request.args["img-by-profile"],
+            "img_desc": request.args["img-desc"]
+        }
+        return render_template("users/create.html", image=quiz_image)
+
+    return render_template("users/search.html")
+
+
+@app.route('/search/unsplash')
+def search_unsplash():
+    """Search the unsplash API for images"""
+
+    if request.args:
+        query = request.args["image-query"]
+        res = requests.get(f"{UNSPLASH_API_URL}/search/photos/",
+                           params={'client_id': UNSPLASH_API_KEY, "query": query, "w": "400"})
+        data = res.json()
+        images = []
+        if len(data["results"]) > 12:
+            for i in range(12):
+                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
+                               ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
+        else:
+            for i in range(len(data["results"])):
+                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
+                               ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
+
+        return render_template("users/search.html", images=images)
+    else:
+        flash("Please enter a search term", "danger")
+        return render_template("users/search.html")
 
 ############################################################################
 # Questions Routes
+
 
 @ app.route("/questions")
 def questions():
@@ -302,50 +376,3 @@ def delete_question(question_id):
     flash("Question deleted", "success")
 
     return redirect(f"/users/{g.user.id}/questions")
-
-############################################################################
-# Quizzes Routes
-
-
-@app.route('/create', methods=["GET", "POST"])
-def create():
-    """ Create a new quiz"""
-
-    form = CreateQuizForm()
-
-    return render_template("users/create.html", form=form)
-
-
-############################################################################
-# API Routes
-
-@app.route('/search', methods=["GET", "POST"])
-def search():
-    """ render the image search modal for the API search for creating a quiz"""
-
-    return render_template("users/search.html")
-
-
-@app.route('/search/unsplash')
-def search_unsplash():
-    """Search the unsplash API for images"""
-
-    if request.args:
-        query = request.args["image-query"]
-        res = requests.get(f"{UNSPLASH_API_URL}/search/photos/",
-                           params={'client_id': UNSPLASH_API_KEY, "query": query, "w": "400"})
-        data = res.json()
-        images = []
-        if len(data["results"]) > 12:
-            for i in range(12):
-                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
-                               ["user"]["username"], data["results"][i]["user"]["links"]["html"]])
-        else:
-            for i in range(len(data["results"])):
-                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
-                               ["user"]["username"], data["results"][i]["user"]["links"]["html"]])
-
-        return render_template("users/search.html", images=images)
-    else:
-        flash("Please enter a search term", "danger")
-        return render_template("users/search.html")

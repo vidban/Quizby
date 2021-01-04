@@ -22,10 +22,16 @@
 				<div class="images text-center">
 					{% if images %}
 						{% for img in images %}
-						<div class="image">
-							<img src="{{img[0]}}" alt="unsplash image">
-							<small>By: <a href="{{img[2]}}">{{img[1]}}</a></small>
-						</div>
+						<form action="/search">
+							<input name="img-url" id="img_url"class="hidden" type="url" value={{img[0]}}>
+							<input name="img-by" id="img-by"class="hidden" type="text" value={{img[1]}}>
+							<input name="img-by-profile" class="hidden" type="url" value={{img[2]}}>
+							<input name="img-desc" class="hidden" type="text" value={{img[3]}}>
+							<button class="image" type="submit">
+								<img src="{{img[0]}}" alt="unsplash image">
+								<small>By: <a href="{{img[2]}}" target="_blank">{{img[1]}}</a></small>
+							</button>
+						</form>
 						{% endfor %}
 					{% else %}
 					<h5>Images By:</h5>

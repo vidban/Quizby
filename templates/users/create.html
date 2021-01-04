@@ -3,20 +3,40 @@
 {% block content %}
 <div class="create col col-sm-9 col-md-9 col-lg-7 m-auto mt-5">
 	<h1><b>Create a Quiz!</b></h1>
-	<form method="POST" id="create" class="create-quiz mt-5">
-		<div class="create-image col-3 col-md-4 col-lg-4 p-3">
-			<div class="create-image-inner text-center">
-				<h3>Quiz Cover</h3>
-				<p>Choose and image using the options below</p>
-				<button class= "m-2" type="button" >
-					<a href="/search">
-						<i class="fas fa-camera"></i>
-						Upload Image
-					</a>
-				</button>
+	<form action="/create" method="POST" id="create" enctype="multipart/form-data" class="create-quiz mt-5 d-flex flex-column justify-content-around">
+		<div class="d-flex justify-content-between">
+			<div class="create-image col-3 col-md-4 col-lg-4 p-3">
+				<div class="create-image-inner text-center">
+					{% if image %}
+						<input name="img_url" id="img_url"class="hidden" type="file" value={{image.img_url}}>
+						<input name="img_by" id="img_by"class="hidden" type="text" value={{image.img_by}}>
+						<input name="img_by_profile" id="img-by-profile"class="hidden" type="url" value={{image.img_by_profile}}>
+						<input name="img_desc" id="img_desc" class="hidden" type="text" value={{image_desc}}>
+						<img class="quiz-image" src="{{image.img_url}}" alt="{{image.desc}}">
+					{% else %}
+					<h3><b>Quiz Cover</b></h3>
+					<p>Choose and image</p>
+					<button class= "m-2" type="button" >
+						<a href="/search">
+							<i class="fas fa-camera"></i>
+							Upload Image
+						</a>
+					</button>
+					{% endif %}
+				</div>
+			</div>
+			<div class = "create-title-description col-8 col-md-7 col-lg-7">
+				<div class="title mb-4">
+					<label for="title" class="d-block"><b>Title</b><small>(required)</small></label>
+					<input class="col" id="title" name="title" type="text" placeholder="A descriptive title">
+				</div>
+				<div class="description">
+					<label for="description" class="d-block"><b>Description:</b></label>
+					<textarea class="col" id="description" name="description" type="text" placeholder="Info about the quiz"></textarea>
+				</div>
 			</div>
 		</div>
-		<button class="btn btn-block btn-lg">Create Quiz</button>
+		<button type="submit" class="btn btn-block btn-lg mt-3">Create Quiz</button>
 	  </form>
 </div>
 

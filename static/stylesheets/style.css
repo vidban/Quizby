@@ -406,11 +406,25 @@ label[for=answer]{
 }
 
 /* ************ create ***************** */
+.create{
+  border-radius: 35px;
+  background-color: #def2f1;
+  padding: 5%;
+  text-align: center;
+}
+
 .create-image{
   min-height: 250px;
   background-color: #def2f1;
   border-radius: 25px;
 }
+
+.create-image .quiz-image{
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
 .create-image-inner{
   min-height: 225px;
   border: 4px dashed #17252a;
@@ -437,18 +451,36 @@ label[for=answer]{
   color: #17252A;
 }
 
+.create-title-description{
+  text-align: left;
+}
+
+.create-title-description label{
+  font-size: 1.4em;
+}
+
+.create-title-description input{
+  width: 100%;
+  height: 40px;
+}
+
+.create-title-description textarea{
+  width: 100%;
+  height: 100px;
+}
+
 
 /* **************image unsplash modal ***************** */
 
 .search-unsplash .upload-image-modal{
   width: 90vh;
-  height: 90vh;
+  height: 80vh;
   position: fixed;
   z-index: 998;
   top: 50%;
   left:50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(222, 242, 241, 0.25);
+  background-color: rgba(222, 242, 241);
   color: #17252A;
   border-radius: 10px;
 }
@@ -479,12 +511,16 @@ label[for=answer]{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border:none;
+  background-color: transparent;
+  padding:0;
+  margin:0;
 }
 .search-unsplash img{
   width: 150px;
   height: 150px;
   background-size: contain;
-  margin: 3px;
+  margin: 5px;
   border-radius: 10px;
 }
 

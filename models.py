@@ -142,6 +142,35 @@ class Question(db.Model):
         return f"<Question {self.question} {self.mult_choice} {self.user_id}>"
 
 
+class Quiz(db.Model):
+    """Quizzes available"""
+
+    __tablename__ = 'quizzes'
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True)
+
+    title = db.Column(db.Text, unique=True)
+
+    desc = db.Column(db.String)
+
+    image_by = db.Column(db.String)
+
+    image_by_profile = db.Column(db.String)
+    image_desc = db.Column(db.String)
+    image_url = db.Column(db.LargeBinary)
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False
+    )
+    category = db.Column(db.Text())
+
+    user = db.relationship('User', backref='quizzes')
+
+
 def connect_db(app):
     """Connect this database to provided Flask app."""
 

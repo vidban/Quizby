@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, BooleanField, IntegerField, SelectField, FormField, FileField, RadioField
+from wtforms import StringField, PasswordField, TextAreaField, BooleanField, IntegerField, SelectField, FieldList, FormField, FileField, RadioField
 from wtforms.validators import DataRequired, Email, Length
 from flask_wtf.file import FileAllowed
 
@@ -59,6 +59,10 @@ class AddQuestionForm(FlaskForm):
 
 class CreateQuizForm(FlaskForm):
     """ Form for creating a quiz."""
-    image_url = StringField('Image URL')
+
     title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Description')
+    img_url = FileField("Image")
+    img_by = StringField("By")
+    img_by_profile = StringField("Artist Profile")
+    image_desc = StringField("Image Description")
