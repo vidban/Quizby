@@ -532,6 +532,18 @@ label[for=answer]{
 .search-unsplash .image{
   font-size: .85em;
 }
+
+/* **************image unsplash modal ***************** */
+
+.quiz-list ul li{
+  border-radius: 25px !important;
+  text-align: center;
+}
+
+.quiz-list ul li img{
+  border-radius: 25px;
+}
+
 /* ************ end ***************** */
 
 .hidden{
