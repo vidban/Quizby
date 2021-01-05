@@ -419,12 +419,6 @@ label[for=answer]{
   border-radius: 25px;
 }
 
-.create-image .quiz-image{
-  width: 100%;
-  height: 100%;
-  border-radius: 25px;
-}
-
 .create-image-inner{
   min-height: 225px;
   border: 4px dashed #17252a;
@@ -432,6 +426,13 @@ label[for=answer]{
   background-color: rgba(43, 120, 122, 0.25);
   text-align: center;
 }
+
+.create-image .create-image-inner .quiz-image{
+  max-width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
 
 .create-image-inner button{
   display: inline-block;

@@ -7,7 +7,7 @@ from flask import Flask, session, g,  render_template, flash, session, redirect,
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm, CreateQuizForm
+from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
 from models import db, connect_db, User, Question, Answer, Quiz
 from werkzeug.utils import secure_filename
 
@@ -224,10 +224,10 @@ def form_create():
         user_id=g.user.id,
         title=request.form["title"],
         desc=request.form["description"],
-        image_by=request.form["img_by"],
-        image_by_profile=request.form["img_by_profile"],
-        image_desc=request.form["img_desc"],
-        image_url=request.form["img_url"]
+        image_by=request.form["image_by"],
+        image_by_profile=request.form["image_by_profile"],
+        image_desc=request.form["image_desc"],
+        image_url=request.form["image_url"]
     )
 
     db.session.add(quiz)
@@ -245,10 +245,10 @@ def search():
     """ render the image search modal for the API search for creating a quiz"""
     if request.args:
         quiz_image = {
-            "img_url": request.args["img-url"],
-            "img_by": request.args["img-by"],
-            "img_by_profile": request.args["img-by-profile"],
-            "img_desc": request.args["img-desc"]
+            "image_url": request.args["image_url"],
+            "image_by": request.args["image_by"],
+            "image_by_profile": request.args["image_by_profile"],
+            "image_desc": request.args["image_desc"]
         }
         return render_template("users/create.html", image=quiz_image)
 

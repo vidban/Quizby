@@ -23,10 +23,10 @@
 					{% if images %}
 						{% for img in images %}
 						<form action="/search">
-							<input name="img-url" id="img_url"class="hidden" type="url" value={{img[0]}}>
-							<input name="img-by" id="img_by"class="hidden" type="text" value={{img[1]}}>
-							<input name="img-by-profile" id="img_by_profile" class="hidden" type="url" value={{img[2]}}>
-							<input name="img-desc" id="img_desc" class="hidden" type="text" value={{img[3]}}>
+							<input name="image_url" id="image_url"class="hidden" type="url" value={{img[0]}}>
+							<input name="image_by" id="image_by"class="hidden" type="text" value={{img[1]}}>
+							<input name="image_by_profile" id="image_by_profile" class="hidden" type="url" value={{img[2]}}>
+							<input name="image_desc" id="image_desc" class="hidden" type="text" value={{img[3]}}>
 							<button class="image" type="submit">
 								<img src="{{img[0]}}" alt="{{img[3]}}">
 								<small>By: <a href="{{img[2]}}" target="_blank">{{img[1]}}</a></small>
