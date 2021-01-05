@@ -159,7 +159,7 @@ class Quiz(db.Model):
 
     image_by_profile = db.Column(db.String)
     image_desc = db.Column(db.String)
-    image_url = db.Column(db.LargeBinary)
+    image_url = db.Column(db.String)
 
     user_id = db.Column(
         db.Integer,

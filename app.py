@@ -146,10 +146,15 @@ def view_user_profile():
 def users_quizzes_dashboard(user_id):
     """ get user's quizzes"""
 
-    return render_template('users/quizzes.html')
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    quizzes = Quiz.query.filter(Quiz.user_id == g.user.id).all()
+    return render_template('users/quizzes.html', quizzes=quizzes)
 
 
-@app.route('/users/<int:user_id>/questions')
+@ app.route('/users/<int:user_id>/questions')
 def users_questions_dashboard(user_id):
     """ Get user's questions"""
 
@@ -161,7 +166,7 @@ def users_questions_dashboard(user_id):
     return render_template('users/questions.html', questions=questions)
 
 
-@app.route('/users/profile/edit', methods=["GET", "POST"])
+@ app.route('/users/profile/edit', methods=["GET", "POST"])
 def user_profile():
     """show/update user profile"""
 
@@ -204,14 +209,14 @@ def user_profile():
 # Quizzes Routes
 
 
-@app.route('/create', methods=["GET"])
+@ app.route('/create', methods=["GET"])
 def create():
     """ reder the create quiz template"""
 
     return render_template("users/create.html")
 
 
-@app.route('/create', methods=["POST"])
+@ app.route('/create', methods=["POST"])
 def form_create():
     """ Create a new quiz"""
 
@@ -222,20 +227,20 @@ def form_create():
         image_by=request.form["img_by"],
         image_by_profile=request.form["img_by_profile"],
         image_desc=request.form["img_desc"],
-        image_url=request.files["img_url"].read()
+        image_url=request.form["img_url"]
     )
 
     db.session.add(quiz)
     db.session.commit()
 
-    return redirect(f'/users/{g.user.id}/quizzes')
+    return render_template('questions/questions.html', quiz=quiz)
 
 
 ####################
 # API search Routes
 
 
-@app.route('/search', methods=["GET", "POST"])
+@ app.route('/search', methods=["GET", "POST"])
 def search():
     """ render the image search modal for the API search for creating a quiz"""
     if request.args:
@@ -250,7 +255,7 @@ def search():
     return render_template("users/search.html")
 
 
-@app.route('/search/unsplash')
+@ app.route('/search/unsplash')
 def search_unsplash():
     """Search the unsplash API for images"""
 

@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if quiz %}
+	<div class="quiz">
+		<ul class="list-group mt-2">
+				<li class="list-group-item d-flex justify-content-between">
+					<img src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
+					<p>{{quiz.title}}</p>
+					<p>{{quiz.desc}}</p>
+				</li>
+		</ul>
+	</div>
+{% endif %}
 <div class="questions">
 	<h1 class="text-center">All Questions</h1>
 	<form action="/questions/add" style="display:inline-block;">

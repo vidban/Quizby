@@ -1,7 +1,21 @@
 {% extends 'users/dashboard.html' %}
 
 {% block main %}
-	<h2>No Quizzes to show!</h2>
-	<h4>Come back soon!</h4>
+<div class="quiz-list">
+	<h2>My Quizzes</h2>
+	{% if not quizzes %}
+		<h2>You haven't made any quizzes yet!</h2>
+	{% else %}
+	<ul class="list-group mt-2">
+		{% for quiz in quizzes %}
+			<li class="list-group-item d-flex justify-content-between">
+				<img src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
+				<p>{{quiz.title}}</p>
+				<p>{{quiz.desc}}</p>
+			</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div>
 
 {% endblock%}

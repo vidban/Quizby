@@ -3,16 +3,16 @@
 {% block content %}
 <div class="create col col-sm-9 col-md-9 col-lg-7 m-auto mt-5">
 	<h1><b>Create a Quiz!</b></h1>
-	<form action="/create" method="POST" id="create" enctype="multipart/form-data" class="create-quiz mt-5 d-flex flex-column justify-content-around">
+	<form action="/create" method="POST" id="create" class="create-quiz mt-5 d-flex flex-column justify-content-around">
 		<div class="d-flex justify-content-between">
 			<div class="create-image col-3 col-md-4 col-lg-4 p-3">
 				<div class="create-image-inner text-center">
 					{% if image %}
-						<input name="img_url" id="img_url"class="hidden" type="file" value={{image.img_url}}>
-						<input name="img_by" id="img_by"class="hidden" type="text" value={{image.img_by}}>
+						<input name="img_url" id="img-url" class="hidden" type="url" value={{image.img_url}}>
+						<input name="img_by" id="img-by" class="hidden" type="text" value={{image.img_by}}>
 						<input name="img_by_profile" id="img-by-profile"class="hidden" type="url" value={{image.img_by_profile}}>
-						<input name="img_desc" id="img_desc" class="hidden" type="text" value={{image_desc}}>
-						<img class="quiz-image" src="{{image.img_url}}" alt="{{image.desc}}">
+						<input name="img_desc" id="img-desc" class="hidden" type="text" value={{image.img_desc}}>
+						<img class="quiz-image" src="{{image.img_url}}" alt="{{image.img_desc}}">
 					{% else %}
 					<h3><b>Quiz Cover</b></h3>
 					<p>Choose and image</p>
