@@ -213,7 +213,7 @@ def user_profile():
 def create():
     """ reder the create quiz template"""
 
-    return render_template("users/create.html")
+    return render_template("users/quizzes/create.html")
 
 
 @ app.route('/create', methods=["POST"])
@@ -250,9 +250,9 @@ def search():
             "image_by_profile": request.args["image_by_profile"],
             "image_desc": request.args["image_desc"]
         }
-        return render_template("users/create.html", image=quiz_image)
+        return render_template("users/quizzes/create.html", image=quiz_image)
 
-    return render_template("users/search.html")
+    return render_template("users/quizzes/search.html")
 
 
 @ app.route('/search/unsplash')
@@ -274,10 +274,10 @@ def search_unsplash():
                 images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
                                ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
 
-        return render_template("users/search.html", images=images)
+        return render_template("users/quizzes/search.html", images=images)
     else:
         flash("Please enter a search term", "danger")
-        return render_template("users/search.html")
+        return render_template("users/quizzes/search.html")
 
 ############################################################################
 # Questions Routes
