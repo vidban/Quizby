@@ -55,14 +55,3 @@ class AddQuestionForm(FlaskForm):
     answer_four = FormField(AnswerForm)
     text_answer = TextAreaField(
         'Answer', description='Enter the answer here...')
-
-
-class CreateQuizForm(FlaskForm):
-    """ Form for creating a quiz."""
-
-    title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description')
-    img_url = FileField("Image")
-    img_by = StringField("By")
-    img_by_profile = StringField("Artist Profile")
-    image_desc = StringField("Image Description")
