@@ -65,7 +65,7 @@ def do_logout():
 def home_dashboard():
     """Render Homepage based on user login status"""
     if g.user:
-        return render_template('users/statistics.html')
+        return render_template('users/dashboard/statistics.html')
     else:
         return render_template("home-quizby.html", page="home")
 
@@ -151,7 +151,7 @@ def users_quizzes_dashboard(user_id):
         return redirect("/")
 
     quizzes = Quiz.query.filter(Quiz.user_id == g.user.id).all()
-    return render_template('users/quizzes.html', quizzes=quizzes)
+    return render_template('users/dashboard/quizzes.html', quizzes=quizzes)
 
 
 @ app.route('/users/<int:user_id>/questions')
@@ -163,7 +163,7 @@ def users_questions_dashboard(user_id):
         return redirect("/")
 
     questions = Question.query.filter(Question.user_id == g.user.id).all()
-    return render_template('users/questions.html', questions=questions)
+    return render_template('users/dashboard/questions.html', questions=questions)
 
 
 @ app.route('/users/profile/edit', methods=["GET", "POST"])
