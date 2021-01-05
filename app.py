@@ -236,6 +236,24 @@ def form_create():
     return render_template('questions/questions.html', quiz=quiz)
 
 
+@app.route('/quizzes/<int:quiz_id>/delete')
+def delete_quiz(quiz_id):
+    """ delete quiz with the provided quiz_id"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    q = Quiz.query.get_or_404(quiz_id)
+
+    db.session.delete(q)
+    db.session.commit()
+
+    flash("Quiz deleted", "success")
+
+    return redirect(f"/users/{g.user.id}/quizzes")
+
+
 ####################
 # API search Routes
 

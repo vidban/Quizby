@@ -545,6 +545,11 @@ label[for=answer]{
   border-radius: 25px;
 }
 
+/* **************image unsplash modal ***************** */
+.quiz-list ul li form button:hover{
+  transform: scale(1.2)
+}
+
 /* ************ end ***************** */
 
 .hidden{
