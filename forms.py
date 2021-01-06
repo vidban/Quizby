@@ -44,7 +44,7 @@ class AnswerForm(FlaskForm):
 class AddQuestionForm(FlaskForm):
     """ Form for adding questions."""
     category = StringField('Category', validators=[
-                           DataRequired()], description="Enter Category here")
+                           DataRequired()], description="Enter Category here", id="autocomplete")
     question = TextAreaField('Question', validators=[
                              DataRequired(), Length(max=200)])
     mult_choice = RadioField('Question Type:', choices=[(

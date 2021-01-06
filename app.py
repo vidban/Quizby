@@ -3,12 +3,12 @@ import requests
 
 from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL
 
-from flask import Flask, session, g,  render_template, flash, session, redirect, request, json
+from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
 from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
-from models import db, connect_db, User, Question, Answer, Quiz
+from models import db, connect_db, User, Question, Answer, Quiz, Category
 from werkzeug.utils import secure_filename
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
@@ -399,3 +399,14 @@ def delete_question(question_id):
     flash("Question deleted", "success")
 
     return redirect(f"/users/{g.user.id}/questions")
+
+############################################################################
+# API Routes
+
+
+@app.route('/api/categories')
+def get_categories():
+    """ get category names from database"""
+
+    all_categories = [c.get_name() for c in Category.query.all()]
+    return jsonify(all_categories)

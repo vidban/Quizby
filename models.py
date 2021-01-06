@@ -195,6 +195,9 @@ class Category(db.Model):
         nullable=False,
         unique=True)
 
+    def get_name(self):
+        return self.name
+
 
 def connect_db(app):
     """Connect this database to provided Flask app."""
