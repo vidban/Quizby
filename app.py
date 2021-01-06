@@ -154,7 +154,7 @@ def users_quizzes_dashboard(user_id):
     return render_template('users/dashboard/quizzes.html', quizzes=quizzes)
 
 
-@ app.route('/users/<int:user_id>/questions')
+@app.route('/users/<int:user_id>/questions')
 def users_questions_dashboard(user_id):
     """ Get user's questions"""
 
@@ -166,7 +166,7 @@ def users_questions_dashboard(user_id):
     return render_template('users/dashboard/questions.html', questions=questions)
 
 
-@ app.route('/users/profile/edit', methods=["GET", "POST"])
+@app.route('/users/profile/edit', methods=["GET", "POST"])
 def user_profile():
     """show/update user profile"""
 
@@ -209,31 +209,26 @@ def user_profile():
 # Quizzes Routes
 
 
-@ app.route('/create', methods=["GET"])
+@app.route('/create', methods=["GET", "POST"])
 def create():
     """ reder the create quiz template"""
+    if request.form:
+        quiz = Quiz(
+            user_id=g.user.id,
+            title=request.form["title"],
+            desc=request.form["description"],
+            image_by=request.form["image_by"],
+            image_by_profile=request.form["image_by_profile"],
+            image_desc=request.form["image_desc"],
+            image_url=request.form["image_url"]
+        )
+
+        db.session.add(quiz)
+        db.session.commit()
+
+        return render_template('questions/questions.html', quiz=quiz)
 
     return render_template("users/quizzes/create.html")
-
-
-@ app.route('/create', methods=["POST"])
-def form_create():
-    """ Create a new quiz"""
-
-    quiz = Quiz(
-        user_id=g.user.id,
-        title=request.form["title"],
-        desc=request.form["description"],
-        image_by=request.form["image_by"],
-        image_by_profile=request.form["image_by_profile"],
-        image_desc=request.form["image_desc"],
-        image_url=request.form["image_url"]
-    )
-
-    db.session.add(quiz)
-    db.session.commit()
-
-    return render_template('questions/questions.html', quiz=quiz)
 
 
 @app.route('/quizzes/<int:quiz_id>/delete')
@@ -258,7 +253,7 @@ def delete_quiz(quiz_id):
 # API search Routes
 
 
-@ app.route('/search', methods=["GET", "POST"])
+@app.route('/search', methods=["GET", "POST"])
 def search():
     """ render the image search modal for the API search for creating a quiz"""
     if request.args:
@@ -273,7 +268,7 @@ def search():
     return render_template("users/quizzes/search.html")
 
 
-@ app.route('/search/unsplash')
+@app.route('/search/unsplash')
 def search_unsplash():
     """Search the unsplash API for images"""
 
@@ -301,7 +296,7 @@ def search_unsplash():
 # Questions Routes
 
 
-@ app.route("/questions")
+@app.route("/questions")
 def questions():
     """ Page with listing of questions """
 
@@ -315,7 +310,7 @@ def questions():
     return render_template('questions/questions.html', questions=questions)
 
 
-@ app.route("/questions/add", methods=["GET", "POST"])
+@app.route("/questions/add", methods=["GET", "POST"])
 def add_question():
     """ Add question form"""
 
@@ -383,7 +378,7 @@ def add_question():
         return render_template('questions/add.html', form=form)
 
 
-@ app.route('/questions/<int:question_id>/delete', methods=["POST"])
+@app.route('/questions/<int:question_id>/delete', methods=["POST"])
 def delete_question(question_id):
     """ Delete a user's question """
 
