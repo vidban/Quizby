@@ -1,0 +1,22 @@
+{% if g.user %}
+
+	{% extends 'base.html' %}
+
+	{% block body_class %}onboarding{% endblock %}
+
+{% endif %}
+
+{% block content %}
+<div class="explore d-flex flex-column justify-content-between">
+	<h2>What would you like to explore?</h2>
+	<div class="selection d-flex flex-row justify-content-around p-4">
+		<div class="explore-questions col-4 p-3">
+			<h3>Questions</h3>
+		</div>
+		<div class="explore-quizzes col-4 p-3">
+			<h3>Quizzes</h3>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

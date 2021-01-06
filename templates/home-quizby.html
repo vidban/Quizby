@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="outer-main home-hero">
-    <div class="welcome-message">
+  <div class="outer-main d-flex flex-column justi-content-around">
+    <div class="home-hero">
       <h1>Welcome to Quizby!</h1>
       <br><br>
       <a href="/login" class="btn">Log In</a>
       <br><br>
       <small>Not a member yet?</small>
       <small><a href="/signup"> Sign up </a> now!</small>
+    </div>
+    <div class="explore-options p-3 mt-5">
+      {% include 'users/explore/main.html' %}
     </div>
   </div>
 {% endblock %}
