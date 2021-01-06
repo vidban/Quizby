@@ -1,16 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="outer-main d-flex flex-column justi-content-around">
-    <div class="home-hero">
+  <div class="home-hero pt-5 col d-flex flex-column">
+    <header class="header">
       <h1>Welcome to Quizby!</h1>
-      <br><br>
-      <a href="/login" class="btn">Log In</a>
-      <br><br>
-      <small>Not a member yet?</small>
-      <small><a href="/signup"> Sign up </a> now!</small>
-    </div>
-    <div class="explore-options p-3 mt-5">
-      {% include 'users/explore/main.html' %}
-    </div>
+    </header>
+    <section class="content col col-md-9 col-lg-9 d-flex flex-row justify-content-around">
+      <div class="explore-options p-3 mt-5">
+        {% include 'users/explore/main.html' %}
+      </div>
+      <div class="login-signup p-3 mt-5">
+        <div class="card">
+          <h5 class="card-header"><i class="fas fa-sign-in-alt"></i></h5>
+          <div class="card-body">
+            <h5 class="card-title">Join Us</h5>
+	          <p class="card-text">Optimize your learning!</p>
+            <div class="selection d-flex flex-column justify-content-around p-4">
+              <div class="col m-3">
+                <a href="/login" class="btn">Log In</a>
+              </div>
+              <div class="col m-3">
+                <small>Not a member yet?</small>
+                <small><a href="/signup"> Sign up </a> now!</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
   </div>
 {% endblock %}

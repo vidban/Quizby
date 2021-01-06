@@ -7,14 +7,18 @@
 {% endif %}
 
 {% block content %}
-<div class="explore d-flex flex-column justify-content-between">
-	<h2>What would you like to explore?</h2>
-	<div class="selection d-flex flex-row justify-content-around p-4">
-		<div class="explore-questions col-4 p-3">
-			<h3>Questions</h3>
-		</div>
-		<div class="explore-quizzes col-4 p-3">
-			<h3>Quizzes</h3>
+<div class="card">
+	<h5 class="card-header"><i class="fas fa-eye"></i></h5>
+	<div class="card-body">
+		<h5 class="card-title">Explore</h5>
+		<p class="card-text">See what you can do....</p>
+		<div class="selection d-flex flex-column justify-content-around p-4">
+			<div class="explore-questions col m-3">
+				<h3><a href="/questions">Questions</a></h3>
+			</div>
+			<div class="explore-quizzes col m-3">
+				<h3><a href="">Quizzes</a></h3>
+			</div>
 		</div>
 	</div>
 </div>

@@ -13,11 +13,13 @@
 {% endif %}
 <div id="questions" class="questions">
 	<h1 class="text-center">All Questions</h1>
+	{%if g.user %}
 	<form action="/questions/add" style="display:inline-block;">
 		<button id="new-question" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
 			<i class="fas fa-plus"></i>
 		</button>
 	</form>
+	{% endif %}
 	<form action="/questions">
 	  <div class="input-group">
 		<input name="q" class="form-control" placeholder="Search questions by category" id="search">  
@@ -38,6 +40,7 @@
 			{% for question in questions %}
 				<li class="list-group-item d-flex justify-content-between">
 					<p>{{question.question}}</p>
+					{% if g.user %}
 					<div class="">
 						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
 							<a href=""><i class="fas fa-plus"></i></a>
@@ -46,6 +49,7 @@
 							<a href=""><i class="fas fa-star"></i></a>
 						</button>
 					</div>
+					{% endif %}
 				</li>
 			{% endfor %}
 		</ul>
