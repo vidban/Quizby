@@ -142,10 +142,14 @@ class Question(db.Model):
         return f"<Question {self.question} {self.mult_choice} {self.user_id}>"
 
     def add_category(category):
-        c = Category(name=category)
+        """ add question category to categories table when question is added"""
+        ct = Category.query.filter_by(name=category).all()
 
-        db.session.add(c)
-        db.session.commit()
+        if len(ct) == 0:
+            c = Category(name=category)
+
+            db.session.add(c)
+            db.session.commit()
 
 
 class Quiz(db.Model):
