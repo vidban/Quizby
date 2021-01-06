@@ -141,6 +141,12 @@ class Question(db.Model):
     def __repr__(self):
         return f"<Question {self.question} {self.mult_choice} {self.user_id}>"
 
+    def add_category(category):
+        c = Category(name=category)
+
+        db.session.add(c)
+        db.session.commit()
+
 
 class Quiz(db.Model):
     """Quizzes available"""
@@ -169,6 +175,21 @@ class Quiz(db.Model):
     category = db.Column(db.Text())
 
     user = db.relationship('User', backref='quizzes')
+
+
+class Category(db.Model):
+    """ Categories Available """
+
+    __tablename__ = "categories"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+        autoincrement=True)
+    name = db.Column(
+        db.String,
+        nullable=False,
+        unique=True)
 
 
 def connect_db(app):

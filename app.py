@@ -312,7 +312,7 @@ def questions():
 
 @app.route("/questions/add", methods=["GET", "POST"])
 def add_question():
-    """ Add question form"""
+    """ Add question and category to database"""
 
     if not g.user:
         flash("Please sign in to add questions", "danger")
@@ -331,9 +331,14 @@ def add_question():
         db.session.add(new_question)
         db.session.commit()
 
+        # add category to categories table
+        Question.add_category(form.category.data)
+
         question = Question.query.filter_by(
             question=form.question.data).first()
 
+        # Add answers based on type of answer
+        # mult-choice or flash cards
         if form.mult_choice.data == 'mc':
             if form.answer_one.data["answer"]:
                 answer_1 = Answer(
@@ -372,7 +377,7 @@ def add_question():
             db.session.add(answer)
 
         db.session.commit()
-
+        flash("Question successfully added", "success")
         return redirect('/questions')
     else:
         return render_template('questions/add.html', form=form)
