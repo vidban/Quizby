@@ -283,15 +283,15 @@ def search_unsplash():
                            params={'client_id': UNSPLASH_API_KEY, "query": query, "w": "400"})
         data = res.json()
         images = []
-        if len(data["results"]) > 12:
-            for i in range(12):
-                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
-                               ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
-        else:
-            for i in range(len(data["results"])):
-                images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
-                               ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
 
+        if data['total'] == 0:
+            flash("No results found. Try another search", "danger")
+            return render_template("users/quizzes/search.html")
+
+        num_results = min(12, len(data["results"]))
+        for i in range(num_results):
+            images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
+                           ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
         return render_template("users/quizzes/search.html", images=images)
     else:
         flash("Please enter a search term", "danger")
