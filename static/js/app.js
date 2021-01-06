@@ -11,12 +11,20 @@
   });
 
   //  autocomplete for question form
-  $(document).on("click", "div#new-question", async function () {
-    res = await axios.get("/api/categories");
-    categories = res.data;
-    let $dlist = $("#list-of-categories");
-    for (c of categories) {
-      $("<option>").text(c).appendTo($dlist);
+  $(document).on(
+    "click",
+    "div#new-question input#autocomplete",
+    async function () {
+      res = await axios.get("/api/categories");
+      categories = res.data;
+      let $dlist = $("#list-of-categories");
+      for (c of categories) {
+        $("<option>").text(c).appendTo($dlist);
+      }
     }
+  );
+
+  $(document).on("blur", "div#new-question input#autocomplete", function () {
+    $("#list-of-categories").empty();
   });
 }
