@@ -300,7 +300,7 @@ def search_unsplash():
 def questions():
     """ Page with listing of questions """
 
-    search = request.args.get('q')
+    search = request.args.get('q') or ""
 
     if not search:
         questions = Question.query.all()

@@ -64,8 +64,10 @@
 						</div>
 					</li>
 					<div id="qn{{question.id}}" class="q-answer collapse">
-						<div class="card card-body">
-							Answer here...
+						<div class="card card-body d-flex flex-row justify-content-around">
+							{%for a in question.answers%}
+								<p class="p-2 d-inline-block {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
+							{% endfor %}
 						</div>
 					</div>
 				</div>

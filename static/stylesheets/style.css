@@ -312,6 +312,10 @@ body{
   transform: scale(1.2);
 }
 
+.questions .filtered-by button:hover{
+  transform: none;
+}
+
 .question-list{
   font-size: 1.3em;
 }
@@ -329,6 +333,18 @@ body{
 .q-answer .card {
   background-color: rgba(43, 120, 122, 0.5);
   color: white;
+}
+
+.q-answer .correct{
+  background-color: rgba(222, 242, 241);
+  color: #17252A;
+  border-radius: 10px;
+}
+
+.q-answer .wrong{
+  background-color: rgba(222, 242, 241, 0.75);
+  border-radius: 10px;
+  opacity:.50;
 }
 
 /* ************ add -questions ***************** */
