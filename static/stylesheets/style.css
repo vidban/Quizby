@@ -321,6 +321,15 @@ body{
   border-radius: unset;
 }
 
+.q-answer{
+  width: 80%;
+  margin: auto;
+}
+
+.q-answer .card {
+  background-color: rgba(43, 120, 122, 0.5);
+  color: white;
+}
 
 /* ************ add -questions ***************** */
 

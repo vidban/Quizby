@@ -12,7 +12,7 @@
 	</div>
 {% endif %}
 <div id="questions" class="questions">
-	<h1 class="text-center">All Questions</h1>
+	<h1 class="text-center mb-5">All Questions</h1>
 	{%if g.user %}
 	<form action="/questions/add" style="display:inline-block;">
 		<button id="new-question" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
@@ -20,9 +20,10 @@
 		</button>
 	</form>
 	{% endif %}
+	
 	<form action="/questions">
 	  <div class="input-group">
-		<input name="q" class="form-control" placeholder="Search questions by category" id="search">  
+		<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
 		<div class="input-group-append">
 		  <div class="input-group-text">
 			<button class="btn btn-default">
@@ -31,26 +32,43 @@
 		  </div>
 		</div>
 	  </div>
+	  {% if not search == ""%}
+	<div class="filtered-by mt-3 mb-3">
+		<p class="btn">{{search}}<button class="btn">X</button></p>
+		
+	</div>
+	{% endif %}
 	</form>
 	<div class="question-list">
 		{% if not questions %}
 			<h2>No questions available yet</h2>
+			<h3>Log In or Sign Up to add them in!</h3>
 		{% else %}
 		<ul class="list-group mt-2">
 			{% for question in questions %}
-				<li class="list-group-item d-flex justify-content-between">
-					<p>{{question.question}}</p>
-					{% if g.user %}
-					<div class="">
-						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
-							<a href=""><i class="fas fa-plus"></i></a>
-						</button>
-						<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
-							<a href=""><i class="fas fa-star"></i></a>
-						</button>
+				<div>
+					<li class="list-group-item d-flex justify-content-between">
+						<p>{{question.question}}</p>
+						<div>
+							{% if g.user %}
+							<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
+								<a href=""><i class="fas fa-plus"></i></a>
+							</button>
+							<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
+								<a href=""><i class="fas fa-star"></i></a>
+							</button>
+							{% endif %}
+							<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
+								<i class="fas fa-chevron-down"></i>
+							</button>
+						</div>
+					</li>
+					<div id="qn{{question.id}}" class="q-answer collapse">
+						<div class="card card-body">
+							Answer here...
+						</div>
 					</div>
-					{% endif %}
-				</li>
+				</div>
 			{% endfor %}
 		</ul>
 		{% endif %}

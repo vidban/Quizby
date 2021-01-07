@@ -307,7 +307,7 @@ def questions():
     else:
         questions = Question.query.filter(
             Question.question.like(f"%{search}%")).all()
-    return render_template('questions/questions.html', questions=questions)
+    return render_template('questions/questions.html', questions=questions, search=search)
 
 
 @app.route("/questions/add", methods=["GET", "POST"])
