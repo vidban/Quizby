@@ -238,7 +238,7 @@ body{
 
 .explore-quizzes:hover,
 .explore-questions:hover{
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
 .explore-quizzes a,
