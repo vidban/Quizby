@@ -3,7 +3,7 @@ import requests
 
 from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL
 
-from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify
+from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
@@ -226,7 +226,8 @@ def create():
         db.session.add(quiz)
         db.session.commit()
 
-        return render_template('questions/questions.html', quiz=quiz)
+        return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
+        # return render_template('questions/questions.html', quiz=quiz)
 
     return render_template("users/quizzes/create.html")
 
@@ -301,7 +302,7 @@ def questions():
     """ Page with listing of questions """
 
     search = request.args.get('q') or ""
-
+    quiz = request.args.get('quiz') or None
     if not search:
         questions = Question.query.all()
     else:
