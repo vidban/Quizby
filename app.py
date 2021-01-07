@@ -306,7 +306,7 @@ def questions():
         questions = Question.query.all()
     else:
         questions = Question.query.filter(
-            Question.question.like(f"%{search}%")).all()
+            Question.question.ilike(f"%{search}%")).all()
     return render_template('questions/questions.html', questions=questions, search=search)
 
 

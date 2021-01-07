@@ -58,9 +58,12 @@
 								<a href=""><i class="fas fa-star"></i></a>
 							</button>
 							{% endif %}
-							<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
-								<i class="fas fa-chevron-down"></i>
-							</button>
+							<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
+								<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
+									<i class="fas fa-chevron-down"></i>
+								</button>
+							</a>
+							
 						</div>
 					</li>
 					<div id="qn{{question.id}}" class="q-answer collapse">
