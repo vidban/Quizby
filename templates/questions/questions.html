@@ -44,7 +44,7 @@
 			<h2>No questions available yet</h2>
 			<h3>Log In or Sign Up to add them in!</h3>
 		{% else %}
-		<ul class="list-group mt-2">
+		<ul id="qn-list" class="list-group mt-2">
 			{% for question in questions %}
 				<div>
 					<li class="list-group-item d-flex justify-content-between">
@@ -66,7 +66,7 @@
 							
 						</div>
 					</li>
-					<div id="qn{{question.id}}" class="q-answer collapse">
+					<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
 						<div class="card card-body d-flex flex-row justify-content-around">
 							{%for a in question.answers%}
 								<p class="p-2 d-inline-block {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
