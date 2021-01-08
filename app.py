@@ -229,7 +229,7 @@ def create():
         return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
         # return render_template('questions/questions.html', quiz=quiz)
 
-    return render_template("users/quizzes/create.html")
+    return render_template("users/new/quizzes/create.html")
 
 
 @app.route('/quizzes/<int:quiz_id>/delete')
@@ -264,9 +264,9 @@ def search():
             "image_by_profile": request.args["image_by_profile"],
             "image_desc": request.args["image_desc"]
         }
-        return render_template("users/quizzes/create.html", image=quiz_image)
+        return render_template("users/new/quizzes/create.html", image=quiz_image)
 
-    return render_template("users/quizzes/search.html")
+    return render_template("users/new/quizzes/search.html")
 
 
 @app.route('/search/unsplash')
@@ -282,16 +282,16 @@ def search_unsplash():
 
         if data['total'] == 0:
             flash("No results found. Try another search", "danger")
-            return render_template("users/quizzes/search.html")
+            return render_template("users/new/quizzes/search.html")
 
         num_results = min(12, len(data["results"]))
         for i in range(num_results):
             images.append([data["results"][i]["urls"]["thumb"], data["results"][i]
                            ["user"]["username"], data["results"][i]["user"]["links"]["html"], data["results"][i]["description"]])
-        return render_template("users/quizzes/search.html", images=images)
+        return render_template("users/new/quizzes/search.html", images=images)
     else:
         flash("Please enter a search term", "danger")
-        return render_template("users/quizzes/search.html")
+        return render_template("users/new/quizzes/search.html")
 
 ############################################################################
 # Questions Routes
@@ -381,7 +381,7 @@ def add_question():
         flash("Question successfully added", "success")
         return redirect('/questions')
     else:
-        return render_template('questions/add.html', form=form)
+        return render_template('users/new/questions/add.html', form=form)
 
 
 @app.route('/questions/<int:question_id>/delete', methods=["POST"])
