@@ -47,7 +47,7 @@
 				{% for question in questions %}
 					<div>
 						<li class="list-group-item d-flex justify-content-between">
-							<p>{{question.question}}</p>
+							<pre><p>{{question.question}}</p></pre>
 							<div>
 								{% if g.user %}
 								<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
