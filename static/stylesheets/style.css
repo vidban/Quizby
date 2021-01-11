@@ -316,7 +316,7 @@ body{
 }
 
 .question-list{
-  font-size: 1.3em;
+  font-size: .9em;
 }
 
 .question-list button{
@@ -325,8 +325,12 @@ body{
 }
 
 .q-answer{
-  width: 80%;
+  width: 90%;
   margin: auto;
+}
+
+.q-answer .card{
+  flex-direction:row;
 }
 
 .q-answer .card {
@@ -334,15 +338,20 @@ body{
   color: white;
 }
 
-.q-answer .correct{
+.q-answer p{
   background-color: rgba(222, 242, 241);
   color: #17252A;
   border-radius: 10px;
+  font-size: .7em;
+}
+.q-answer .correct:hover{
+  background-color: rgb(16, 71, 14);
+  color: white;
 }
 
-.q-answer .wrong{
-  background-color: rgba(222, 242, 241, 0.75);
-  border-radius: 10px;
+.q-answer .wrong:hover{
+  background-color: rgb(228, 89, 64);
+  color: white;
   opacity:.50;
 }
 

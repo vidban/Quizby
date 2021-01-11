@@ -43,11 +43,11 @@
 		{% endif %}
 		</form>
 		<div class="question-list">
-			<ul id="qn-list" class="list-group mt-2">
+			<ol id="qn-list" class="list-group mt-2">
 				{% for question in questions %}
-					<div>
 						<li class="list-group-item d-flex justify-content-between">
-							<pre><p>{{question.question}}</p></pre>
+							<div class="col-1">{{loop.index}}</div>
+							<pre class="col-8"><p>{{question.question}}</p></pre>
 							<div>
 								{% if g.user %}
 								<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
@@ -66,15 +66,14 @@
 							</div>
 						</li>
 						<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
-							<div class="card card-body d-flex flex-row justify-content-around">
+							<div class="card card-body d-flex flex-wrap justify-content-around">
 								{%for a in question.answers%}
-									<p class="p-2 d-inline-block {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
+									<p class="p-2 m-2 col col-md-5 col-lg-2 {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
 								{% endfor %}
 							</div>
 						</div>
-					</div>
 				{% endfor %}
-			</ul>
+			</ol>
 		</div>
 	{% endif %}
 </div>
