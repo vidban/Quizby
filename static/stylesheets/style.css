@@ -190,8 +190,7 @@ body{
   width: 100%;
   text-align: center;
   color: #17252a;
-  background-color: rgba(240, 232, 232, 0.25);
-  background-image: url('/static/images/quizby-hero2.jpeg');
+  background: rgba(22, 126, 147);
   background-size: cover;
 }
 

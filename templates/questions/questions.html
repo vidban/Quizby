@@ -21,62 +21,61 @@
 	</form>
 	{% endif %}
 	
-	<form action="/questions">
-	  <div class="input-group">
-		<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
-		<div class="input-group-append">
-		  <div class="input-group-text">
-			<button class="btn btn-default">
-				<span class="fa fa-search"></span>
-			  </button>
-		  </div>
+	{% if not questions %}
+		<h2>No questions available yet</h2>
+	{% else %}
+		<form action="/questions">
+		<div class="input-group">
+			<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
+			<div class="input-group-append">
+			<div class="input-group-text">
+				<button class="btn btn-default">
+					<span class="fa fa-search"></span>
+				</button>
+			</div>
+			</div>
 		</div>
-	  </div>
-	  {% if not search == ""%}
-	<div class="filtered-by mt-3 mb-3">
-		<p class="btn">{{search}}<button class="btn">X</button></p>
-		
-	</div>
-	{% endif %}
-	</form>
-	<div class="question-list">
-		{% if not questions %}
-			<h2>No questions available yet</h2>
-			<h3>Log In or Sign Up to add them in!</h3>
-		{% else %}
-		<ul id="qn-list" class="list-group mt-2">
-			{% for question in questions %}
-				<div>
-					<li class="list-group-item d-flex justify-content-between">
-						<p>{{question.question}}</p>
-						<div>
-							{% if g.user %}
-							<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
-								<a href=""><i class="fas fa-plus"></i></a>
-							</button>
-							<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
-								<a href=""><i class="fas fa-star"></i></a>
-							</button>
-							{% endif %}
-							<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
-								<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
-									<i class="fas fa-chevron-down"></i>
+		{% if not search == ""%}
+			<div class="filtered-by mt-3 mb-3">
+				<p class="btn">{{search}}<button class="btn">X</button></p>
+				
+			</div>
+		{% endif %}
+		</form>
+		<div class="question-list">
+			<ul id="qn-list" class="list-group mt-2">
+				{% for question in questions %}
+					<div>
+						<li class="list-group-item d-flex justify-content-between">
+							<p>{{question.question}}</p>
+							<div>
+								{% if g.user %}
+								<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">
+									<a href=""><i class="fas fa-plus"></i></a>
 								</button>
-							</a>
-							
-						</div>
-					</li>
-					<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
-						<div class="card card-body d-flex flex-row justify-content-around">
-							{%for a in question.answers%}
-								<p class="p-2 d-inline-block {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
-							{% endfor %}
+								<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
+									<a href=""><i class="fas fa-star"></i></a>
+								</button>
+								{% endif %}
+								<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
+									<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
+										<i class="fas fa-chevron-down"></i>
+									</button>
+								</a>
+								
+							</div>
+						</li>
+						<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
+							<div class="card card-body d-flex flex-row justify-content-around">
+								{%for a in question.answers%}
+									<p class="p-2 d-inline-block {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
+								{% endfor %}
+							</div>
 						</div>
 					</div>
-				</div>
-			{% endfor %}
-		</ul>
-		{% endif %}
-	</div>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
 </div>
 {% endblock %}
