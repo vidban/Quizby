@@ -17,7 +17,7 @@ Click [here](https://docs.google.com/document/d/1UX03vmtLDEaC_aLBhUG15_K6iTjF3O1
 
 ## API used:
 
-[Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+[Unsplash API](https://unsplash.com/documentation#getting-started)
 
 ## Theme
 
