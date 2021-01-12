@@ -133,6 +133,8 @@ def logout():
 
 @app.route('/users/profile')
 def view_user_profile():
+    """ Display info on user"""
+
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/"
