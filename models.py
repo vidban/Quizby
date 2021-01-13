@@ -133,6 +133,7 @@ class Question(db.Model):
         nullable=False
     )
     category = db.Column(db.Text())
+    private = db.Column(db.Boolean, default=True)
 
     user = db.relationship('User', backref='questions')
     answers = db.relationship(
