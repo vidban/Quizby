@@ -179,6 +179,8 @@ class Quiz(db.Model):
     )
     category = db.Column(db.Text())
 
+    private = db.Column(db.Boolean, default=True)
+
     user = db.relationship('User', backref='quizzes')
 
 
