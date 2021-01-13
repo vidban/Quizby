@@ -386,6 +386,23 @@ def add_question():
         return render_template('users/new/questions/add.html', form=form)
 
 
+@app.route('/questions/<int:question_id>/update')
+def update_question(question_id):
+    """updates whether question is private or not"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    q = Question.query.get_or_404(question_id)
+    q.private = not q.private
+
+    db.session.add(q)
+    db.session.commit()
+
+    return redirect(url_for('questions'))
+
+
 @app.route('/questions/<int:question_id>/delete', methods=["POST"])
 def delete_question(question_id):
     """ Delete a user's question """
