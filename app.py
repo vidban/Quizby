@@ -310,7 +310,7 @@ def questions():
     else:
         questions = Question.query.filter(
             Question.question.ilike(f"%{search}%")).all()
-    return render_template('questions/questions.html', questions=questions, search=search)
+    return render_template('explore/questions.html', questions=questions, search=search)
 
 
 @app.route("/questions/add", methods=["GET", "POST"])
