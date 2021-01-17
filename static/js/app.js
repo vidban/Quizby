@@ -3,6 +3,7 @@
   $(document).on("change", "#mult_choice", function () {
     if ($("input[id^=mult_choice]:checked").val() === "f") {
       $("#text_answer").parent().toggle();
+      $("table[id^=answer_] input").removeAttr("required");
       $("label[id^=answer]").parent().toggle();
     } else if ($("input[id^=mult_choice]:checked").val() === "mc") {
       $("#text_answer").parent().toggle();
@@ -15,6 +16,9 @@
     "click",
     "div#new-question input#autocomplete",
     async function () {
+      if ($("input[id^=mult_choice]:checked").val() === "mc") {
+        $("table[id^=answer_] tr:first-child input").prop("required", true);
+      }
       res = await axios.get("/api/categories");
       categories = res.data;
       let $dlist = $("#list-of-categories");
@@ -29,5 +33,5 @@
   });
 
   // remove flash messages
-  window.setTimeout("document.getElementById('alert').remove();", 1500);
+  // window.setTimeout("document.getElementById('alert').remove();", 1500);
 }

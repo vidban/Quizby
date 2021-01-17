@@ -38,15 +38,15 @@ class EditUserForm(FlaskForm):
 class AnswerForm(FlaskForm):
     """Form for adding answer options with correct choice option"""
     answer = StringField(id='answer')
-    correct = BooleanField('Correct?')
+    correct = BooleanField('Correct?', default=False)
 
 
 class AddQuestionForm(FlaskForm):
     """ Form for adding questions."""
     category = StringField('Category', validators=[
-                           DataRequired()], description="Enter Category here", id="autocomplete")
+        DataRequired()], description="Enter Category here", id="autocomplete")
     question = TextAreaField('Question', validators=[
-                             DataRequired(), Length(max=200)])
+        DataRequired(), Length(max=200)])
     mult_choice = RadioField('Question Type:', choices=[(
         'mc', 'Multiple Choice'),  ('f', 'Flash Cards')], default='mc')
     answer_one = FormField(AnswerForm)

@@ -164,8 +164,12 @@ def users_questions_dashboard(user_id):
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
+    search = request.args.get('q') or ""
     questions = Question.query.filter(Question.user_id == g.user.id).all()
-    return render_template('users/dashboard/questions.html', questions=questions)
+    if search:
+        questions = Question.query.filter(
+            Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
+    return render_template('users/dashboard/questions.html', questions=questions, search=search)
 
 
 @app.route('/users/profile/edit', methods=["GET", "POST"])
@@ -324,64 +328,66 @@ def add_question():
     form = AddQuestionForm()
 
     if form.validate_on_submit():
-        new_question = Question(
-            question=form.question.data,
-            mult_choice=form.mult_choice.data,
-            category=form.category.data,
-            user_id=g.user.id
-        )
+        try:
+            new_question = Question(
+                question=form.question.data,
+                mult_choice=form.mult_choice.data,
+                category=form.category.data,
+                user_id=g.user.id
+            )
 
-        db.session.add(new_question)
-        db.session.commit()
+            db.session.add(new_question)
+            db.session.commit()
 
-        # add category to categories table
-        Question.add_category(form.category.data)
+            # add category to categories table
+            Question.add_category(form.category.data)
 
-        question = Question.query.filter_by(
-            question=form.question.data).first()
+            question = Question.query.filter_by(
+                question=form.question.data).first()
 
-        # Add answers based on type of answer
-        # mult-choice or flash cards
-        if form.mult_choice.data == 'mc':
-            if form.answer_one.data["answer"]:
+            # Add answers based on type of answer
+            # mult-choice or flash cards
+            if form.mult_choice.data == 'mc':
                 answer_1 = Answer(
                     answer=form.answer_one.data["answer"],
                     correct=form.answer_one.data["correct"],
                     question_id=question.id
                 )
                 db.session.add(answer_1)
-            if form.answer_two.data["answer"]:
                 answer_2 = Answer(
                     answer=form.answer_two.data["answer"],
                     correct=form.answer_two.data["correct"],
                     question_id=question.id
                 )
                 db.session.add(answer_2)
-            if form.answer_three.data["answer"]:
                 answer_3 = Answer(
                     answer=form.answer_three.data["answer"],
                     correct=form.answer_three.data["correct"],
                     question_id=question.id
                 )
                 db.session.add(answer_3)
-            if form.answer_four.data["answer"]:
                 answer_4 = Answer(
                     answer=form.answer_four.data["answer"],
                     correct=form.answer_four.data["correct"],
                     question_id=question.id
                 )
                 db.session.add(answer_4)
-        else:
-            answer = Answer(
-                answer=form.text_answer.data,
-                correct=True,
-                question_id=question.id
-            )
-            db.session.add(answer)
+            else:
+                answer = Answer(
+                    answer=form.text_answer.data,
+                    correct=True,
+                    question_id=question.id
+                )
+                db.session.add(answer)
 
-        db.session.commit()
-        flash("Question successfully added", "success")
-        return redirect('/questions')
+            db.session.commit()
+            flash("Question successfully added", "success")
+            return redirect('/questions')
+
+        except IntegrityError as e:
+            # print(e.orig.args)
+            flash('This question already exists! Please enter', 'danger')
+            return redirect(url_for(request.endpoint, question=new_question))
     else:
         return render_template('users/new/questions/add.html', form=form)
 
@@ -400,10 +406,10 @@ def update_question(question_id):
     db.session.add(q)
     db.session.commit()
 
-    return redirect(url_for('questions'))
+    return redirect(f'/users/{g.user.id}/questions')
 
 
-@app.route('/questions/<int:question_id>/delete', methods=["POST"])
+@ app.route('/questions/<int:question_id>/delete', methods=["POST"])
 def delete_question(question_id):
     """ Delete a user's question """
 
@@ -424,7 +430,7 @@ def delete_question(question_id):
 # API Routes
 
 
-@app.route('/api/categories')
+@ app.route('/api/categories')
 def get_categories():
     """ get category names from database"""
 

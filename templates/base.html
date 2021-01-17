@@ -48,7 +48,12 @@
 <div class="container-fluid">
   {% for category, message in get_flashed_messages(with_categories=True) %}
     {% if message %}
-      <div id="alert" class="alert alert-{{ category }}">{{ message }}</div>
+      <div id="alert" class="alert alert-{{ category }} alert-dismissible">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     {% endif %}
   {% endfor %}
 

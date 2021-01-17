@@ -57,9 +57,6 @@
 									<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">
 										<a href=""><i class="fas fa-star"></i></a>
 									</button>
-									<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
-										<a href="/questions/{{question.id}}/update"><i class="fas fa-{{'lock' if question.private else 'unlock'}}"></i></a>
-									</button>
 								{% endif %}
 								<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
 									<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">

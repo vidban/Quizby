@@ -144,7 +144,7 @@ class Question(db.Model):
 
     def add_category(category):
         """ add question category to categories table when question is added"""
-        ct = Category.query.filter_by(name=category).all()
+        ct = Category.query.filter(Category.name.ilike(category)).all()
 
         if len(ct) == 0:
             c = Category(name=category)
