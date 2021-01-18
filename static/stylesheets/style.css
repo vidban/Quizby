@@ -122,20 +122,7 @@ button.close{
   .onboarding .navbar-brand span {
 	display: none;
   }
-  
-  /* .onboarding .nav.navbar-nav.navbar-right {
-	position: absolute;
-	right: 16px;
-  } */
-  
-  /* .onboarding .navbar a {
-	color: #def2f1;
-  } */
-  
-  /* .onboarding {
-  background-color: #3aafa9;
-  } */
-  
+   
 
   /* ************ Login & Signup***************** */
 
@@ -258,6 +245,11 @@ button.close{
 .explore-questions a{
   text-decoration: none;
   color: #17252A
+}
+
+.user-explore .card{
+  width: 70%;
+  margin: 20px auto 0;
 }
 
 /* ************ base ***************** */
