@@ -310,10 +310,10 @@ def questions():
     search = request.args.get('q') or ""
     quiz = request.args.get('quiz') or None
     if not search:
-        questions = Question.query.all()
+        questions = Question.query.filter(Question.private == False).all()
     else:
-        questions = Question.query.filter(
-            Question.question.ilike(f"%{search}%")).all()
+        questions = Question.query.filter(Question.private == False,
+                                          Question.question.ilike(f"%{search}%")).all()
     return render_template('explore/questions.html', questions=questions, search=search)
 
 
@@ -382,7 +382,7 @@ def add_question():
 
             db.session.commit()
             flash("Question successfully added", "success")
-            return redirect('/questions')
+            return redirect(f'/users/{g.user.id}/questions')
 
         except IntegrityError as e:
             # print(e.orig.args)

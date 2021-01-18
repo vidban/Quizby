@@ -31,7 +31,4 @@
   $(document).on("blur", "div#new-question input#autocomplete", function () {
     $("#list-of-categories").empty();
   });
-
-  // remove flash messages
-  // window.setTimeout("document.getElementById('alert').remove();", 1500);
 }

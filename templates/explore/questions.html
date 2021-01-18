@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if quiz %}
+<!-- {% if quiz %}
 	<div class="quiz">
 		<ul class="list-group mt-2">
 				<li class="list-group-item d-flex justify-content-between">
@@ -10,16 +10,16 @@
 				</li>
 		</ul>
 	</div>
-{% endif %}
+{% endif %} -->
 <div id="questions" class="questions">
 	<h1 class="text-center mb-5">All Questions</h1>
-	{%if g.user %}
+	<!-- {%if g.user %}
 	<form action="/questions/add" style="display:inline-block;">
 		<button id="new-question" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
 			<i class="fas fa-plus"></i>
 		</button>
 	</form>
-	{% endif %}
+	{% endif %} -->
 	
 	{% if not questions %}
 		<a href="{{url_for(request.endpoint)}}"><button class="btn">Go Back</button></a>
