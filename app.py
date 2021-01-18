@@ -216,7 +216,7 @@ def user_profile():
 
 
 @app.route('/quizzes')
-def quizzes():
+def quizzes_explore():
     """ display all public quizzes available"""
 
     quizzes = Quiz.query.filter(Quiz.private == False).all()
@@ -241,29 +241,6 @@ def update_quiz(quiz_id):
     return redirect(f'/users/{g.user.id}/quizzes')
 
 
-@app.route('/create', methods=["GET", "POST"])
-def create():
-    """ reder the create quiz template"""
-    if request.form:
-        quiz = Quiz(
-            user_id=g.user.id,
-            title=request.form["title"],
-            desc=request.form["description"],
-            image_by=request.form["image_by"],
-            image_by_profile=request.form["image_by_profile"],
-            image_desc=request.form["image_desc"],
-            image_url=request.form["image_url"]
-        )
-
-        db.session.add(quiz)
-        db.session.commit()
-
-        return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
-        # return render_template('questions/questions.html', quiz=quiz)
-
-    return render_template("users/new/quizzes/create.html")
-
-
 @app.route('/quizzes/<int:quiz_id>/delete')
 def delete_quiz(quiz_id):
     """ delete quiz with the provided quiz_id"""
@@ -282,9 +259,31 @@ def delete_quiz(quiz_id):
     return redirect(f"/users/{g.user.id}/quizzes")
 
 
+@app.route('/quizzes/add', methods=["GET", "POST"])
+def add_quiz_create():
+    """ reder the create quiz template"""
+    if request.form:
+        quiz = Quiz(
+            user_id=g.user.id,
+            title=request.form["title"],
+            desc=request.form["description"],
+            image_by=request.form["image_by"],
+            image_by_profile=request.form["image_by_profile"],
+            image_desc=request.form["image_desc"],
+            image_url=request.form["image_url"]
+        )
+
+        db.session.add(quiz)
+        db.session.commit()
+
+        # return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
+        return redirect(url_for('users_quizzes_dashboard', user_id=g.user.id))
+
+    return render_template("users/new/quizzes/create.html")
+
+
 ####################
 # API search Routes
-
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
@@ -330,7 +329,7 @@ def search_unsplash():
 
 
 @app.route("/questions")
-def questions():
+def questions_explore():
     """ Page with listing of questions """
 
     search = request.args.get('q') or ""
@@ -346,7 +345,7 @@ def questions():
 
 
 @app.route("/questions/add", methods=["GET", "POST"])
-def add_question():
+def add_question_create():
     """ Add question and category to database"""
 
     if not g.user:
@@ -417,7 +416,7 @@ def add_question():
             flash('This question already exists! Please enter', 'danger')
             return redirect(url_for(request.endpoint, question=new_question))
     else:
-        return render_template('users/new/questions/add.html', form=form)
+        return render_template('users/new/add-questions.html', form=form)
 
 
 @app.route('/questions/<int:question_id>/update')
@@ -474,3 +473,13 @@ def explore():
     """ display options to explore based on sign in"""
 
     return render_template('/explore/main.html')
+
+############################################################################
+# Create Route
+
+
+@app.route('/create', methods=["GET", "POST"])
+def create():
+    """ display create options"""
+
+    return render_template('users/new/main.html')
