@@ -13,16 +13,6 @@
 				<h3>{{quiz.title}}</h3>
 				<p>{{quiz.desc}}</p>
 				<hr>
-				<form action="" style="display:inline-block;">
-					<button class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
-						<i class="fas fa-edit"></i>
-					</button>
-				</form>
-				<form action="/quizzes/{{quiz.id}}/delete" style="display:inline-block;">
-					<button class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
-						<i class="fas fa-trash"></i>
-					</button>
-				</form>
 			</li>
 		{% endfor %}
 	</ul>

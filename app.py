@@ -224,6 +224,23 @@ def quizzes():
     return render_template('explore/quizzes.html', quizzes=quizzes, page="quizzes")
 
 
+@app.route('/quizzes/<int:quiz_id>/update')
+def update_quiz(quiz_id):
+    """updates whether quiz is private or not"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    q = Quiz.query.get_or_404(quiz_id)
+    q.private = not q.private
+
+    db.session.add(q)
+    db.session.commit()
+
+    return redirect(f'/users/{g.user.id}/quizzes')
+
+
 @app.route('/create', methods=["GET", "POST"])
 def create():
     """ reder the create quiz template"""
