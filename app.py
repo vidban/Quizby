@@ -86,7 +86,7 @@ def login():
 
         flash("Invalid credentials.", 'danger')
 
-    return render_template('users/login.html', form=form)
+    return render_template('users/login.html', form=form, page="login")
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -115,7 +115,7 @@ def signup():
         return redirect('/')
 
     else:
-        return render_template('users/signup.html', form=form)
+        return render_template('users/signup.html', form=form, page="signup")
 
 
 @app.route('/logout')
@@ -213,6 +213,15 @@ def user_profile():
 
 ############################################################################
 # Quizzes Routes
+
+
+@app.route('/quizzes')
+def quizzes():
+    """ display all public quizzes available"""
+
+    quizzes = Quiz.query.filter(Quiz.private == False).all()
+
+    return render_template('explore/quizzes.html', quizzes=quizzes, page="quizzes")
 
 
 @app.route('/create', methods=["GET", "POST"])
@@ -314,7 +323,9 @@ def questions():
     else:
         questions = Question.query.filter(Question.private == False,
                                           Question.question.ilike(f"%{search}%")).all()
-    return render_template('explore/questions.html', questions=questions, search=search)
+        if len(questions) == 0:
+            flash("No questions found for that search", 'warning')
+    return render_template('explore/questions.html', questions=questions, search=search, page="questions")
 
 
 @app.route("/questions/add", methods=["GET", "POST"])
@@ -436,3 +447,13 @@ def get_categories():
 
     all_categories = [c.get_name() for c in Category.query.all()]
     return jsonify(all_categories)
+
+############################################################################
+# Explore Route
+
+
+@app.route('/explore')
+def explore():
+    """ display options to explore based on sign in"""
+
+    return render_template('/explore/main.html')

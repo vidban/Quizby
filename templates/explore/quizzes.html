@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="quiz-list col">
+	<h1 class= "text-center m-2">Quizzes</h1>
+	{% if not quizzes %}
+		<h2 class="text-center mt-4">There aren't any public quizzes available!</h2>
+		<p class="text-center">Log In or Sign Up to make you own quiz using the questions available or add your own questions</p>
+	{% else %}
+	<ul class="list-group m-2 d-flex flex-row flex-wrap">
+		{% for quiz in quizzes %}
+			<li class="list-group-item m-3 col-5 col-md-5 col-lg-2">
+				<img class="col" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
+				<h3>{{quiz.title}}</h3>
+				<p>{{quiz.desc}}</p>
+				<hr>
+				<form action="" style="display:inline-block;">
+					<button class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
+						<i class="fas fa-edit"></i>
+					</button>
+				</form>
+				<form action="/quizzes/{{quiz.id}}/delete" style="display:inline-block;">
+					<button class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
+						<i class="fas fa-trash"></i>
+					</button>
+				</form>
+			</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div>
+{% endblock %}

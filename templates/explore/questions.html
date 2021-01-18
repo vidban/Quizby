@@ -12,7 +12,9 @@
 	</div>
 {% endif %} -->
 <div id="questions" class="questions">
-	<h1 class="text-center mb-5">All Questions</h1>
+	<h1 class="text-center mb-5">Questions</h1>
+	<p class="text-center">Check out the available questions below.</p>
+	<p class="text-center">Log In or Sign Up to add questions or make a quiz</p>
 	<!-- {%if g.user %}
 	<form action="/questions/add" style="display:inline-block;">
 		<button id="new-question" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
@@ -22,8 +24,10 @@
 	{% endif %} -->
 	
 	{% if not questions %}
-		<a href="{{url_for(request.endpoint)}}"><button class="btn">Go Back</button></a>
 		<h2>No questions available yet</h2>
+		{%if not g.user%}
+			<h3><a href="/login"> Log In </a> to add questions</h3>
+		{%endif%}
 	{% else %}
 		<form action="/questions">
 		<div class="input-group">
@@ -48,7 +52,7 @@
 				{% for question in questions %}
 						<li class="list-group-item d-flex justify-content-between">
 							<div class="col-1">{{loop.index}}</div>
-							<pre class="col-8"><p>{{question.question}}</p></pre>
+							<pre class="col"><p>{{question.question}}</p></pre>
 							<div>
 								{% if g.user %}
 									<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Add to a set">

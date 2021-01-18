@@ -25,22 +25,30 @@
       </a>
     </div>
      <ul class="nav navbar-nav">
-        {% if not g.user and  page=="home"%}
-        <li class="description">Optimize your learning!</li>
-        {% elif g.user%}
-        {{ nav_link('home_dashboard','Dashboard')}}
-        {{ nav_link('questions', 'Questions')}}
-        {{ nav_link('create', 'Create')}}
-        <li><a href="#">Explore</a></li>
-        <li class="dropdown">
-          <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src={{g.user.image_url}} alt="profile image" class="profile-img d-block">
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/users/profile">Settings</a></li>
-            <li><a class="dropdown-item" href="/logout">Log out</a></li>
-          </ul>
-        </li>
+        {% if g.user%}
+          {{ nav_link('home_dashboard','Dashboard')}}
+          {{ nav_link('questions', 'Questions')}}
+          {{ nav_link('create', 'Create')}}
+          <li><a href="#">Explore</a></li>
+          <li class="dropdown">
+            <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src={{g.user.image_url}} alt="profile image" class="profile-img d-block">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/users/profile">Settings</a></li>
+              <li><a class="dropdown-item" href="/logout">Log out</a></li>
+            </ul>
+          </li>
+        {% elif page=="home"%}
+          <li class="description">Optimize your learning!</li>
+        {% elif not page=="login" and not page=="signup" %}
+          {% if page=="questions"%}
+            {{ nav_link('quizzes', 'Quizzes')}}
+          {% elif page=="quizzes"%}
+            {{ nav_link('questions', 'Questions')}}
+          {% endif %}
+          {{ nav_link('login', 'Log In')}}
+          {{ nav_link('signup', 'Sign Up')}}
         {% endif %}
       </ul>
   </div>
