@@ -14,10 +14,7 @@
 				<p>{{quiz.desc}}</p>
 				<hr>
 				<form style="display:inline-block;">
-					<button class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
-						<i class="fas fa-edit"></i>
-					</button>
-					<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
+					<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
 						<i class="fas fa-trash"></i>
 					</button>
 					<button formaction="/quizzes/{{quiz.id}}/update" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">

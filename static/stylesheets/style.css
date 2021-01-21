@@ -629,3 +629,7 @@ label[for=answer]{
 .hidden{
   display: none;
 }
+
+.yellow{
+  color:gold;
+}

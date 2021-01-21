@@ -43,9 +43,9 @@
           <li class="description">Optimize your learning!</li>
         {% elif not page=="login" and not page=="signup" %}
           {% if page=="questions"%}
-            {{ nav_link('quizzes', 'Quizzes')}}
+            {{ nav_link('quizzes_explore', 'Quizzes')}}
           {% elif page=="quizzes"%}
-            {{ nav_link('questions', 'Questions')}}
+            {{ nav_link('questions_explore', 'Questions')}}
           {% endif %}
           {{ nav_link('login', 'Log In')}}
           {{ nav_link('signup', 'Sign Up')}}

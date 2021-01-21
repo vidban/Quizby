@@ -57,6 +57,10 @@ class User(db.Model):
         db.Integer,
     )
 
+    favorites = db.relationship(
+        'Question',
+        secondary='favorites')
+
     @classmethod
     def authenticate(cls, username, password):
         """Find user with `username` and `password`.
@@ -114,6 +118,17 @@ class Answer(db.Model):
     )
 
 
+class Favorites(db.Model):
+
+    __tablename__ = "favorites"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'users.id', ondelete='cascade'))
+    question_id = db.Column(db.Integer, db.ForeignKey(
+        'questions.id', ondelete='cascade'))
+
+
 class Question(db.Model):
     """Questions available"""
 
@@ -134,6 +149,7 @@ class Question(db.Model):
     )
     category = db.Column(db.Text())
     private = db.Column(db.Boolean, default=True)
+    favorite = db.Column(db.Boolean, default=False)
 
     user = db.relationship('User', backref='questions')
     answers = db.relationship(

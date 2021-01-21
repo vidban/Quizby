@@ -3,7 +3,7 @@ import requests
 
 from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL
 
-from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for
+from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for, abort
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
@@ -277,7 +277,7 @@ def add_quiz_create():
         db.session.commit()
 
         # return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
-        return redirect(url_for('users_quizzes_dashboard', user_id=g.user.id))
+        return render_template("users/new/quizzes/main.html", quiz=quiz)
 
     return render_template("users/new/quizzes/create.html")
 
@@ -332,8 +332,7 @@ def search_unsplash():
 def questions_explore():
     """ Page with listing of questions """
 
-    search = request.args.get('q') or ""
-    quiz = request.args.get('quiz') or None
+    search = request.args.get('q') or None
     if not search:
         questions = Question.query.filter(Question.private == False).all()
     else:
@@ -341,6 +340,10 @@ def questions_explore():
                                           Question.question.ilike(f"%{search}%")).all()
         if len(questions) == 0:
             flash("No questions found for that search", 'warning')
+            return redirect('/questions')
+    if g.user:
+        favorites = [question.id for question in g.user.favorites]
+        return render_template('explore/questions.html', questions=questions, search=search, page="questions", favorites=favorites)
     return render_template('explore/questions.html', questions=questions, search=search, page="questions")
 
 
@@ -417,6 +420,30 @@ def add_question_create():
             return redirect(url_for(request.endpoint, question=new_question))
     else:
         return render_template('users/new/add-questions.html', form=form)
+
+
+@app.route('/questions/<int:question_id>/star')
+def star_question(question_id):
+    """ Adds question to favorites"""
+
+    if not g.user:
+        return redirect('/login')
+
+    q = Question.query.get_or_404(question_id)
+
+    if q.user_id == g.user.id:
+        flash("You cannot favorite you own question", 'warning')
+        return redirect('/questions')
+
+    user_favorites = g.user.favorites
+    if q in user_favorites:
+        g.user.favorites = [fav for fav in user_favorites if fav != q]
+    else:
+        g.user.favorites.append(q)
+
+    db.session.commit()
+
+    return redirect('/questions')
 
 
 @app.route('/questions/<int:question_id>/update')
