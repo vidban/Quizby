@@ -268,10 +268,12 @@ def add_quiz_create():
             user_id=g.user.id,
             title=request.form["title"],
             desc=request.form["description"],
-            image_by=request.form["image_by"],
-            image_by_profile=request.form["image_by_profile"],
-            image_desc=request.form["image_desc"],
-            image_url=request.form["image_url"]
+            image_by=request.form.get("image_by", "craftedbygcs"),
+            image_by_profile=request.form.get(
+                "image_by_profile", "https://unsplash.com/@craftedbygc"),
+            image_desc=request.form.get("image_desc", "Designer"),
+            image_url=request.form.get(
+                "image_url", "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxOTU0NjB8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGNoYW1lbGVvbnxlbnwwfHx8&ixlib=rb-1.2.1&q=80&w=200"),
         )
 
         db.session.add(quiz)
