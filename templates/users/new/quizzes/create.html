@@ -6,7 +6,7 @@
 	<form action="/quizzes/add" method="POST" id="create" class="create-quiz mt-5 d-flex flex-column justify-content-around">
 		<div class="d-flex justify-content-between">
 			<div class="create-image col-3 col-md-4 col-lg-4 p-3">
-				<div class="create-image-inner text-center">
+				<div class="create-image-inner d-flex flex-column justify-content-center align-items-center">
 					{% if image %}
 						<input name="image_url" id="image_url" class="hidden" type="url" value={{image.image_url}}>
 						<input name="image_by" id="image_by" class="hidden" type="text" value={{image.image_by}}>

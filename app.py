@@ -144,34 +144,6 @@ def view_user_profile():
     return render_template('/users/profile/view.html', user=user)
 
 
-@app.route('/users/<int:user_id>/quizzes')
-def users_quizzes_dashboard(user_id):
-    """ get user's quizzes"""
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
-
-    quizzes = Quiz.query.filter(Quiz.user_id == g.user.id).all()
-    return render_template('users/dashboard/quizzes.html', quizzes=quizzes)
-
-
-@app.route('/users/<int:user_id>/questions')
-def users_questions_dashboard(user_id):
-    """ Get user's questions"""
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
-
-    search = request.args.get('q') or ""
-    questions = Question.query.filter(Question.user_id == g.user.id).all()
-    if search:
-        questions = Question.query.filter(
-            Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
-    return render_template('users/dashboard/questions.html', questions=questions, search=search)
-
-
 @app.route('/users/profile/edit', methods=["GET", "POST"])
 def user_profile():
     """show/update user profile"""
@@ -210,6 +182,35 @@ def user_profile():
         flash("Wrong password, please try again.", 'danger')
 
     return render_template('users/profile/edit.html', form=form)
+
+
+@app.route('/users/<int:user_id>/quizzes')
+def users_quizzes_dashboard(user_id):
+    """ get user's quizzes"""
+
+    if not g.user:
+        flash("Access unauthorized. Please Login.", "danger")
+        return redirect("/login")
+
+    quizzes = Quiz.query.filter(Quiz.user_id == g.user.id).all()
+    return render_template('users/dashboard/quizzes.html', quizzes=quizzes)
+
+
+@app.route('/users/<int:user_id>/questions')
+def users_questions_dashboard(user_id):
+    """ Get user's questions"""
+
+    if not g.user:
+        flash("Access unauthorized. Please login.", "danger")
+        return redirect("/login")
+
+    search = request.args.get('q') or ""
+    questions = Question.query.filter(Question.user_id == g.user.id).all()
+    if search:
+        questions = Question.query.filter(
+            Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
+    return render_template('users/dashboard/questions.html', questions=questions, search=search)
+
 
 ############################################################################
 # Quizzes Routes
