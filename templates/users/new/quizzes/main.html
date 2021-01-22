@@ -2,35 +2,32 @@
 
 {% block content %}
 <div class="quiz">
-	<ul class="list-group mt-2">
+	<div class="list-group mt-2 col">
 			<li class="list-group-item d-flex justify-content-around">
 				<img src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 				<div class="col-6 d-flex flex-column justify-content-around">
 					<p><b>Title :</b>{{quiz.title}}</p>
 					<p><b>Description: </b>{{quiz.desc}}</p>
+					<p><b>Type:</b>{{'Multiple Choice' if quiz.mult_choice=='mc' else 'Flash Cards'}}</p>
+					<p><b>Questions:</b>{{quiz.questions|length}}</p>
 				</div>
 				
 			</li>
-	</ul>
-</div>
-<div class="card col col-7 m-auto mt-4">
-	<h5 class="text-center card-header"> Choose an option below: </h5>
-	<div class="card-body">
-		<div class="selection d-flex flex-column justify-content-around p-4">
-			<div class="col m-3">
-				<h3 class="text-center">
+	</div>
+	<div class="choice col">
+		<div class="selection d-flex justify-content-around p-4">
+			<div class="card col m-2 p-3 text-center">
 					<a href="">Import questions</a>
-					<p>from a sheet</p>
-				</h3>
 			</div>
-			<div class="col m-3">
-				<h3 class="text-center">
+			<div class="card col m-2 p-3 text-center">
 					<a href="">Add Questions </a>
-					<p>from available questions</p>
-				</h3>
 			</div>
 		</div>
 	</div>
+	<div class="questions col-9">
+
+	</div>
 </div>
+
 
 {% endblock %}

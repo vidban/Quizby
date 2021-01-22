@@ -542,6 +542,11 @@ label[for=answer]{
   height: 100px;
 }
 
+.create-title-description .type{
+  
+}
+
+
 
 /* **************image unsplash modal ***************** */
 
@@ -623,7 +628,20 @@ label[for=answer]{
 }
 
 
+/* ************ quiz ***************** */
 
+.quiz .list-group .list-group-item img{
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.quiz .choice .selection .card a{
+  text-decoration: none;
+  color:#17252a;
+}
+
+
+ 
 /* ************ end ***************** */
 
 .hidden{

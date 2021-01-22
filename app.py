@@ -225,9 +225,9 @@ def quizzes_explore():
     return render_template('explore/quizzes.html', quizzes=quizzes, page="quizzes")
 
 
-@app.route('/quizzes/<int:quiz_id>/update')
-def update_quiz(quiz_id):
-    """updates whether quiz is private or not"""
+@app.route('/quizzes/<int:quiz_id>/privacy')
+def change_privacy_quiz(quiz_id):
+    """toggles quiz privacy"""
 
     if not g.user:
         flash("Access unauthorized.", "danger")
@@ -274,6 +274,7 @@ def add_quiz_create():
             image_desc=request.form.get("image_desc", "Designer"),
             image_url=request.form.get(
                 "image_url", "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxOTU0NjB8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGNoYW1lbGVvbnxlbnwwfHx8&ixlib=rb-1.2.1&q=80&w=200"),
+            mult_choice=request.form["choice"]
         )
 
         db.session.add(quiz)
@@ -285,8 +286,20 @@ def add_quiz_create():
     return render_template("users/new/quizzes/create.html")
 
 
+@app.route('/quizzes/<int:quiz_id>/edit')
+def edit_quiz(quiz_id):
+    """ edit a quiz"""
+
+    if not g.user:
+        flash("Access unauthorized. Please login.", "danger")
+        return redirect("/login")
+
+    q = Quiz.query.get_or_404(quiz_id)
+    return render_template('users/new/quizzes/main.html', quiz=q)
+
 ####################
 # API search Routes
+
 
 @app.route('/search', methods=["GET", "POST"])
 def search():

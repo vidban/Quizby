@@ -14,11 +14,14 @@
 				<p>{{quiz.desc}}</p>
 				<hr>
 				<form style="display:inline-block;">
+					<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
+						<i class="fas fa-edit"></i>
+					</button>
 					<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
 						<i class="fas fa-trash"></i>
 					</button>
-					<button formaction="/quizzes/{{quiz.id}}/update" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
-						<a href="{{url_for('update_quiz', quiz_id=quiz.id)}}"><i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i></a>
+					<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
+						<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
 					</button>
 				</form>
 			</li>
