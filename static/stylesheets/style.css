@@ -6,6 +6,10 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.container-fluid{
+  padding:0 !important;
+}
+
 .btn{
   border-radius: 35px;
   color: #def2f1 !important;
@@ -96,9 +100,11 @@ button.close{
   }
 
   ul.nav.navbar-nav li.description{
-    color: #2b7a78;
-    font-size: 1.6em;
+    color: #def2f1;
+    font-size: 1.8em;
     font-weight: bold;
+    opacity: .8;
+    margin-right: 2rem;
   }
 
   .nav .dropdown .profile-img{
@@ -236,15 +242,20 @@ button.close{
   transition: all .5s ease-in-out;
 }
 
-.explore-quizzes:hover,
-.explore-questions:hover{
-  transform: scale(1.2);
-}
-
 .explore-quizzes a,
 .explore-questions a{
   text-decoration: none;
-  color: #17252A
+  color: #17252A;
+}
+
+.explore-quizzes a:hover,
+.explore-questions a:hover{
+  color: #def2f1;
+}
+
+.explore-quizzes:hover,
+.explore-questions:hover{
+  background-color: #2b787a;
 }
 
 .user-explore .card{
