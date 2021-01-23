@@ -200,7 +200,7 @@ class Quiz(db.Model):
     image_by_profile = db.Column(db.String)
     image_desc = db.Column(db.String)
     image_url = db.Column(db.String)
-
+    mult_choice = db.Column(db.String)
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id', ondelete='CASCADE'),

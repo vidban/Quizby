@@ -6,9 +6,9 @@
 	{% if not quizzes %}
 		<h2>You haven't made any quizzes yet!</h2>
 	{% else %}
+		<div class="quiz-card d-flex flex-row flex-wrap">
 		{% for quiz in quizzes %}
-			<div class="quiz-card m-3 d-flex flex-wrap">
-				<div class="card">
+				<div class="card m-3">
 					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 					<div class="card-body">
 						<h5 class="card-title">{{quiz.title}}</h5>
@@ -31,8 +31,8 @@
 						</form>
 					</div>
 				</div>
-			</div>
 		{% endfor %}
+		</div>
 	{% endif %}
 </div>
 
