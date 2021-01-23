@@ -6,54 +6,33 @@
 	{% if not quizzes %}
 		<h2>You haven't made any quizzes yet!</h2>
 	{% else %}
-	<!-- <ul class="list-group m-2 d-flex flex-row flex-wrap"> -->
 		{% for quiz in quizzes %}
-			<!-- <li class="list-group-item m-4 col-4 col-md-3 col-lg-2"> -->
-				<div class="card col-5 m-3">
-					<div class="row">
-						<div class="col-5">
-							<img style="max-width: 100%; min-height: 100%;" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
-						</div>
-						<div class="col-7 p-1 d-flex flex-column justify-content-between">
-							<div class="card-body">
-								<h5 class="card-title">{{quiz.title}}</h5>
-								<p class="card-text">{{quiz.desc}}</p>
-							</div>
-							<div class="card-footer text-center">
-								<form style="display:inline-block;">
-									<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
-										<i class="fas fa-edit"></i>
-									</button>
-									<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
-										<i class="fas fa-trash"></i>
-									</button>
-									<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
-										<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
-									</button>
-								</form>
-							</div>
-						</div>
+			<div class="quiz-card m-3 d-flex flex-wrap">
+				<div class="card">
+					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
+					<div class="card-body">
+						<h5 class="card-title">{{quiz.title}}</h5>
+						<p class="card-text">{{quiz.desc}}</p>
+					</div>
+					<div class="card-footer text-center">
+						<form style="display:inline-block;">
+							<button formaction="" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
+								<i class="fas fa-eye"></i>
+							</button>
+							<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
+								<i class="fas fa-edit"></i>
+							</button>
+							<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
+								<i class="fas fa-trash"></i>
+							</button>
+							<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Make Public' if quiz.private else 'Make Private'}}">
+								<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
+							</button>
+						</form>
 					</div>
 				</div>
-				<!-- <img class="col m-2" style="max-height: 150px;"src="{{quiz.image_url}}" alt="{{quiz.image_desc}}"> -->
-				
-				<!-- <h3>{{quiz.title}}</h3>
-				<p>{{quiz.desc}}</p>
-				<hr>
-				<form style="display:inline-block;">
-					<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
-						<i class="fas fa-edit"></i>
-					</button>
-					<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
-						<i class="fas fa-trash"></i>
-					</button>
-					<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
-						<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
-					</button>
-				</form> -->
-			</li>
+			</div>
 		{% endfor %}
-	</ul>
 	{% endif %}
 </div>
 
