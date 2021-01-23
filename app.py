@@ -226,7 +226,8 @@ def users_questions_dashboard(user_id):
 def quizzes_explore():
     """ display all public quizzes available"""
 
-    quizzes = Quiz.query.filter(Quiz.private == False).all()
+    quizzes = Quiz.query.filter(
+        Quiz.private == False, Quiz.user_id != g.user.id).all()
 
     return render_template('explore/quizzes.html', quizzes=quizzes, page="quizzes")
 
@@ -355,18 +356,30 @@ def questions_explore():
     """ Page with listing of questions """
 
     search = request.args.get('q') or None
-    if not search:
-        questions = Question.query.filter(Question.private == False).all()
-    else:
-        questions = Question.query.filter(Question.private == False,
-                                          Question.question.ilike(f"%{search}%")).all()
-        if len(questions) == 0:
-            flash("No questions found for that search", 'warning')
-            return redirect('/questions')
+
     if g.user:
+        if not search:
+            questions = Question.query.filter(
+                Question.private == False, Question.user_id != g.user.id).all()
+        else:
+            questions = Question.query.filter(
+                Question.private == False, Question.user_id != g.user.id, Question.question.ilike(f"%{search}%")).all()
+            if len(questions) == 0:
+                flash("No questions found for that search", 'warning')
+                return redirect('/questions')
         favorites = [question.id for question in g.user.favorites]
         return render_template('explore/questions.html', questions=questions, search=search, page="questions", favorites=favorites)
-    return render_template('explore/questions.html', questions=questions, search=search, page="questions")
+    else:
+        if not search:
+            questions = Question.query.filter(
+                Question.private == False).all()
+        else:
+            questions = Question.query.filter(
+                Question.private == False, Question.question.ilike(f"%{search}%")).all()
+            if len(questions) == 0:
+                flash("No questions found for that search", 'warning')
+                return redirect('/questions')
+        return render_template('explore/questions.html', questions=questions, search=search, page="questions")
 
 
 @app.route("/questions/add", methods=["GET", "POST"])
