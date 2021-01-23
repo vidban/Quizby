@@ -74,6 +74,9 @@ def home_dashboard():
 def login():
     """Handle user login."""
 
+    if g.user:
+        return redirect('/')
+
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -92,6 +95,9 @@ def login():
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Handle user signup."""
+
+    if g.user:
+        return redirect('/')
 
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]

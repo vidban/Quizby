@@ -8,19 +8,19 @@
 	{% else %}
 	<ul class="list-group m-2 d-flex flex-row flex-wrap">
 		{% for quiz in quizzes %}
-			<li class="list-group-item m-3 col-5 col-md-5 col-lg-2">
-				<img class="col" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
+			<li class="list-group-item m-3 col-3 col-md-3 col-lg-2">
+				<img class="col" style="max-height: 150px;"src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 				<h3>{{quiz.title}}</h3>
 				<p>{{quiz.desc}}</p>
 				<hr>
 				<form style="display:inline-block;">
-					<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
+					<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
 						<i class="fas fa-edit"></i>
 					</button>
-					<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
+					<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
 						<i class="fas fa-trash"></i>
 					</button>
-					<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
+					<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
 						<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
 					</button>
 				</form>

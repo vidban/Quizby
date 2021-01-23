@@ -6,10 +6,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-.container-fluid{
-  padding:0 !important;
-}
-
 .btn{
   border-radius: 35px;
   color: #def2f1 !important;
@@ -66,9 +62,14 @@ button.close{
     font-size: 1.3em;
   }
   
-  .navbar a:hover,
+  .navbar a:hover{
+    color: #def2f1;
+    opacity: .8;
+    text-shadow: 2px 2px .5px #2b787a;
+  }
+
   .navbar a:active {
-  color: #3aafa9;
+    color: #3aafa9;
   }
   
   .navbar-brand {
@@ -643,6 +644,8 @@ label[for=answer]{
   color: #17252A;
 }
 
+
+/* Editing a quiz */
 .quiz .list-group .list-group-item img{
   max-width: 150px;
   max-height: 150px;
