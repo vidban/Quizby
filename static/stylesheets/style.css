@@ -553,11 +553,6 @@ label[for=answer]{
   height: 100px;
 }
 
-.create-title-description .type{
-  
-}
-
-
 
 /* **************image unsplash modal ***************** */
 
@@ -640,6 +635,13 @@ label[for=answer]{
 
 
 /* ************ quiz ***************** */
+.quiz-list .quiz-card .card .card-img-top{
+  max-height: 150px;
+}
+
+.quiz-list .quiz-card .card .card-footer a{
+  color: #17252A;
+}
 
 .quiz .list-group .list-group-item img{
   max-width: 150px;
