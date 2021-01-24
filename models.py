@@ -57,6 +57,9 @@ class User(db.Model):
         db.Integer,
     )
 
+    date_joined = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow())
+
     favorites = db.relationship(
         'Question',
         secondary='favorites')

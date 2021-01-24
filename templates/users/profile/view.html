@@ -4,30 +4,34 @@
 
 <div class="profile row justify-content-md-center">
     <div class="col-md-7 col-md-9">
-	  <h2>Your Account.</h2>
-	  <div class="profile-image">
-		  <img src={{user.image_url}} alt="profile image" class="img-thumbnail rounded mx-auto d-block">
+		<h2>Your Account.</h2>
+		<div class="profile-image">
+			<img src={{user.image_url}} alt="profile image" class="img-thumbnail rounded mx-auto d-block">
+			</div>
+		<div class="profile-username">
+			<b>Username:</b>
+			{{user.username}}
 		</div>
-	  <div class="profile-username">
-		<b>Username:</b>
-		{{user.username}}
-	  </div>
-	  <div class="profile-email">
-		<b>Email:</b>
-		{{user.email}}
-	  </div>
-	  {% if user.firstname %}
-		<div class="profile-firstname">
-			<b>First Name:</b>
-			{{user.firstname}}
+		<div class="profile-email">
+			<b>Email:</b>
+			{{user.email}}
 		</div>
-	  {% endif %}
-	  {% if user.lastname %}
-	  <div class="profile-lastname">
-		  <b>Last Name:</b>
-		  {{user.lastname}}
-	  </div>
-	{% endif %}
+		{% if user.firstname %}
+			<div class="profile-firstname">
+				<b>First Name:</b>
+				{{user.firstname}}
+			</div>
+		{% endif %}
+		{% if user.lastname %}
+		<div class="profile-lastname">
+			<b>Last Name:</b>
+			{{user.lastname}}
+		</div>
+		{% endif %}
+		<div class="date-joined">
+			<b>Date Joined: </b>
+			{{user.date_joined}}
+		</div>
 
 	<button class="btn"><a href="/users/profile/edit">Edit Information</a> </button>
 
