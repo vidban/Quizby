@@ -1,7 +1,37 @@
 {% extends 'users/dashboard/dashboard.html' %}
 
 {% block main %}
-	<h2>Welcome {{g.user.username}}</h2>
-	<h4>You've got nothing to show here yet!</h4>
+<div class="user-statistics">
+	<div class="stats-user card col">
+		<div class="card-header">
+			<h2>{{g.user.username}}</h2>
+		</div>
+		<div class="card-body">
+			<small>
+				Date Joined: {{g.user.date_joined}}
+			</small>
+		</div>
+	</div>
+	<div class="col d-flex flex-row flex-wrap text-center">
+		<div class="stats-questions card col-3 m-2">
+			<div class="card-header">
+				<h3>Questions Added</h3>
+			</div>
+			<div class="card-body">
+				<p>{{g.user.questions|length}}</p>
+			</div>
+		</div>
+		<div class="stats-quizzes card col-3 m-2">
+			<div class="card-header">
+				<h3>Quizzes Added</h3>
+			</div>
+			<div class="card-body">
+				<p>{{g.user.quizzes|length}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 {% endblock%}
