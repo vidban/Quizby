@@ -466,9 +466,9 @@ def star_question(question_id):
 
     q = Question.query.get_or_404(question_id)
 
-    if q.user_id == g.user.id:
-        flash("You cannot favorite you own question", 'warning')
-        return redirect('/questions')
+    # if q.user_id == g.user.id:
+    #     flash("You cannot favorite you own question", 'warning')
+    #     return redirect('/questions')
 
     user_favorites = g.user.favorites
     if q in user_favorites:
