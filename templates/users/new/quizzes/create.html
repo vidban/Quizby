@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{{super()}}
 <div class="create col col-sm-9 col-md-9 col-lg-7 m-auto mt-5">
 	<h1><b>Create a Quiz!</b></h1>
 	<form action="/quizzes/add" method="POST" id="create" class="create-quiz mt-5 d-flex flex-column justify-content-around">
@@ -37,7 +38,7 @@
 				<div class="category mb-2">
 					<div >
 						<label for="category"><b>Category</b></label>
-						<input class="d-inline-block" id="category" type="text" name="category" placeholder="Choose a category"/>	
+						<input id="autocomplete" list= "list-of-categories" class="d-inline-block" type="text" name="category" placeholder="Choose a category"/>	
 					</div>
 				</div>
 				<div class="type d-flex justify-content-around">

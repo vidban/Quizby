@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import or_
 
 from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
-from models import db, connect_db, User, Question, Answer, Quiz, Category
+from models import db, connect_db, User, Question, Answer, Quiz, Category, add_category
 from werkzeug.utils import secure_filename
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
@@ -271,6 +271,7 @@ def delete_quiz(quiz_id):
 @app.route('/quizzes/add', methods=["GET", "POST"])
 def add_quiz_create():
     """ reder the create quiz template"""
+
     if request.form:
         quiz = Quiz(
             user_id=g.user.id,
@@ -282,8 +283,12 @@ def add_quiz_create():
             image_desc=request.form.get("image_desc", "Designer"),
             image_url=request.form.get(
                 "image_url", "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxOTU0NjB8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGNoYW1lbGVvbnxlbnwwfHx8&ixlib=rb-1.2.1&q=80&w=200"),
-            mult_choice=request.form["choice"]
+            mult_choice=request.form["choice"],
+            category=request.form["category"]
         )
+
+    #   Add category to category table
+        add_category(request.form["category"])
 
         db.session.add(quiz)
         db.session.commit()
@@ -402,7 +407,6 @@ def add_question_create():
         flash("Please sign in to add questions", "danger")
         return redirect("/login")
 
-    
     form = AddQuestionForm()
 
     if form.validate_on_submit():
@@ -418,7 +422,7 @@ def add_question_create():
             db.session.commit()
 
             # add category to categories table
-            Question.add_category(form.category.data)
+            add_category(form.category.data)
 
             question = Question.query.filter_by(
                 question=form.question.data).first()

@@ -174,16 +174,6 @@ class Question(db.Model):
     def __repr__(self):
         return f"<Question {self.question} {self.mult_choice} {self.user_id}>"
 
-    def add_category(category):
-        """ add question category to categories table when question is added"""
-        ct = Category.query.filter(Category.name.ilike(category)).all()
-
-        if len(ct) == 0:
-            c = Category(name=category)
-
-            db.session.add(c)
-            db.session.commit()
-
 
 class Quiz(db.Model):
     """Quizzes available"""
@@ -209,7 +199,7 @@ class Quiz(db.Model):
         db.ForeignKey('users.id', ondelete='CASCADE'),
         nullable=False
     )
-    # category = db.Column(db.Text())
+    category = db.Column(db.Text)
 
     private = db.Column(db.Boolean, default=True)
 
@@ -235,6 +225,17 @@ class Category(db.Model):
 
     def get_name(self):
         return self.name
+
+
+def add_category(category):
+    """ add new category to categories table when question or quiz is added"""
+    ct = Category.query.filter(Category.name.ilike(category)).all()
+
+    if len(ct) == 0:
+        c = Category(name=category)
+
+        db.session.add(c)
+        db.session.commit()
 
 
 def connect_db(app):
