@@ -26,22 +26,28 @@
 				</div>
 			</div>
 			<div class = "create-title-description col-8 col-md-7 col-lg-7">
-				<div class="title mb-4">
+				<div class="title mb-2">
 					<label for="title" class="d-block"><b>Title</b><small>(required)</small></label>
 					<input class="col" id="title" name="title" type="text" placeholder="A descriptive title" required>
 				</div>
-				<div class="description">
+				<div class="description mb-2">
 					<label for="description" class="d-block"><b>Description:</b></label>
 					<textarea class="col" id="description" name="description" type="text" placeholder="Info about the quiz"></textarea>
 				</div>
-				<div class="type d-flex justify-content-around">
+				<div class="category mb-2">
 					<div >
-						<label for="mc">Multiple Choice</label>
-						<input id="mc" class="col-2 d-inline-block" type="radio" name="choice" value="mc"/>	
+						<label for="category"><b>Category</b></label>
+						<input class="d-inline-block" id="category" type="text" name="category" placeholder="Choose a category"/>	
 					</div>
-					<div>
-						<label for="f">Flash Cards</label>
-						<input id= "f" class="col-2 d-inline-block" type="radio" name="choice" value="f"/>
+				</div>
+				<div class="type d-flex justify-content-around">
+					<div class="d-flex col-6 pl-2">
+						<input id="mc" class="d-inline-block" type="radio" name="choice" value="mc"/>	
+						<label for="mc"><b>Multiple Choice</b></label>
+					</div>
+					<div class="d-flex col-6 pl-2">
+						<input id= "f" class="d-inline-block" type="radio" name="choice" value="f"/>
+						<label for="f"><b>Flash Cards</b></label>
 					</div>
 				</div>
 			</div>

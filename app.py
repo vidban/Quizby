@@ -6,6 +6,7 @@ from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, U
 from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for, abort
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import or_
 
 from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
 from models import db, connect_db, User, Question, Answer, Quiz, Category
@@ -293,16 +294,25 @@ def add_quiz_create():
     return render_template("users/new/quizzes/create.html")
 
 
-@app.route('/quizzes/<int:quiz_id>/edit')
+@app.route('/quizzes/<int:quiz_id>/edit', methods=["GET", "POST"])
 def edit_quiz(quiz_id):
-    """ edit a quiz"""
+    """ edit a quiz by adding or deleting questions"""
 
     if not g.user:
         flash("Access unauthorized. Please login.", "danger")
         return redirect("/login")
 
-    q = Quiz.query.get_or_404(quiz_id)
-    return render_template('users/new/quizzes/main.html', quiz=q)
+    search = request.args.get('q') or None
+
+    if not search:
+        questions = Question.query.filter(
+            or_(Question.user_id == g.user.id, Question.private == False)).all()
+    else:
+        questions = Question.query.filter(or_(Question.user_id == g.user.id, Question.private == False),
+                                          Question.question.ilike(f"%{search}%")).all()
+
+    quiz = Quiz.query.get_or_404(quiz_id)
+    return render_template('users/new/quizzes/main.html', quiz=quiz, questions=questions, search=search)
 
 ####################
 # API search Routes
@@ -353,7 +363,9 @@ def search_unsplash():
 
 @app.route("/questions")
 def questions_explore():
-    """ Page with listing of questions """
+    """ Page with listing of questions 
+        Returns only public questions if not logged in
+        Returns only public questions and questions not by user if logged in"""
 
     search = request.args.get('q') or None
 
@@ -390,6 +402,7 @@ def add_question_create():
         flash("Please sign in to add questions", "danger")
         return redirect("/login")
 
+    
     form = AddQuestionForm()
 
     if form.validate_on_submit():

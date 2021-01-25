@@ -6,9 +6,9 @@
 	{% if not quizzes %}
 		<h2>You haven't made any quizzes yet!</h2>
 	{% else %}
-		<div class="quiz-card d-flex flex-row flex-wrap">
+		<div class="quiz-card col-4 d-flex flex-row flex-wrap">
 		{% for quiz in quizzes %}
-				<div class="card col-4 m-3">
+				<div class="card m-3">
 					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 					<div class="card-body">
 						<h5 class="card-title">{{quiz.title}}</h5>
