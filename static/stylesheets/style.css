@@ -305,10 +305,19 @@ button.close{
   margin: 20px 0;
 }
 
-.dashboard .sidebar ul li a{
+.dashboard .sidebar ul .sidebar-item a{
   text-decoration: none;
   color: #17252a;
   padding: 5px;
+}
+
+.dashboard .sidebar ul .sidebar-item.active{
+  background-color: #17252A;
+  color: #def2f1;
+}
+
+.dashboard .sidebar ul .sidebar-item.active a{
+  color: #def2f1;
 }
 
 .dashboard .main-content{
