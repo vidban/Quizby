@@ -8,11 +8,11 @@
 	{% else %}
 		<div class="quiz-card d-flex flex-row flex-wrap">
 		{% for quiz in quizzes %}
-				<div class="card m-3">
+				<div class="card col-4 m-3">
 					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 					<div class="card-body">
 						<h5 class="card-title">{{quiz.title}}</h5>
-						<p class="card-text">{{quiz.desc}}</p>
+						<p class="card-text text-truncate">{{quiz.desc}}</p>
 					</div>
 					<div class="card-footer text-center">
 						<form style="display:inline-block;">
