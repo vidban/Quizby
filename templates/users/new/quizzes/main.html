@@ -11,12 +11,17 @@
 			<p><b>Questions:</b>{{quiz.questions|length}}</p>
 		</div>
 	</div>
-	<div class="choice col">
-		<div class="card col-3 mt-3 m-auto p-3 text-center">
-				<a href="/questions/add">Add Question Manually</a>
+	<div class="choice col mt-3 d-flex flex-row justify-content-between">
+		<div class="quiz-add-qn p-3 text-center">
+				<a href="{{url_for('add_question_create', endpt=request.endpoint, quiz_id=quiz.id)}}">Add Question Manually</a>
 		</div>
-	</div>
-	<div id="questions" class="questions">
+		{% if search %}
+		<form action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
+			<div class="filtered-by mt-3">
+				<p class="btn">{{search}}<button class="btn">X</button></p>
+			</div>
+		</form>
+		{% endif %}
 		<form action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
 			<div class="input-group col-9">
 				<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
@@ -28,12 +33,9 @@
 				</div>
 				</div>
 			</div>
-			{% if search %}
-				<div class="filtered-by mt-3 mb-3">
-					<p class="btn">{{search}}<button class="btn">X</button></p>
-				</div>
-			{% endif %}
 		</form>
+	</div>
+	<div id="questions" class="questions">
 		<div class="question-list col">
 			<ol id="qn-list" class="list-group mt-2">
 				{% for question in questions %}

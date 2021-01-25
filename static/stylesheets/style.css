@@ -674,14 +674,14 @@ label[for=answer]{
   max-height: 150px;
 }
 
-.quiz .choice .card{
-  border-radius: 5px;
-}
-.quiz .choice .card a{
+.quiz .choice a{
   color:#17252a;
 }
 
-
+.quiz .quiz-add-qn{
+  background-color: #def2f1;
+  border-radius: 5px;
+}
 
  
 /* ************ end ***************** */

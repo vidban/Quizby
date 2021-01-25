@@ -407,6 +407,8 @@ def add_question_create():
         flash("Please sign in to add questions", "danger")
         return redirect("/login")
 
+    endpt = request.args['endpt'] or None
+
     form = AddQuestionForm()
 
     if form.validate_on_submit():
@@ -464,6 +466,8 @@ def add_question_create():
 
             db.session.commit()
             flash("Question successfully added", "success")
+            if endpt:
+                return redirect(url_for(request.args['endpt'], quiz_id=request.args["quiz_id"]))
             return redirect(f'/users/{g.user.id}/questions')
 
         except IntegrityError as e:
