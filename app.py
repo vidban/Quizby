@@ -216,6 +216,10 @@ def users_questions_dashboard(user_id):
     if search:
         questions = Question.query.filter(
             Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
+        if len(questions) == 0:
+            flash("No questions found with that term", 'warning')
+            return redirect(url_for('users_questions_dashboard', user_id=g.user.id))
+
     return render_template('users/dashboard/questions.html', questions=questions, search=search)
 
 
@@ -320,6 +324,9 @@ def edit_quiz(quiz_id):
     else:
         questions = Question.query.filter(or_(Question.user_id == g.user.id, Question.private == False),
                                           Question.category == quiz.category, Question.mult_choice == quiz.mult_choice, Question.question.ilike(f"%{search}%")).all()
+        if len(questions) == 0:
+            flash("No questions found with that term", 'warning')
+            return redirect(url_for('edit_quiz', quiz_id=quiz.id))
 
     return render_template('users/new/quizzes/edit.html', quiz=quiz, questions=questions, search=search)
 

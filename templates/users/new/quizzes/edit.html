@@ -28,7 +28,7 @@
 				</div>
 			</form>
 			{% endif %}
-			<form class="col-3.5"action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
+			<form class="col-3.5"action="{{url_for(request.endpoint, endpt = request.endpoint, quiz_id=quiz.id)}}">
 				<div class="input-group">
 					<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
 					<div class="input-group-append">
