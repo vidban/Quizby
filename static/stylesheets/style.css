@@ -715,22 +715,23 @@ label[for=answer]{
 /* Editing a quiz */
 
 .edit-quiz{
-  max-height: 100%;
+  max-height: 89vh;
 }
 
 .edit-quiz .edit-quiz-card{
   background-color: #def2f1;
   border-radius: 5px;
-  max-height: 100%;
 }
 
 .edit-quiz .quiz-add-qn{
   background-color: #def2f1;
   border-radius: 5px;
+  min-height: 8px;
 }
 
 .edit-quiz .quiz-add-qn a{
   color:#17252a;
+  text-decoration: none;
 }
 
 .edit-quiz .edit-quiz-main .choice{
@@ -738,10 +739,15 @@ label[for=answer]{
 }
 
 .edit-quiz .edit-quiz-main .questions{
-  max-height: 80%;
+  max-height: 90%;
   overflow: hidden;
 }
 
+/* Exploring a quiz */
+
+.quiz-list .quiz-card .card-footer a{
+  color: #17252a;
+}
  
 /* ************ end ***************** */
 
