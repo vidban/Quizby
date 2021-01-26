@@ -411,12 +411,13 @@ def add_question_create():
         flash("Please sign in to add questions", "danger")
         return redirect("/login")
 
+    form = AddQuestionForm()
+
     if request.args:
         endpt = request.args['endpt']
+        quiz = Quiz.query.get_or_404(request.args['quiz_id'])
     else:
         endpt = request.endpoint
-
-    form = AddQuestionForm()
 
     if form.validate_on_submit():
         try:
@@ -483,7 +484,7 @@ def add_question_create():
             return redirect(url_for(request.endpoint, question=new_question))
     else:
         if request.args:
-            return render_template('users/new/add-questions.html', form=form, quiz_id=request.args['quiz_id'])
+            return render_template('users/new/add-questions.html', form=form, quiz=quiz)
         else:
             return render_template('users/new/add-questions.html', form=form)
 
