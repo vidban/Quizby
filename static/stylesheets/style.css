@@ -734,13 +734,12 @@ label[for=answer]{
   text-decoration: none;
 }
 
-.edit-quiz .edit-quiz-main .choice{
-  max-height: 7%
+.edit-quiz .edit-quiz-main small{
+  color: #def2f1;
 }
 
 .edit-quiz .edit-quiz-main .questions{
-  max-height: 90%;
-  overflow: hidden;
+  max-height: 89%;
 }
 
 /* Exploring a quiz */

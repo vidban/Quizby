@@ -12,6 +12,9 @@
 		</div>
 	</div>
 	<div class="edit-quiz-main col-9 p-2">
+		<div class="note text-center">
+			<small>Only {{'Multiple Choice' if quiz.mult_choice == 'mc' else 'Flash cards'}} type questions will be available to add</small>
+		</div>
 		<div class="choice col mt-3 d-flex flex-row justify-content-between">
 			<div class="quiz-add-qn col-3.5 p-3 text-center">
 					<a href="{{url_for('add_question_create', endpt=request.endpoint, quiz_id=quiz.id, quiz_type=quiz.mult_choice)}}"><i class="fas fa-plus"></i> New Question</a>
@@ -24,8 +27,8 @@
 				</div>
 			</form>
 			{% endif %}
-			<form class=" col-3.5"action="{{url_for(request.endpoint, quiz_id=quiz.id, quiz_type=quiz.mult_choice)}}">
-				<div class="input-group col-9">
+			<form class="col-3.5"action="{{url_for(request.endpoint, quiz_id=quiz.id, quiz_type=quiz.mult_choice)}}">
+				<div class="input-group">
 					<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
 					<div class="input-group-append">
 					<div class="input-group-text">
@@ -37,7 +40,7 @@
 				</div>
 			</form>
 		</div>
-		<div id="questions" class="questions col p-3">
+		<div id="questions" class="questions col p-3 overflow-auto">
 			<div class="question-list col">
 				<ol id="qn-list" class="list-group mt-2">
 					{% for question in questions %}

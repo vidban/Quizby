@@ -322,7 +322,6 @@ def edit_quiz(quiz_id, quiz_type):
                                           Question.question.ilike(f"%{search}%")).all()
 
     quiz = Quiz.query.get_or_404(quiz_id)
-    flash(f"Showing {qtype} questions only ", "warning")
     return render_template('users/new/quizzes/edit.html', quiz=quiz, questions=questions, search=search)
 
 ####################
