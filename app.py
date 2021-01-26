@@ -1,10 +1,10 @@
 import os
 import requests
 
-from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL
+from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL, POSTS_PER_PAGE
 
 from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for, abort
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import or_
 
@@ -27,7 +27,7 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = SECRET_KEY or "it's a secret"
-toolbar = DebugToolbarExtension(app)
+# toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
@@ -227,8 +227,12 @@ def users_questions_dashboard(user_id):
 def quizzes_explore():
     """ display all public quizzes available"""
 
-    quizzes = Quiz.query.filter(
-        Quiz.private == False, Quiz.user_id != g.user.id).all()
+    if g.user:
+        quizzes = Quiz.query.filter(
+            Quiz.private == False, Quiz.user_id != g.user.id).all()
+    else:
+        quizzes = Quiz.query.filter(
+            Quiz.private == False).all()
 
     return render_template('explore/quizzes.html', quizzes=quizzes, page="quizzes")
 

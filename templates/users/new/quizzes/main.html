@@ -1,70 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="quiz">
-	<div class="quiz-card mt-2 p-2 col col-lg-10 m-auto d-flex justify-content-around">
+<div class="edit-quiz d-flex flex-row">
+	<div class="edit-quiz-card mt-2 p-2 col d-flex flex-column justify-content-start">
 		<img src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
-		<div class="col-6 d-flex flex-column justify-content-around">
+		<div class="col p-2 d-flex flex-column justify-content-start">
 			<p><b>Title :</b>{{quiz.title}}</p>
 			<p><b>Description: </b>{{quiz.desc}}</p>
 			<p><b>Type:</b>{{'Multiple Choice' if quiz.mult_choice=='mc' else 'Flash Cards'}}</p>
 			<p><b>Questions:</b>{{quiz.questions|length}}</p>
 		</div>
 	</div>
-	<div class="choice col mt-3 d-flex flex-row justify-content-between">
-		<div class="quiz-add-qn p-3 text-center">
-				<a href="{{url_for('add_question_create', endpt=request.endpoint, quiz_id=quiz.id)}}">Add Question Manually</a>
+	<div class="edit-quiz-main col-9 p-2">
+		<div class="choice col mt-3 d-flex flex-row justify-content-between">
+			<div class="quiz-add-qn p-3 text-center">
+					<a href="{{url_for('add_question_create', endpt=request.endpoint, quiz_id=quiz.id)}}">Add Question Manually</a>
+			</div>
+			{% if search %}
+			<form action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
+				<div class="filtered-by mt-3">
+					<p class="btn">{{search}}<button class="btn">X</button></p>
+				</div>
+			</form>
+			{% endif %}
+			<form action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
+				<div class="input-group col-9">
+					<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
+					<div class="input-group-append">
+					<div class="input-group-text">
+						<button class="btn btn-default">
+							<span class="fa fa-search"></span>
+						</button>
+					</div>
+					</div>
+				</div>
+			</form>
 		</div>
-		{% if search %}
-		<form action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
-			<div class="filtered-by mt-3">
-				<p class="btn">{{search}}<button class="btn">X</button></p>
-			</div>
-		</form>
-		{% endif %}
-		<form action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
-			<div class="input-group col-9">
-				<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
-				<div class="input-group-append">
-				<div class="input-group-text">
-					<button class="btn btn-default">
-						<span class="fa fa-search"></span>
-					</button>
-				</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div id="questions" class="questions">
-		<div class="question-list col">
-			<ol id="qn-list" class="list-group mt-2">
-				{% for question in questions %}
-						<li class="list-group-item d-flex justify-content-between">
-							<div class="col-1">{{loop.index}}</div>
-							<pre class="col-8"><p>{{question.question}}</p></pre>
-							<div>
-								<form method="POST" action="" style="display:inline;">
-									<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add to Quiz">
-										<i class="fas fa-plus"></i>
-									</button>
-								</form>
-								<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
-									<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
-										<i class="fas fa-chevron-down"></i>
-									</button>
-								</a>
-								
+		<div id="questions" class="questions col p-3">
+			<div class="question-list col">
+				<ol id="qn-list" class="list-group mt-2">
+					{% for question in questions %}
+							<li class="list-group-item mb-1 d-flex justify-content-between">
+								<div class="col-1 qn-index">{{loop.index}}</div>
+								<pre class="col-8 mb-0"><p>{{question.question}}</p></pre>
+								<div>
+									<form method="POST" action="" style="display:inline;">
+										<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add to Quiz">
+											<i class="fas fa-plus"></i>
+										</button>
+									</form>
+									<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
+										<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
+											<i class="fas fa-chevron-down"></i>
+										</button>
+									</a>
+									
+								</div>
+							</li>
+							<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
+								<div class="card card-body d-flex flex-wrap justify-content-around">
+									{%for a in question.answers%}
+										<p class="p-2 m-2 col col-md-5 col-lg-2 {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
+									{% endfor %}
+								</div>
 							</div>
-						</li>
-						<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
-							<div class="card card-body d-flex flex-wrap justify-content-around">
-								{%for a in question.answers%}
-									<p class="p-2 m-2 col col-md-5 col-lg-2 {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
-								{% endfor %}
-							</div>
-						</div>
-				{% endfor %}
-			</ol>
+					{% endfor %}
+				</ol>
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,7 +1,7 @@
 {% extends 'users/dashboard/dashboard.html' %}
 
 {% block main %}
-<div id="questions" class="questions">
+<div id="questions" class="questions p-2">
 	{% if not questions %}
 		<h2>No questions available yet</h2>
 		<form action="/questions/add" style="display:inline-block;">
@@ -10,7 +10,7 @@
 			</button>
 		</form>
 	{% else %}
-		<form action="{{url_for(request.endpoint, user_id=g.user.id)}}">
+		<form class= "p-3" action="{{url_for(request.endpoint, user_id=g.user.id)}}">
 		<div class="input-group">
 			<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
 			<div class="input-group-append">
@@ -31,9 +31,9 @@
 		<div class="question-list">
 			<ol id="qn-list" class="list-group mt-2">
 				{% for question in questions %}
-						<li class="list-group-item d-flex justify-content-between">
-							<div class="col-1">{{loop.index}}</div>
-							<pre class="col-8"><p>{{question.question}}</p></pre>
+						<li class="list-group-item mb-1 d-flex justify-content-between">
+							<div class="qn-index col-1">{{loop.index}}</div>
+							<pre class="col-8 mb-0"><p>{{question.question}}</p></pre>
 							<div>
 								{% if g.user %}
 									<form method="POST" action="/questions/{{question.id}}/delete" style="display:inline;">

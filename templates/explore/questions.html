@@ -32,9 +32,9 @@
 		<div class="question-list">
 			<ol id="qn-list" class="list-group mt-2">
 				{% for question in questions %}
-						<li class="list-group-item d-flex justify-content-between mb-2">
-							<div class="col-1">{{loop.index}}</div>
-							<pre class="col"><p>{{question.question}}</p></pre>
+						<li class="list-group-item mb-1 d-flex justify-content-between mb-2">
+							<div class="col-1 qn-index">{{loop.index}}</div>
+							<pre class="col mb-0"><p>{{question.question}}</p></pre>
 							<div>
 								{% if g.user %}
 									<button class= "btn" type="button" data-toggle="tooltip" data-placement="bottom" title="favorite">

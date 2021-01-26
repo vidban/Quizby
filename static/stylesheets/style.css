@@ -6,6 +6,14 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.home{
+  min-height: 100vh;
+}
+
+.home-main{
+  min-height: 89vh;
+}
+
 .btn{
   border-radius: 35px;
   color: #def2f1 !important;
@@ -22,6 +30,12 @@ body{
   color: inherit;
 }
 
+.alert{
+  position: absolute;
+  bottom:0;
+  left: 50%;
+  transform: translate(-50%, 0)
+}
 .alert-dismissible .close{
   position: absolute;
   top:0;
@@ -39,19 +53,23 @@ button.close{
   float:right;
 }
 
+
+
 /* **************Navbar*********** */
 .navbar {
 	background-color: #333;
-	height: 12%;
-	border-bottom: 1px solid rgba(240, 232, 232, 0.25);
+  min-height: 11vh;
+  max-height: 11vh;
 	position: relative;
   z-index: 9999;
   padding-left: .75rem;
+  position: sticky;
+  top:0;
   }
   
   .navbar a{
 	color: #2b7a78;
-	font-size: 1.2em;
+	font-size: 1.5em;
   font-weight: bold;
   text-decoration: none;
   }
@@ -59,7 +77,7 @@ button.close{
   .navbar .active a{
     color:#3aafa9;
     text-decoration: underline;
-    font-size: 1.3em;
+    font-size: 1.6em;
   }
   
   .navbar a:hover{
@@ -77,8 +95,16 @@ button.close{
 	align-items: center;
   }
 
+  .navbar-header a:hover{
+    text-shadow:unset;
+    opacity: unset;
+  }
+
+
+
   .navbar-brand span{
-    font-size: 1.6em;
+    color: #3aafa9;
+    font-size: 1.4em;
   }
   
   .navbar-brand > img {
@@ -110,6 +136,11 @@ button.close{
 
   .nav .dropdown-menu{
     background-color: #333;
+    margin-left: -15px;
+  }
+
+  .nav .dropdown-menu a{
+    font-size: 1.2em;
   }
 
   .nav .dropdown-menu .dropdown-item:hover{
@@ -143,7 +174,6 @@ button.close{
 
   .login-main,
   .signup-main{
-    margin-top: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -204,7 +234,7 @@ button.close{
   /* ************ home-quizby***************** */
 
 .home-hero {
-  min-height: 93vh;
+  min-height: 89vh;
   align-items: center;
   width: 100%;
   text-align: center;
@@ -282,13 +312,12 @@ button.close{
 
 .dashboard{
   width: 100%;
-  min-height: 94vh;
+  min-height: 89vh;
   display: flex;
+  position: relative;
 }
 .dashboard .sidebar{
   min-height: 100%;
-  position: sticky;
-  padding: 30px 10px;
   box-shadow: 7px 0px 15px -3px #2b787a;
   background-color: transparent;
 }
@@ -298,6 +327,9 @@ button.close{
   list-style: none;
   margin:0;
   font-size: 1.6em;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 13.5%;
 }
 
 .dashboard .sidebar ul .sidebar-item{
@@ -312,7 +344,7 @@ button.close{
 }
 
 .dashboard .sidebar ul .sidebar-item.active{
-  background-color: #17252A;
+  background-color: rgba(51, 51, 51, 0.5);
   color: #def2f1;
 }
 
@@ -323,6 +355,7 @@ button.close{
 .dashboard .main-content{
   width: 68%;
   padding: 20px 20px;
+  position: relative;
 }
 
 
@@ -361,6 +394,10 @@ button.close{
 .question-list button{
   background-color: #3aafa9;
   border-radius: unset;
+}
+
+.question-list ol li .qn-index{
+  border-right: 1px dotted #17252A;
 }
 
 .q-answer{
@@ -585,7 +622,7 @@ label[for=answer]{
 /* **************image unsplash modal ***************** */
 
 .search-unsplash .upload-image-modal{
-  width: 90vh;
+  width: 90vw;
   height: 80vh;
   position: fixed;
   z-index: 998;
@@ -668,6 +705,7 @@ label[for=answer]{
   background-color: #def2f1;
 }
 
+
 .quiz-list .quiz-card .card .card-img-top{
   max-height: 150px;
 }
@@ -676,20 +714,38 @@ label[for=answer]{
   color: #17252A;
 }
 
-
-/* Editing a quiz */
 .quiz .list-group .list-group-item img{
   max-width: 150px;
   max-height: 150px;
 }
+/* Editing a quiz */
 
-.quiz .choice a{
+.edit-quiz{
+  max-height: 100%;
+}
+
+.edit-quiz .edit-quiz-card{
+  background-color: #def2f1;
+  border-radius: 5px;
+  max-height: 100%;
+}
+
+.edit-quiz .quiz-add-qn{
+  background-color: #def2f1;
+  border-radius: 5px;
+}
+
+.edit-quiz .quiz-add-qn a{
   color:#17252a;
 }
 
-.quiz .quiz-add-qn{
-  background-color: #def2f1;
-  border-radius: 5px;
+.edit-quiz .edit-quiz-main .choice{
+  max-height: 7%
+}
+
+.edit-quiz .edit-quiz-main .questions{
+  max-height: 80%;
+  overflow: hidden;
 }
 
  
