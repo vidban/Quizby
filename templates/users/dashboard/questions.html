@@ -3,12 +3,7 @@
 {% block main %}
 <div id="questions" class="questions p-2">
 	{% if not questions %}
-		<h2>No questions available yet</h2>
-		<form action="/questions/add" style="display:inline-block;">
-			<button id="new-question" class= "btn btn-block btn-lg mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a question">
-				<i class="fas fa-plus"></i>
-			</button>
-		</form>
+		<h2>You haven't added any questions yet!</h2>
 	{% else %}
 		<form class= "p-3" action="{{url_for(request.endpoint, user_id=g.user.id)}}">
 		<div class="input-group">

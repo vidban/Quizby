@@ -30,12 +30,6 @@ body{
   color: inherit;
 }
 
-.alert{
-  position: absolute;
-  bottom:0;
-  left: 50%;
-  transform: translate(-50%, 0)
-}
 .alert-dismissible .close{
   position: absolute;
   top:0;
@@ -168,7 +162,7 @@ button.close{
   .onboarding .navbar-brand span {
 	display: none;
   }
-   
+  
 
   /* ************ Login & Signup***************** */
 
@@ -700,17 +694,17 @@ label[for=answer]{
 
 
 /* ************ quiz ***************** */
-.quiz-card{
+.quiz-cards .card{
   border-radius: 10px;
   background-color: #def2f1;
 }
 
 
-.quiz-list .quiz-card .card .card-img-top{
+.quiz-list .quiz-cards .card .card-img-top{
   max-height: 150px;
 }
 
-.quiz-list .quiz-card .card .card-footer a{
+.quiz-list .quiz-cards .card .card-footer a{
   color: #17252A;
 }
 

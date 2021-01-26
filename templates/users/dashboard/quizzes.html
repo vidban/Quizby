@@ -5,9 +5,9 @@
 	{% if not quizzes %}
 		<h2>You haven't made any quizzes yet!</h2>
 	{% else %}
-		<div class="quiz-card col-4 d-flex flex-row flex-wrap">
+		<div class="quiz-cards col d-flex flex-row flex-wrap">
 		{% for quiz in quizzes %}
-				<div class="card m-3">
+				<div class="card col-3 m-3">
 					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 					<div class="card-body">
 						<h5 class="card-title">{{quiz.title}}</h5>
@@ -18,7 +18,7 @@
 							<button formaction="" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
 								<i class="fas fa-eye"></i>
 							</button>
-							<button formaction="/quizzes/{{quiz.id}}/edit" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
+							<button formaction="{{url_for('edit_quiz', quiz_id=quiz.id, quiz_type=quiz.mult_choice)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
 								<i class="fas fa-edit"></i>
 							</button>
 							<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">

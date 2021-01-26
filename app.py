@@ -4,7 +4,7 @@ import requests
 from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL, POSTS_PER_PAGE
 
 from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for, abort
-# from flask_debugtoolbar import DebugToolbarExtension
+from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import or_
 
@@ -27,7 +27,7 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = SECRET_KEY or "it's a secret"
-# toolbar = DebugToolbarExtension(app)
+toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
@@ -298,13 +298,13 @@ def add_quiz_create():
         db.session.commit()
 
         # return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
-        return render_template("users/new/quizzes/main.html", quiz=quiz)
+        return render_template("users/new/quizzes/edit.html", quiz=quiz)
 
     return render_template("users/new/quizzes/create.html")
 
 
-@app.route('/quizzes/<int:quiz_id>/edit', methods=["GET", "POST"])
-def edit_quiz(quiz_id):
+@app.route('/quizzes/<int:quiz_id>/edit/<quiz_type>', methods=["GET", "POST"])
+def edit_quiz(quiz_id, quiz_type):
     """ edit a quiz by adding or deleting questions"""
 
     if not g.user:
@@ -312,16 +312,18 @@ def edit_quiz(quiz_id):
         return redirect("/login")
 
     search = request.args.get('q') or None
+    qtype = "Multiple Choice" if quiz_type == 'mc' else "Flash Cards"
 
     if not search:
         questions = Question.query.filter(
-            or_(Question.user_id == g.user.id, Question.private == False)).all()
+            or_(Question.user_id == g.user.id, Question.private == False), Question.mult_choice == quiz_type).all()
     else:
         questions = Question.query.filter(or_(Question.user_id == g.user.id, Question.private == False),
                                           Question.question.ilike(f"%{search}%")).all()
 
     quiz = Quiz.query.get_or_404(quiz_id)
-    return render_template('users/new/quizzes/main.html', quiz=quiz, questions=questions, search=search)
+    flash(f"Showing {qtype} questions only ", "warning")
+    return render_template('users/new/quizzes/edit.html', quiz=quiz, questions=questions, search=search)
 
 ####################
 # API search Routes

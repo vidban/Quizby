@@ -184,7 +184,7 @@ class Quiz(db.Model):
         db.Integer,
         primary_key=True)
 
-    title = db.Column(db.Text, unique=True)
+    title = db.Column(db.Text)
 
     desc = db.Column(db.String)
 
