@@ -423,7 +423,7 @@ def add_question_create():
         try:
             new_question = Question(
                 question=form.question.data,
-                mult_choice=form.mult_choice.data,
+                mult_choice=form.mult_choice.data if form.mult_choice.data else quiz.mult_choice,
                 category=form.category.data,
                 user_id=g.user.id
             )
@@ -484,7 +484,10 @@ def add_question_create():
             return redirect(url_for(request.endpoint, question=new_question))
     else:
         if request.args:
-            return render_template('users/new/add-questions.html', form=form, quiz=quiz)
+            if quiz.mult_choice is 'f':
+                return render_template('users/new/questions/add-fc-qns.html', form=form, quiz=quiz)
+            else:
+                return render_template('users/new/add-questions.html', form=form, quiz=quiz)
         else:
             return render_template('users/new/add-questions.html', form=form)
 

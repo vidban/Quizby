@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-{{super()}}
 <div id="new-question" class="add-question p-4 col col-md-10 col-lg-7 m-auto">
 	<div class="col">
 		<form method="POST" class="p-5">
@@ -14,18 +13,18 @@
 							{{ field(placeholder=field.description, value=quiz.category) }}
 						</div>
 					{% elif (quiz) and (field.id=='mult_choice') %}
-						<div style="visibility: hidden;" class="input-group mb-2">
+						<div style="visibility: hidden;"  class="input-group mb-2">
 							<label id="{{field.id}}">{{field.label.text}}</label>
-							<input id="mult_choice-0" name="mult_choice" placeholder = "{{'Multiple Choice' if quiz.mult_choice == 'mc' else 'Flash Cards'}}" value="{{'mc' if quiz.mult_choice=='mc' else 'f'}}" disabled>
+							<input id="mult_choice-0" name="mult_choice" placeholder = "{{'Multiple Choice' if quiz.mult_choice == 'mc' else 'Flash Cards'}}" value="{{'mc' if quiz.mult_choice=='mc' else 'f'}}">
 						</div>
 					{% else %}
-						{% if field.id=='text_answer' %}
+						{% if field.id.startswith('answer') %}
 						<div class="input-group mb-2 hidden">
 						{% else %}
 						<div class="input-group mb-2">
 						{% endif %}
 							<label id="{{field.id}}">{{field.label.text}}</label>
-							{{ field(placeholder=field.description, list="list-of-categories") }}
+							{{ field(placeholder=field.description) }}
 							<small class="form-text text-muted">
 								{% for error in field.errors %}
 								<span class="text-danger">{{ error }}</span>
