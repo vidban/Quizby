@@ -8,7 +8,9 @@
 			{{ form.hidden_tag() }}
 			<div class="fields">
 				{% for field in form if field.widget.input_type != 'hidden' %}
-					{% if field.id=='text_answer' %}
+					{% if (quiz_id) and (field.id=='autocomplete' or field.id=='mult_choice') %}
+					<div class="input-group mb-2 hidden">
+					{% elif field.id=='text_answer' %}
 					<div class="input-group mb-2 hidden">
 					{% else %}
 					<div class="input-group mb-2">
@@ -21,8 +23,7 @@
 							{% endfor %}
 						</small>
 					</div>	
-			{% endfor %}
-		
+				{% endfor %}
 			</div>
 
 			<button class="btn btn-block btn-lg">Submit</button>

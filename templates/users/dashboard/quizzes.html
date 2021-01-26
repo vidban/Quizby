@@ -18,7 +18,7 @@
 							<button formaction="" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
 								<i class="fas fa-eye"></i>
 							</button>
-							<button formaction="{{url_for('edit_quiz', quiz_id=quiz.id, quiz_type=quiz.mult_choice)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
+							<button formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
 								<i class="fas fa-edit"></i>
 							</button>
 							<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">

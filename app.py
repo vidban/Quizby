@@ -303,25 +303,24 @@ def add_quiz_create():
     return render_template("users/new/quizzes/create.html")
 
 
-@app.route('/quizzes/<int:quiz_id>/edit/<quiz_type>', methods=["GET", "POST"])
-def edit_quiz(quiz_id, quiz_type):
+@app.route('/quizzes/<int:quiz_id>/edit', methods=["GET", "POST"])
+def edit_quiz(quiz_id):
     """ edit a quiz by adding or deleting questions"""
 
     if not g.user:
         flash("Access unauthorized. Please login.", "danger")
         return redirect("/login")
 
+    quiz = Quiz.query.get_or_404(quiz_id)
     search = request.args.get('q') or None
-    qtype = "Multiple Choice" if quiz_type == 'mc' else "Flash Cards"
 
     if not search:
         questions = Question.query.filter(
-            or_(Question.user_id == g.user.id, Question.private == False), Question.mult_choice == quiz_type).all()
+            or_(Question.user_id == g.user.id, Question.private == False), Question.mult_choice == quiz.mult_choice, Question.category == quiz.category).all()
     else:
         questions = Question.query.filter(or_(Question.user_id == g.user.id, Question.private == False),
-                                          Question.question.ilike(f"%{search}%")).all()
+                                          Question.category == quiz.category, Question.mult_choice == quiz.mult_choice, Question.question.ilike(f"%{search}%")).all()
 
-    quiz = Quiz.query.get_or_404(quiz_id)
     return render_template('users/new/quizzes/edit.html', quiz=quiz, questions=questions, search=search)
 
 ####################
@@ -475,7 +474,7 @@ def add_question_create():
             db.session.commit()
             flash("Question successfully added", "success")
             if request.args:
-                return redirect(url_for(endpt, quiz_id=request.args["quiz_id"], quiz_type=request.args["quiz_type"]))
+                return redirect(url_for(endpt, quiz_id=request.args["quiz_id"]))
             return redirect(url_for(endpt))
 
         except IntegrityError as e:
@@ -483,7 +482,10 @@ def add_question_create():
             flash('This question already exists! Please enter', 'danger')
             return redirect(url_for(request.endpoint, question=new_question))
     else:
-        return render_template('users/new/add-questions.html', form=form)
+        if request.args:
+            return render_template('users/new/add-questions.html', form=form, quiz_id=request.args['quiz_id'])
+        else:
+            return render_template('users/new/add-questions.html', form=form)
 
 
 @app.route('/questions/<int:question_id>/star')
