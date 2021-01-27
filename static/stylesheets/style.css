@@ -377,8 +377,9 @@ button.close{
   transform: scale(1.2);
 }
 
-.questions .filtered-by button:hover{
-  transform: none;
+.filtered-by{
+  background:rgba(222, 242, 241, 0.5);
+  border-radius: 5px;
 }
 
 .question-list{
@@ -755,9 +756,13 @@ label[for=answer]{
 }
 
 .yellow{
-  color:gold;
+  color:gold !important;
+}
+
+.black{
+  color: black !important;
 }
 
 .red{
-  background-color:#e27d60;
+  background-color:#e27d60 !important;
 }

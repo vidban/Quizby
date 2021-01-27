@@ -295,14 +295,13 @@ def add_quiz_create():
             category=request.form["category"]
         )
 
-    #   Add category to category table
+        # Add category to category table
         add_category(request.form["category"])
 
         db.session.add(quiz)
         db.session.commit()
 
-        # return redirect(url_for('questions', quiz=quiz, q=request.form["title"]))
-        return render_template("users/new/quizzes/edit.html", quiz=quiz)
+        return redirect(url_for("edit_quiz", quiz_id=quiz.id))
 
     return render_template("users/new/quizzes/create.html")
 
@@ -482,7 +481,8 @@ def add_question_create():
             db.session.commit()
             flash("Question successfully added", "success")
             if request.args:
-                return redirect(url_for(endpt, quiz_id=request.args["quiz_id"]))
+                return redirect(url_for("add_question_to_quiz", quiz_id=request.args["quiz_id"], question_id=question.id))
+                # return redirect(url_for(endpt, quiz_id=request.args["quiz_id"]))
             return redirect(url_for(endpt))
 
         except IntegrityError as e:
@@ -527,7 +527,7 @@ def star_question(question_id):
     """ Adds question to favorites"""
 
     if not g.user:
-        flash("Unauthorized access. Please Login.", "danger")
+        flash("Please Log In to mark favorites.", "danger")
         return redirect('/login')
 
     q = Question.query.get_or_404(question_id)

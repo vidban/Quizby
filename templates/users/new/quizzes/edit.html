@@ -32,19 +32,19 @@
 		<div class="note text-center">
 			<small>Only {{quiz.category}} {{'Multiple Choice' if quiz.mult_choice == 'mc' else 'Flash cards'}} type questions will be available to add</small>
 		</div>
-		<div class="choice col mt-3 d-flex flex-row justify-content-between">
-			<div class="quiz-add-qn col-3.5 p-3 text-center">
+		<div class="choice col mt-3 d-flex flex-row justify-content-between align-items-center">
+			<div class="quiz-add-qn col-3 me-2 p-3 text-center">
 					<a href="{{url_for('add_question_create', endpt=request.endpoint, quiz_id=quiz.id)}}"><i class="fas fa-plus"></i> New Question</a>
 			</div>
 			{% if search %}
-			<form class="col-3.5" action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
+			<form class="col-3 me-2" action="{{url_for(request.endpoint, quiz_id=quiz.id)}}">
 				<div class="filtered-by">
-					<button class="btn d-inline-block">X</button>
-					Filtered Term: {{search}}
+					<button class="btn-secondary d-inline-block">X</button>
+					Filtered Term: <span class="badge-bg-secondary">{{search}}</span> 
 				</div>
 			</form>
 			{% endif %}
-			<form class="col-3.5"action="{{url_for(request.endpoint, endpt = request.endpoint, quiz_id=quiz.id)}}">
+			<form class="col"action="{{url_for(request.endpoint, endpt = request.endpoint, quiz_id=quiz.id)}}">
 				<div class="input-group">
 					<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
 					<div class="input-group-append">
@@ -60,10 +60,10 @@
 		<div id="questions" class="questions col p-3 overflow-auto">
 			<div class="question-list col">
 				<ol id="qn-list" class="list-group mt-2">
-					{% for question in questions %}
-							<li class="list-group-item mb-1 d-flex justify-content-between">
+					{% for question in questions | sort(attribute="id") %}
+							<li class="list-group-item mb-1 d-flex justify-content-between text-align-center">
 								<div class="col-1 qn-index">{{loop.index}}</div>
-								<pre class="col-8 mb-0"><p>{{question.question}}</p></pre>
+								<pre class="col-8 mb-0 ps-2 pe-2 text-wrap"><p class="mb-0">{{question.question}}</p></pre>
 								<div>
 									<form action="{{url_for('add_question_to_quiz', quiz_id=quiz.id, question_id=question.id)}}" style="display:inline;">
 										<button class= "btn {{'red' if question in quiz.questions}}" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Remove from Quiz' if question in quiz.questions else 'Add to Quiz'}}">

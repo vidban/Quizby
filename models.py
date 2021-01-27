@@ -164,6 +164,8 @@ class Question(db.Model):
     category = db.Column(db.Text())
     private = db.Column(db.Boolean, default=True)
     favorite = db.Column(db.Boolean, default=False)
+    created_on = db.Column(db.DateTime(timezone=False), nullable=False,
+                           default=datetime.utcnow())
 
     user = db.relationship('User', backref='questions')
     answers = db.relationship(
@@ -198,8 +200,9 @@ class Quiz(db.Model):
         nullable=False
     )
     category = db.Column(db.Text)
-
     private = db.Column(db.Boolean, default=True)
+    created_on = db.Column(db.DateTime(timezone=False), nullable=False,
+                           default=datetime.utcnow())
 
     user = db.relationship('User', backref='quizzes')
 

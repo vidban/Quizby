@@ -25,19 +25,19 @@
 		</form>
 		<div class="question-list">
 			<ol id="qn-list" class="list-group mt-2">
-				{% for question in questions %}
+				{% for question in questions | sort(attribute="id") %}
 						<li class="list-group-item mb-1 d-flex justify-content-between">
 							<div class="qn-index col-1">{{loop.index}}</div>
-							<pre class="col-8 mb-0"><p>{{question.question}}</p></pre>
+							<pre class="col-8 mb-0 ps-2 pe-2 text-wrap"><p class="mb-0">{{question.question}}</p></pre>
 							<div>
 								{% if g.user %}
 									<form method="POST" action="/questions/{{question.id}}/delete" style="display:inline;">
-										<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="delete">
+										<button class= "btn red" type="submit" data-toggle="tooltip" data-placement="bottom" title="delete">
 											<i class="fas fa-trash"></i>
 										</button>
 									</form>
 									<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
-										<a href="{{url_for('update_question', question_id=question.id)}}"><i class="fas fa-{{'lock' if question.private else 'unlock'}}"></i></a>
+										<a href="{{url_for('update_question', question_id=question.id)}}"><i class="fas fa-{{'lock black' if question.private else 'unlock'}}"></i></a>
 									</button>
 								{% endif %}
 								<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
