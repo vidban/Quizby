@@ -65,9 +65,9 @@
 								<div class="col-1 qn-index">{{loop.index}}</div>
 								<pre class="col-8 mb-0"><p>{{question.question}}</p></pre>
 								<div>
-									<form method="POST" action="" style="display:inline;">
-										<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add to Quiz">
-											<i class="fas fa-plus"></i>
+									<form action="{{url_for('add_question_to_quiz', quiz_id=quiz.id, question_id=question.id)}}" style="display:inline;">
+										<button class= "btn {{'red' if question in quiz.questions}}" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Remove from Quiz' if question in quiz.questions else 'Add to Quiz'}}">
+											<i class="fas fa-{{'minus-circle' if question in quiz.questions else 'plus'}}"></i>
 										</button>
 									</form>
 									<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >

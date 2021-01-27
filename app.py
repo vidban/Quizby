@@ -499,18 +499,38 @@ def add_question_create():
             return render_template('users/new/add-questions.html', form=form)
 
 
+@app.route('/questions/<int:question_id>/add/<int:quiz_id>')
+def add_question_to_quiz(question_id, quiz_id):
+    """Takes question and adds it to quiz with the provided id"""
+
+    if not g.user:
+        flash("Unauthorized access. Please Login.", "danger")
+        return redirect('/login')
+
+    quiz = Quiz.query.get_or_404(quiz_id)
+    question = Question.query.get_or_404(question_id)
+
+    quiz_questions = quiz.questions
+
+    if question in quiz_questions:
+        quiz.questions = [qn for qn in quiz_questions if qn != question]
+    else:
+        quiz.questions.append(question)
+
+    db.session.commit()
+
+    return redirect(url_for('edit_quiz', quiz_id=quiz_id))
+
+
 @app.route('/questions/<int:question_id>/star')
 def star_question(question_id):
     """ Adds question to favorites"""
 
     if not g.user:
+        flash("Unauthorized access. Please Login.", "danger")
         return redirect('/login')
 
     q = Question.query.get_or_404(question_id)
-
-    # if q.user_id == g.user.id:
-    #     flash("You cannot favorite you own question", 'warning')
-    #     return redirect('/questions')
 
     user_favorites = g.user.favorites
     if q in user_favorites:
@@ -534,7 +554,7 @@ def update_question(question_id):
     q = Question.query.get_or_404(question_id)
     q.private = not q.private
 
-    db.session.add(q)
+    # db.session.add(q)
     db.session.commit()
 
     return redirect(f'/users/{g.user.id}/questions')

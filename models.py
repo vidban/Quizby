@@ -132,17 +132,15 @@ class Favorites(db.Model):
         'questions.id', ondelete='cascade'))
 
 
-class QuizQuestionCategory(db.Model):
-    """ relational table for quiz, questions and categories"""
+class QuizQuestion(db.Model):
+    """ relational table for quiz and questions"""
 
-    __tablename__ = "quizzes_questions_categories"
+    __tablename__ = "quizzes_questions"
 
     quiz_id = db.Column(db.Integer, db.ForeignKey(
-        'quizzes.id'), primary_key=True)
+        'quizzes.id', ondelete="cascade"), primary_key=True)
     question_id = db.Column(db.Integer, db.ForeignKey(
-        'questions.id'), primary_key=True)
-    category_id = db.Column(db.Integer, db.ForeignKey(
-        'categories.id'), primary_key=True)
+        'questions.id', ondelete="cascade"), primary_key=True)
 
 
 class Question(db.Model):
@@ -206,7 +204,7 @@ class Quiz(db.Model):
     user = db.relationship('User', backref='quizzes')
 
     questions = db.relationship(
-        'Question', secondary='quizzes_questions_categories')
+        'Question', secondary='quizzes_questions')
 
 
 class Category(db.Model):
