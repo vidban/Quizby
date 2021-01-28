@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="view-quiz col col-md-9 col-lg-9 m-auto">
+	<div class="view-quiz-card card mt-2 col d-flex flex-row justify-content-around align-items-center">
+		<img class="col-3 p-2" style="max-width: 250px; max-height: 250px;" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
+		<div class="col p-3 d-flex flex-column justify-content-center ">
+			<p><b>Title: </b>{{quiz.title}}</p>
+			<p><b>Description: </b>{{quiz.desc}}</p>
+			<p><b>Type: </b>{{'Multiple Choice' if quiz.mult_choice=='mc' else 'Flash Cards'}}</p>
+			<p><b>Category: </b>{{quiz.category}}</p>
+			<p><b>Questions: </b>{{quiz.questions|length}}</p>
+		</div>
+		<div class="col-3 view-quiz-links">
+			<form>
+				<div>
+					<button style="display:inline-block;" formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
+						<i class="fas fa-edit"></i>
+					</button>
+					<p style="display:inline-block;"><b>Edit Quiz</b></p>	
+				</div>
+				<div>
+					<button style="display:inline-block;" formaction="" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
+						<i class="fas fa-play"></i>
+					</button>
+					<p style="display:inline-block;"><b>Take Quiz</b></p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="questions" class="questions col p-3 overflow-auto">
+		<div class="question-list col">
+			<ol id="qn-list" class="list-group mt-2">
+				{% for question in quiz.questions | sort(attribute="id") %}
+						<li class="list-group-item mb-1 d-flex justify-content-between text-align-center">
+							<div class="col-1 qn-index">{{loop.index}}</div>
+							<pre class="col-8 mb-0 ps-2 pe-2 text-wrap"><p class="mb-0">{{question.question}}</p></pre>
+							<div>
+								<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
+									<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
+										<i class="fas fa-chevron-down"></i>
+									</button>
+								</a>
+							</div>
+						</li>
+						<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
+							<div class="card card-body d-flex flex-wrap justify-content-around">
+								{%for a in question.answers%}
+									<p class="p-2 m-2 col col-md-5 col-lg-2 {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
+								{% endfor %}
+							</div>
+						</div>
+				{% endfor %}
+			</ol>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

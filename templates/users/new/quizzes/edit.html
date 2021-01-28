@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="edit-quiz d-flex flex-row">
-	<div class="edit-quiz-card mt-2 p-3 col d-flex flex-column justify-content-start">
+	<div class="edit-quiz-card mt-2 p-3 col-3 col-md-3 col-lg-2 d-flex flex-column justify-content-start">
 		<img src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 		<div class="col p-2 d-flex flex-column justify-content-start">
 			<p><b>Title: </b>{{quiz.title}}</p>
@@ -14,7 +14,7 @@
 		<div class="edit-quiz-links">
 			<form class = "d-flex flex-column align-items-center text-align-center">
 				<div>
-					<button style="display:inline-block;" formaction="" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
+					<button style="display:inline-block;" formaction="{{url_for('view_quiz', quiz_id=quiz.id)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
 						<i class="fas fa-eye"></i>
 					</button>
 					<p style="display:inline-block;"><b>View Quiz</b></p>	
@@ -28,7 +28,7 @@
 			</form>
 		</div>
 	</div>
-	<div class="edit-quiz-main col-9 p-2">
+	<div class="edit-quiz-main col p-2">
 		<div class="note text-center">
 			<small>Only {{quiz.category}} {{'Multiple Choice' if quiz.mult_choice == 'mc' else 'Flash cards'}} type questions will be available to add</small>
 		</div>

@@ -329,6 +329,18 @@ def edit_quiz(quiz_id):
 
     return render_template('users/new/quizzes/edit.html', quiz=quiz, questions=questions, search=search)
 
+
+@app.route('/quizzes/<int:quiz_id>/view')
+def view_quiz(quiz_id):
+    """ show quiz and included questions"""
+
+    if not g.user:
+        flash("Access unauthorized. Please login.", "danger")
+        return redirect("/login")
+
+    quiz = Quiz.query.get_or_404(quiz_id)
+
+    return render_template("users/new/quizzes/view.html", quiz=quiz)
 ####################
 # API search Routes
 
