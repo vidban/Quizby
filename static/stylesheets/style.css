@@ -359,6 +359,16 @@ button.close{
   margin: auto;
 }
 
+.questions .questions-add-new{
+  background-color: rgba(222, 242, 241, 0.5);
+  border-radius: 5px;
+}
+
+.questions .questions-add-new a{
+  text-decoration: none;
+  color:#17252A;
+}
+
 
 .questions form{
   width: 100%;

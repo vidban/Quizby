@@ -1,30 +1,39 @@
 {% extends 'users/dashboard/dashboard.html' %}
 
 {% block main %}
-<div id="questions" class="questions p-2 col-10 m-auto">
+<div id="questions" class="questions p-2 col col-md-11 col-lg-10 m-auto">
 	{% if not questions %}
 		<h2>You haven't added any questions yet!</h2>
+		<div class="questions-add-new col-3 text-center p-2">
+			<a href="/questions/add"><i class="fas fa-plus"></i> New question</a>
+		</div>
 	{% else %}
-		<form class= "p-2 d-flex justify-content-between align-items-center" action="{{url_for(request.endpoint, user_id=g.user.id)}}">
-			{% if search%}
-				<div class="col-3 me-2 filtered-by">
-					<button class="btn-secondary d-inline-block">X</button>
-					Filtered Term: <span class="badge-bg-secondary">{{search}}</span> 
-				</div>
-			{% endif %}
-			<div class="col input-group">
-				<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
-				<div class="input-group-append">
-				<div class="input-group-text">
-					<button class="btn btn-default">
-						<span class="fa fa-search"></span>
-					</button>
-				</div>
-				</div>
+		<div class="choice col mt-3 d-flex flex-row justify-content-between align-items-center">
+			<div class="questions-add-new col-3 me-2 text-center p-2">
+				<a href="/questions/add"><i class="fas fa-plus"></i> New question</a>
 			</div>
-		</form>
+			<form class= "col p-2 d-flex justify-content-between align-items-center" action="{{url_for(request.endpoint, user_id=g.user.id)}}">
+				{% if search%}
+					<div class="col-3 me-2 filtered-by">
+						<button class="btn-secondary d-inline-block">X</button>
+						Filtered Term: <span class="badge-bg-secondary">{{search}}</span> 
+					</div>
+				{% endif %}
+				<div class="col input-group">
+					<input name="q" class="form-control" placeholder="Search questions by term" id="search">  
+					<div class="input-group-append">
+					<div class="input-group-text">
+						<button class="btn btn-default">
+							<span class="fa fa-search"></span>
+						</button>
+					</div>
+					</div>
+				</div>
+			</form>
+		</div>	
 		<div class="question-list">
 			<ol id="qn-list" class="list-group mt-2">
+				You've added {{questions | count}} question{{'' if ((questions|count)==1) else 's'}} so far.
 				{% for question in questions | sort(attribute="id") %}
 						<li class="list-group-item mb-1 d-flex justify-content-between">
 							<div class="qn-index col-1">{{loop.index}}</div>

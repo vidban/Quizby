@@ -495,7 +495,7 @@ def add_question_create():
             if request.args:
                 return redirect(url_for("add_question_to_quiz", quiz_id=request.args["quiz_id"], question_id=question.id))
                 # return redirect(url_for(endpt, quiz_id=request.args["quiz_id"]))
-            return redirect(url_for(endpt))
+            return redirect(url_for('users_questions_dashboard', user_id=g.user.id))
 
         except IntegrityError as e:
             # print(e.orig.args)

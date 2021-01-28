@@ -6,7 +6,7 @@
 		<h2>You haven't made any quizzes yet!</h2>
 	{% else %}
 		<div class="quiz-cards col d-flex flex-row flex-wrap">
-		{% for quiz in quizzes %}
+		{% for quiz in quizzes | sort(attribute="id")  %}
 				<div class="card col col-md-5 col-lg-2 m-3">
 					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 					<div class="card-body">
