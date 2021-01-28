@@ -4,7 +4,13 @@
 <div class="quiz-list col-10 m-auto">
 	{% if not quizzes %}
 		<h2>You haven't made any quizzes yet!</h2>
+		<div class="quiz-add-new col-3 text-center p-2">
+			<a href="/quizzes/add"><i class="fas fa-plus"></i> New Quiz</a>
+		</div>
 	{% else %}
+		<div class="quiz-add-new col-3 text-center p-2">
+			<a href="/quizzes/add"><i class="fas fa-plus"></i> New Quiz</a>
+		</div>
 		<div class="quiz-cards col d-flex flex-row flex-wrap">
 		{% for quiz in quizzes | sort(attribute="id")  %}
 				<div class="card col col-md-5 col-lg-2 m-3">

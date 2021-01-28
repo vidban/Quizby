@@ -329,6 +329,7 @@ button.close{
 .dashboard .sidebar ul .sidebar-item{
   width: 100%;
   margin: 20px 0;
+  font-size: .95em;
 }
 
 .dashboard .sidebar ul .sidebar-item a{
@@ -710,6 +711,15 @@ label[for=answer]{
   background-color: #def2f1;
 }
 
+.quiz-list .quiz-add-new{
+  background-color: rgba(222, 242, 241, 0.5);
+  border-radius: 5px;
+}
+
+.quiz-list .quiz-add-new a{
+  text-decoration: none;
+  color:#17252A;
+}
 
 .quiz-list .quiz-cards .card .card-img-top{
   max-height: 150px;
