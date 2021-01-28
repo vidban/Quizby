@@ -743,6 +743,13 @@ label[for=answer]{
   max-height: 89%;
 }
 
+.edit-quiz-links .quiz-link,
+.view-quiz-links .quiz-link{
+  background-color: #2b7a78;
+  color: #def2f1;
+  border-radius: 5px;
+}
+
 /* Exploring a quiz */
 
 .quiz-list .quiz-card .card-footer a{
