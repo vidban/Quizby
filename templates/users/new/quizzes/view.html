@@ -13,12 +13,14 @@
 		</div>
 		<div class="col-3 view-quiz-links text-center">
 			<form>
-				<div class="quiz-link m-2 p-2">
-					<button style="display:inline-block;" formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
-						<i class="fas fa-edit"></i>
-					</button>
-					<p class="mb-0" style="display:inline-block;"><b> &larr; Edit Quiz</b></p>	
-				</div>
+				{% if g.user.id == quiz.user_id %}
+					<div class="quiz-link m-2 p-2">
+						<button style="display:inline-block;" formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
+							<i class="fas fa-edit"></i>
+						</button>
+						<p class="mb-0" style="display:inline-block;"><b> &larr; Edit Quiz</b></p>	
+					</div>
+				{% endif %}
 				<div class="quiz-link m-2 p-2">
 					<button style="display:inline-block;" formaction="/quizzes/{{quiz.id}}/test" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
 						<i class="fas fa-play"></i>
