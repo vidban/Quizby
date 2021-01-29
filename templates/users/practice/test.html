@@ -14,7 +14,7 @@
 		{% if submitted %}
 		<div class="col-3 p-2 align-self-center text-center">
 			<h2>Score:</h2>
-			<h4>{{((wrong / quiz.questions|count)*100)|int}} %</h4>
+			<h4>{{(((100 - (wrong / quiz.questions|count)*100)|int)) if wrong>0 else 100}} %</h4>
 		</div>
 		{% endif %}
 	</div>
