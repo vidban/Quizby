@@ -8,7 +8,7 @@
 		</div>
 		<div class="card-body">
 			<small>
-				Joined: {{g.user.date_joined}}
+				Joined: {{ moment(g.user.date_joined).calendar()}}
 			</small>
 		</div>
 	</div>

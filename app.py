@@ -12,9 +12,13 @@ from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
 from models import db, connect_db, User, Question, Answer, Quiz, Category, add_category, create_answer_sheet
 from werkzeug.utils import secure_filename
 
+from flask_moment import Moment
+
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
 
 app = Flask(__name__)
+
+moment = Moment(app)
 
 # Get DB_URI from environ variable or,
 # if not set there, use development local db.

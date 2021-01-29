@@ -57,8 +57,8 @@ class User(db.Model):
         db.Integer,
     )
 
-    date_joined = db.Column(db.DateTime(timezone=False), nullable=False,
-                            default=datetime.utcnow())
+    date_joined = db.Column(db.DateTime, index=True, nullable=False,
+                            default=datetime.utcnow)
 
     favorites = db.relationship(
         'Question',
@@ -164,8 +164,8 @@ class Question(db.Model):
     category = db.Column(db.Text())
     private = db.Column(db.Boolean, default=True)
     favorite = db.Column(db.Boolean, default=False)
-    created_on = db.Column(db.DateTime(timezone=False), nullable=False,
-                           default=datetime.utcnow())
+    created_on = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
     correct = db.Column(db.Boolean, default=True)
     marked = db.Column(db.String)
 
@@ -203,8 +203,8 @@ class Quiz(db.Model):
     )
     category = db.Column(db.Text)
     private = db.Column(db.Boolean, default=True)
-    created_on = db.Column(db.DateTime(timezone=False), nullable=False,
-                           default=datetime.utcnow())
+    created_on = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
 
     user = db.relationship('User', backref='quizzes')
 

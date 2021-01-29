@@ -816,3 +816,7 @@ label[for=answer]{
   color: darkgreen !important;
 
 }
+
+.flask-moment{
+  display: inline-block !important;
+}
