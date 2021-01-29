@@ -775,6 +775,23 @@ label[for=answer]{
 .quiz-list .quiz-card .card-footer a{
   color: #17252a;
 }
+
+
+/* Taking a quiz */
+
+.test .test-info{
+  background-color:rgba(23, 37, 42, .7);
+  color: #def2f1;
+}
+.test .test-questions .question-number{
+  background-color: rgba(23, 82, 90, 0.9);
+  color: #def2f1;
+}
+
+.test form button{
+  min-width: 20%;
+  border-radius: 5px;
+}
  
 /* ************ end ***************** */
 
@@ -792,4 +809,10 @@ label[for=answer]{
 
 .red{
   background-color:#e27d60 !important;
+}
+
+.green{
+  /* color: #5cdb95 !important; */
+  color: darkgreen !important;
+
 }

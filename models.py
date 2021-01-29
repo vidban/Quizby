@@ -166,6 +166,8 @@ class Question(db.Model):
     favorite = db.Column(db.Boolean, default=False)
     created_on = db.Column(db.DateTime(timezone=False), nullable=False,
                            default=datetime.utcnow())
+    correct = db.Column(db.Boolean, default=True)
+    marked = db.Column(db.String)
 
     user = db.relationship('User', backref='questions')
     answers = db.relationship(
@@ -237,6 +239,18 @@ def add_category(category):
 
         db.session.add(c)
         db.session.commit()
+
+
+def create_answer_sheet(quiz):
+    """ create an answer sheet for given quiz"""
+
+    ans_sheet = {}
+    for question in quiz.questions:
+        for answer in question.answers:
+            if answer.correct:
+                ans_sheet[question.id] = answer.answer
+
+    return ans_sheet
 
 
 def connect_db(app):

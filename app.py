@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import or_
 
 from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
-from models import db, connect_db, User, Question, Answer, Quiz, Category, add_category
+from models import db, connect_db, User, Question, Answer, Quiz, Category, add_category, create_answer_sheet
 from werkzeug.utils import secure_filename
 
 CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
@@ -341,6 +341,36 @@ def view_quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
 
     return render_template("users/new/quizzes/view.html", quiz=quiz)
+
+
+@app.route('/quizzes/<int:quiz_id>/test', methods=['GET', 'POST'])
+def take_quiz(quiz_id):
+
+    if not g.user:
+        flash("Access unauthorized. Please login.", "danger")
+        return redirect("/login")
+
+    quiz = Quiz.query.get_or_404(quiz_id)
+    # create answer sheet
+    ans_sheet = create_answer_sheet(quiz)
+    print('******************')
+    print(ans_sheet)
+
+    if request.form:
+        # check answers
+        wrong = 0
+        for question in quiz.questions:
+            if ans_sheet[question.id] != request.form[f"question{question.id}"]:
+                print(f"***question{question.id}****")
+                print(request.form[f"question{question.id}"])
+                question.correct = False
+                wrong += 1
+            question.marked = request.form[f"question{question.id}"]
+
+        return render_template('users/practice/test.html', quiz=quiz, submitted=True, wrong=wrong)
+
+    return render_template('users/practice/test.html', quiz=quiz, submitted=False)
+
 ####################
 # API search Routes
 
