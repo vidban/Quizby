@@ -375,6 +375,10 @@ button.close{
   width: 100%;
 }
 
+.questions .search-question-by{
+  max-width: 25%;
+}
+
 .questions button a{
   text-decoration: none;
   color: #def2f1;

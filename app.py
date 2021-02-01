@@ -219,22 +219,21 @@ def users_questions_dashboard(user_id):
     questions = Question.query.filter(Question.user_id == g.user.id).all()
 
     if search:
-        search_by = request.args.get('search-question-by') or None
+        search_by = request.args.get('search-question-by') or "Term"
 
-        if search_by == 'Term':
-            print('************')
-            print(search_by)
+        if search_by == 'Category':
+            questions = Question.query.filter(
+                Question.user_id == g.user.id, Question.category.ilike(f"%{search}%")).all()
+        else:
             questions = Question.query.filter(
                 Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
-        else:
-            print('************')
-            print(search_by)
-            questions = Question.query.filter(
-                Question.private == False, Question.user_id != g.user.id, Question.category == search_by).all()
         if len(questions) == 0:
             flash(
                 f"No questions found with that {search_by.lower()}", 'warning')
             return redirect(url_for('users_questions_dashboard', user_id=g.user.id))
+    else:
+        questions = Question.query.filter(
+            Question.user_id == g.user.id).all()
 
     return render_template('users/dashboard/questions.html', questions=questions, search=search)
 
@@ -441,25 +440,22 @@ def questions_explore():
         Returns only public questions and questions not by user if logged in"""
 
     search = request.args.get('q') or None
-    search_by = request.args.get('search-question-by') or None
+    search_by = request.args.get('search-question-by') or "Term"
 
     if g.user:
         if not search:
             questions = Question.query.filter(
                 Question.private == False, Question.user_id != g.user.id).all()
         else:
-            if search_by == 'Term':
-                print('************')
-                print(search_by)
+            if search_by == 'Category':
+                questions = Question.query.filter(
+                    Question.private == False, Question.user_id != g.user.id, Question.category.ilike(f"%{search}%")).all()
+            else:
                 questions = Question.query.filter(
                     Question.private == False, Question.user_id != g.user.id, Question.question.ilike(f"%{search}%")).all()
-            else:
-                print('************')
-                print(search_by)
-                questions = Question.query.filter(
-                    Question.private == False, Question.user_id != g.user.id, Question.category == search_by).all()
             if len(questions) == 0:
-                flash("No questions found for that search", 'warning')
+                flash(
+                    f"No questions found for that {search_by.lower()}", 'warning')
                 return redirect('/questions')
         favorites = [question.id for question in g.user.favorites]
         return render_template('explore/questions.html', questions=questions, search=search, page="questions", favorites=favorites)
@@ -468,8 +464,12 @@ def questions_explore():
             questions = Question.query.filter(
                 Question.private == False).all()
         else:
-            questions = Question.query.filter(
-                Question.private == False, Question.question.ilike(f"%{search}%")).all()
+            if search_by == 'Category':
+                questions = Question.query.filter(
+                    Question.private == False,  Question.category.ilike(f"%{search}%")).all()
+            else:
+                questions = Question.query.filter(
+                    Question.private == False,  Question.question.ilike(f"%{search}%")).all()
             if len(questions) == 0:
                 flash("No questions found for that search", 'warning')
                 return redirect('/questions')
