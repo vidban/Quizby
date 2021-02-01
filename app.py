@@ -648,8 +648,8 @@ def explore():
 # Create Route
 
 
-@app.route('/create', methods=["GET", "POST"])
-def create():
-    """ display create options"""
+# @app.route('/create', methods=["GET", "POST"])
+# def create():
+#     """ display create options"""
 
-    return render_template('users/new/main.html')
+#     return render_template('users/new/main.html')
