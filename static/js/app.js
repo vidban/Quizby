@@ -27,4 +27,12 @@
   $(document).on("blur", "input#autocomplete", function () {
     $("#list-of-categories").empty();
   });
+
+  $(document).on("change", "#search-question-by", () => {
+    if ($("#search-question-by").val() === "Category") {
+      $("#questions #search").attr("placeholder", "Enter category...");
+    } else {
+      $("#questions #search").attr("placeholder", "Enter term...");
+    }
+  });
 }

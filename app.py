@@ -217,11 +217,23 @@ def users_questions_dashboard(user_id):
 
     search = request.args.get('q') or ""
     questions = Question.query.filter(Question.user_id == g.user.id).all()
+
     if search:
-        questions = Question.query.filter(
-            Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
+        search_by = request.args.get('search-question-by') or None
+
+        if search_by == 'Term':
+            print('************')
+            print(search_by)
+            questions = Question.query.filter(
+                Question.user_id == g.user.id, Question.question.ilike(f"%{search}%")).all()
+        else:
+            print('************')
+            print(search_by)
+            questions = Question.query.filter(
+                Question.private == False, Question.user_id != g.user.id, Question.category == search_by).all()
         if len(questions) == 0:
-            flash("No questions found with that term", 'warning')
+            flash(
+                f"No questions found with that {search_by.lower()}", 'warning')
             return redirect(url_for('users_questions_dashboard', user_id=g.user.id))
 
     return render_template('users/dashboard/questions.html', questions=questions, search=search)
@@ -429,14 +441,23 @@ def questions_explore():
         Returns only public questions and questions not by user if logged in"""
 
     search = request.args.get('q') or None
+    search_by = request.args.get('search-question-by') or None
 
     if g.user:
         if not search:
             questions = Question.query.filter(
                 Question.private == False, Question.user_id != g.user.id).all()
         else:
-            questions = Question.query.filter(
-                Question.private == False, Question.user_id != g.user.id, Question.question.ilike(f"%{search}%")).all()
+            if search_by == 'Term':
+                print('************')
+                print(search_by)
+                questions = Question.query.filter(
+                    Question.private == False, Question.user_id != g.user.id, Question.question.ilike(f"%{search}%")).all()
+            else:
+                print('************')
+                print(search_by)
+                questions = Question.query.filter(
+                    Question.private == False, Question.user_id != g.user.id, Question.category == search_by).all()
             if len(questions) == 0:
                 flash("No questions found for that search", 'warning')
                 return redirect('/questions')
@@ -537,7 +558,7 @@ def add_question_create():
             return redirect(url_for(request.endpoint, question=new_question))
     else:
         if request.args:
-            if quiz.mult_choice is 'f':
+            if quiz.mult_choice == 'f':
                 return render_template('users/new/questions/add-fc-qns.html', form=form, quiz=quiz)
             else:
                 return render_template('users/new/questions/add-questions.html', form=form, quiz=quiz)
