@@ -540,9 +540,9 @@ def add_question_create():
             if quiz.mult_choice is 'f':
                 return render_template('users/new/questions/add-fc-qns.html', form=form, quiz=quiz)
             else:
-                return render_template('users/new/add-questions.html', form=form, quiz=quiz)
+                return render_template('users/new/questions/add-questions.html', form=form, quiz=quiz)
         else:
-            return render_template('users/new/add-questions.html', form=form)
+            return render_template('users/new/questions/add-questions.html', form=form)
 
 
 @app.route('/questions/<int:question_id>/add/<int:quiz_id>')
