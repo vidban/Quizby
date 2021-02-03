@@ -53,9 +53,9 @@
       if (--timer < 0) {
         display.text("Time's Up!");
         clearInterval(refresh); // exit refresh loop
-        var music = $("#over_music")[0];
+        let music = $("#over_music")[0];
         music.play();
-        $("#test-questions-form").attr("disable", "true");
+        $("#submit-test").click();
       }
     }, 1000);
   };
@@ -64,6 +64,6 @@
     let display = $(".test #time");
     $("#start-quiz").toggleClass("hidden");
     $("#test-questions-form").toggleClass("hidden");
-    startTimer(60, display);
+    startTimer(10, display);
   });
 }

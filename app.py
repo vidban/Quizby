@@ -373,14 +373,16 @@ def take_quiz(quiz_id):
         # check answers
         wrong = 0
         for question in quiz.questions:
-            if ans_sheet[question.id] != request.form[f"question{question.id}"]:
-                print(f"***question{question.id}****")
-                print(request.form[f"question{question.id}"])
+            ans = request.form[f"question{question.id}"] if f"question{question.id}" in request.form else None
+            if (ans_sheet[question.id] != ans or ans == None):
                 question.correct = False
                 wrong += 1
-            question.marked = request.form[f"question{question.id}"]
+            question.marked = ans
 
         return render_template('users/practice/test.html', quiz=quiz, submitted=True, wrong=wrong)
+
+    if request.method == 'POST':
+        flash("Test taken not valid. No answers were submitted!!", "danger")
 
     return render_template('users/practice/test.html', quiz=quiz, submitted=False)
 
