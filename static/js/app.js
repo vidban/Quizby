@@ -35,4 +35,35 @@
       $("#questions #search").attr("placeholder", "Enter term...");
     }
   });
+
+  const startTimer = (duration, display) => {
+    let timer = duration,
+      minutes,
+      seconds;
+    let refresh = setInterval(() => {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      let output = minutes + " : " + seconds;
+      display.text(output);
+
+      if (--timer < 0) {
+        display.text("Time's Up!");
+        clearInterval(refresh); // exit refresh loop
+        var music = $("#over_music")[0];
+        music.play();
+        $("#test-questions-form").attr("disable", "true");
+      }
+    }, 1000);
+  };
+
+  $(document).on("click", "#start-quiz", () => {
+    let display = $(".test #time");
+    $("#start-quiz").toggleClass("hidden");
+    $("#test-questions-form").toggleClass("hidden");
+    startTimer(60, display);
+  });
 }

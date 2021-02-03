@@ -800,7 +800,7 @@ label[for=answer]{
 /* ************ end ***************** */
 
 .hidden{
-  display: none;
+  display: none !important;
 }
 
 .yellow{

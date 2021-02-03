@@ -368,8 +368,6 @@ def take_quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
     # create answer sheet
     ans_sheet = create_answer_sheet(quiz)
-    print('******************')
-    print(ans_sheet)
 
     if request.form:
         # check answers

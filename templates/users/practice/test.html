@@ -11,14 +11,28 @@
 			<p><b>Category: </b>{{quiz.category}}</p>
 			<p><b>Questions: </b>{{quiz.questions|length}}</p>
 		</div>
-		{% if submitted %}
-		<div class="col-3 p-2 align-self-center text-center">
-			<h2>Score:</h2>
-			<h4>{{(((100 - (wrong / quiz.questions|count)*100)|int)) if wrong>0 else 100}} %</h4>
+		<div class="m-2 col-2">
+			<div class="take-test">
+				<audio id="over_music">
+					<source src="{{ url_for('static', filename='beepbeep.mp3') }}">
+				</audio>
+				<div class="timer">
+					<p id="time"></p>
+				</div>
+				<div class="begin {{'hidden' if submitted}}">
+					<button id="start-quiz" class="btn p-2">Start</button>
+				</div>
+			</div>
+			{% if submitted %}
+			<div class="p-2 align-self-center text-center">
+				<h2>Score:</h2>
+				<h4>{{(((100 - (wrong / quiz.questions|count)*100)|int)) if wrong>0 else 100}} %</h4>
+			</div>
+			{% endif %}
 		</div>
-		{% endif %}
+	
 	</div>
-	<form class="col col-md-9 col-lg-10 m-auto d-flex flex-column justify-content-around align-items-center" method="POST">
+	<form id="test-questions-form" class="col col-md-9 col-lg-10 m-auto d-flex flex-column justify-content-around align-items-center {{'hidden' if not submitted}}" method="POST">
 		{% for question in quiz.questions %}
 		<div class="test-questions d-flex flex-row col  mb-2 align-self-stretch">
 			<div class="card question-number col-1 p-2 align-self-stretch text-center {{'red' if not question.correct}}">{{loop.index}}</div>
