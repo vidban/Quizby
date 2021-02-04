@@ -68,4 +68,10 @@
     $("#test-questions-form").toggleClass("hidden");
     startTimer(10, display);
   });
+
+  $(document).on("click", "#user-statistics-tabs a", function (e) {
+    e.preventDefault();
+    console.log($(this));
+    $(this).tab("show");
+  });
 }

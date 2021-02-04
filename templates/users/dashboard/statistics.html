@@ -2,7 +2,7 @@
 
 {% block main %}
 <div class="user-statistics">
-	<div class="stats-user card col">
+	<div class="card col m-2">
 		<div class="card-header">
 			<h2>{{g.user.username}}</h2>
 		</div>
@@ -12,24 +12,50 @@
 			</small>
 		</div>
 	</div>
-	<div class="col d-flex flex-row flex-wrap text-center">
-		<div class="stats-questions card col-3 m-2">
-			<div class="card-header">
-				<h3>Questions Added</h3>
-			</div>
-			<div class="card-body">
-				<p>{{g.user.questions|length}}</p>
-			</div>
+	<div class="stats-user card col m-2">
+		<div class="card-header">
+			<ul id="user-statistics-tabs" class="nav nav-tabs card-header-tabs" role="tablist">
+				<li class="nav-item">
+				  <a class="nav-link active" role="tab" aria-controls="current" aria-current="true" href="#current">Current Stats</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" role="tab" aria-controls="leaderboard" aria-current="false"  href="#leaderboard">Leaderboard</a>
+				</li>
+			  </ul>
 		</div>
-		<div class="stats-quizzes card col-3 m-2">
-			<div class="card-header">
-				<h3>Quizzes Added</h3>
-			</div>
-			<div class="card-body">
-				<p>{{g.user.quizzes|length}}</p>
+		<div class="card-body">
+			<div class="tab-content mt-3 col text-center">
+				<div class="tab-pane active" id="current" role="tabpanel">
+					<div class="d-flex flex-row flex-wrap">
+						<div class="stats-questions card col-4 m-2">
+							<div class="row g-0">
+								<div class="card-header col-md-8">
+									<h4>Questions Added</h4>
+								</div>
+								<div class="col-md-4 card-body">
+									<p>{{g.user.questions|length}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="stats-quizzes card col-4 m-2">
+							<div class="row g-0">
+								<div class="card-header col-md-8">
+									<h4>Quizzes Added</h4>
+								</div>
+								<div class="col-md-4 card-body">
+									<p>{{g.user.quizzes|length}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="leaderboard" role="tabpanel">
+					<h3>Leaderboard</h3>
+				</div>
 			</div>
 		</div>
 	</div>
+
 </div>
 
 
