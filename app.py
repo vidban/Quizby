@@ -62,9 +62,9 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
-
 ##############################################################################
 # Login/Logout/Signup Routes
+
 
 @app.route("/")
 def home_dashboard():
@@ -137,6 +137,7 @@ def logout():
 
     flash("You have successfully logged out.", "success")
     return redirect("/")
+
 
 ##############################################################################
 # User Routes
@@ -674,3 +675,30 @@ def explore():
 #     """ display create options"""
 
 #     return render_template('users/new/main.html')
+
+##############################################################################
+# Error handling Routes
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """ return page not found page"""
+
+    print(request.endpoint)
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(403)
+def page_not_found(e):
+    """ return page not found page"""
+
+    print(request.endpoint)
+    return render_template('errors/403.html'), 403
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    """ return page not found page"""
+
+    print(request.endpoint)
+    return render_template('errors/500.html'), 500

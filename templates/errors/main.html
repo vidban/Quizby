@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{%block title %}{% endblock %}</title>
+	<link rel="shortcut icon" href="/static/favicon.ico">
+	<style>
+		.error-page{
+			min-width: 100vw;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		h1{
+			font-size: 6em;
+			margin-top: 0;
+		}
+	</style>
+</head>
+<body>
+	{% block content %}
+	{% endblock %}
+	
+</body>
+</html>
