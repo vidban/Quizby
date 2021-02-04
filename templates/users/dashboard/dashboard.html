@@ -17,9 +17,27 @@
 					<a href="/users/{{g.user.id}}/questions" class="sidebar-link">My Questions</a>
 				</li>
 			</ul>
+			<blockquote class="quote p-2">
+				<p id="quote"></p>
+				<i id="author"></i>
+			</blockquote>
+
 	</aside>
 	<main class="main-content col">
 		{% block main%}{% endblock %}
 	</main>
 </div>
+{% endblock %}
+
+{% block script %}
+{{super()}}
+<script type="text/javascript">
+    function parseQuote(response)
+    {
+        document.getElementById("quote").innerHTML = response.quoteText;
+        document.getElementById("author").innerHTML = response.quoteAuthor;
+    }
+</script>
+
+<script type="text/javascript" src="http://api.forismatic.com/api/1.0/?method=getQuote&amp;format=jsonp&amp;lang=en&amp;jsonp=parseQuote" async></script>
 {% endblock %}

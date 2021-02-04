@@ -666,15 +666,6 @@ def explore():
 
     return render_template('/explore/main.html')
 
-############################################################################
-# Create Route
-
-
-# @app.route('/create', methods=["GET", "POST"])
-# def create():
-#     """ display create options"""
-
-#     return render_template('users/new/main.html')
 
 ##############################################################################
 # Error handling Routes

@@ -314,6 +314,7 @@ button.close{
   min-height: 100%;
   box-shadow: 7px 0px 15px -3px #2b787a;
   background-color: transparent;
+  position: relative;
 }
 
 .dashboard .sidebar ul{
@@ -345,6 +346,11 @@ button.close{
 
 .dashboard .sidebar ul .sidebar-item.active a{
   color: #def2f1;
+}
+
+.dashboard .sidebar .quote{
+  position: absolute;
+  bottom: 10%;
 }
 
 .dashboard .main-content{
