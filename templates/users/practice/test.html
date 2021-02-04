@@ -17,10 +17,10 @@
 					<source src="{{ url_for('static', filename='beepbeep.mp3') }}">
 				</audio>
 				<div class="timer">
-					<p id="time"></p>
+					<h4 id="time"></h4>
 				</div>
-				<div class="begin {{'hidden' if submitted}}">
-					<button id="start-quiz" class="btn p-2">Start</button>
+				<div class="begin {{'hidden' if submitted}} m-2">
+					<button id="start-quiz" class="btn p-2"><b>Start</b></button>
 				</div>
 			</div>
 			{% if submitted %}

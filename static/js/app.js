@@ -52,10 +52,12 @@
 
       if (--timer < 0) {
         display.text("Time's Up!");
+        setTimeout(() => {
+          $("#submit-test").click();
+        }, 2000);
         clearInterval(refresh); // exit refresh loop
         let music = $("#over_music")[0];
         music.play();
-        $("#submit-test").click();
       }
     }, 1000);
   };

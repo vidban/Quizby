@@ -796,6 +796,14 @@ label[for=answer]{
   min-width: 20%;
   border-radius: 5px;
 }
+
+.test .test-info .begin{
+  min-width: 80%;
+}
+
+.test .test-info .begin button{
+  min-width: 100%;
+}
  
 /* ************ end ***************** */
 
