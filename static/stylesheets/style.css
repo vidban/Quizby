@@ -810,6 +810,15 @@ label[for=answer]{
 .test .test-info .begin button{
   min-width: 100%;
 }
+
+/* ************ table ***************** */
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #3aafa9;
+  color: #def2f1
+}
+.table-striped>tbody>tr:nth-of-type(even) {
+  color: #2b787a
+}
  
 /* ************ end ***************** */
 

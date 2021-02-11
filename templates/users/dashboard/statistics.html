@@ -53,10 +53,28 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="quizscores" role="tabpanel">
-					<h3>Quiz Scores</h3>
+					{% if g.user.activities %}
+						<h3>See scores for:</h3>
+						{% for activity in g.user.activities|unique(attribute="quiz_id") %}
+							<button type="button" class="btn-outline-secondary">{{activity.quiz.title}}</button>
+						{% endfor %}
+					{% else %}
+					<h5>No activity yet! </h5>
+					{% endif %}
 				</div>
 				<div class="tab-pane" id="history" role="tabpanel">
-					<h3>History</h3>
+					{% if g.user.activities %}
+					<table class="history-table table table-hover table-striped">
+						<thead><tr><th>Quiz Title</th><th>Date Taken</th><th>Score</th></tr></thead>
+						<tbody>
+							{% for activity in g.user.activities|sort(reverse=true,attribute="date_taken") %}
+							<tr><td>{{activity.quiz.title}}</td><td>{{ moment(activity.date_taken).calendar()}}</td><td>{{activity.score}}</td></tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					{% else %}
+					<h5>No activity yet! </h5>
+					{% endif %}
 				</div>
 			</div>
 		</div>

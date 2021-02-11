@@ -273,8 +273,8 @@ class Activity(db.Model):
                            default=datetime.utcnow)
     score = db.Column(db.String, nullable=False)
 
-    user = db.relationship('User', backref='history')
-    quiz = db.relationship('Quiz', backref='history')
+    user = db.relationship('User', backref='activities')
+    quiz = db.relationship('Quiz', backref='activities')
 
 
 def connect_db(app):
