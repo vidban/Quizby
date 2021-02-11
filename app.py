@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import or_
 
 from forms import LoginForm, AddUserForm, AddQuestionForm, EditUserForm
-from models import db, connect_db, User, Question, Answer, Quiz, Category, add_category, create_answer_sheet
+from models import db, connect_db, User, Question, Answer, Quiz, Category, Activity, add_category, create_answer_sheet
 from werkzeug.utils import secure_filename
 
 from flask_moment import Moment
@@ -367,6 +367,7 @@ def take_quiz(quiz_id):
         return redirect("/login")
 
     quiz = Quiz.query.get_or_404(quiz_id)
+
     # create answer sheet
     ans_sheet = create_answer_sheet(quiz)
 
@@ -380,10 +381,27 @@ def take_quiz(quiz_id):
                 wrong += 1
             question.marked = ans
 
+        # save activity
+        total = len(quiz.questions)
+        activity = Activity(
+            user_id=g.user.id,
+            quiz_id=quiz_id,
+            score=int(((total-wrong)/total)*100)
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         return render_template('users/practice/test.html', quiz=quiz, submitted=True, wrong=wrong)
 
     if request.method == 'POST':
         flash("Test taken not valid. No answers were submitted!!", "danger")
+
+    # reset metrics
+    for question in quiz.questions:
+        question.marked = ''
+        question.correct = True
+    db.session.commit()
 
     return render_template('users/practice/test.html', quiz=quiz, submitted=False)
 

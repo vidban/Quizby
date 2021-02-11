@@ -253,6 +253,30 @@ def create_answer_sheet(quiz):
     return ans_sheet
 
 
+class Activity(db.Model):
+    """ Stores activity history of user"""
+
+    __tablename__ = "activities"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True)
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False
+    )
+    quiz_id = db.Column(db.Integer, db.ForeignKey(
+        'quizzes.id', ondelete="CASCADE"))
+    date_taken = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
+    score = db.Column(db.String, nullable=False)
+
+    user = db.relationship('User', backref='history')
+    quiz = db.relationship('Quiz', backref='history')
+
+
 def connect_db(app):
     """Connect this database to provided Flask app."""
 
