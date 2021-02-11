@@ -811,7 +811,11 @@ label[for=answer]{
   min-width: 100%;
 }
 
-/* ************ table ***************** */
+/* ************ statistics ***************** */
+.stats-user .nav-item a{
+  color: #2b787a;
+}
+
 .table-striped>tbody>tr:nth-of-type(odd) {
   background-color: #3aafa9;
   color: #def2f1
