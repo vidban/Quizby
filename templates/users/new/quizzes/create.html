@@ -29,25 +29,25 @@
 			<div class = "create-title-description col-8 col-md-7 col-lg-7">
 				<div class="title mb-2">
 					<label for="title" class="d-block"><b>Title</b><small>(required)</small></label>
-					<input class="col" id="title" name="title" type="text" placeholder="A descriptive title" required>
+					<input class="col" id="title" name="title" type="text" placeholder="A descriptive title" required {% if not image %} disabled {% endif %}>
 				</div>
 				<div class="description mb-2">
 					<label for="description" class="d-block"><b>Description:</b></label>
-					<textarea class="col" id="description" name="description" type="text" placeholder="Info about the quiz"></textarea>
+					<textarea class="col" id="description" name="description" type="text" placeholder="Info about the quiz" {% if not image %} disabled {% endif %}></textarea>
 				</div>
 				<div class="category mb-2">
 					<div >
 						<label for="category"><b>Category</b></label>
-						<input id="autocomplete" list= "list-of-categories" class="d-inline-block" type="text" name="category" placeholder="Choose a category"/>	
+						<input id="autocomplete" list= "list-of-categories" class="d-inline-block" type="text" name="category" placeholder="Choose a category" {% if not image %} disabled {% endif %}/>	
 					</div>
 				</div>
 				<div class="type d-flex justify-content-around">
 					<div class="d-flex col-6 pl-2">
-						<input id="mc" class="d-inline-block" type="radio" name="choice" value="mc"/>	
+						<input id="mc" class="d-inline-block" type="radio" name="choice" value="mc" {% if not image %} disabled {% endif %}/>	
 						<label for="mc"><b>Multiple Choice</b></label>
 					</div>
 					<div class="d-flex col-6 pl-2">
-						<input id= "f" class="d-inline-block" type="radio" name="choice" value="f"/>
+						<input id= "f" class="d-inline-block" type="radio" name="choice" value="f" {% if not image %} disabled {% endif %}/>
 						<label for="f"><b>Flash Cards</b></label>
 					</div>
 				</div>
