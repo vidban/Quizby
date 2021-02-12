@@ -39,7 +39,7 @@
 		<div class="question-list">
 			<ol id="qn-list" class="list-group mt-2">
 				You've added {{questions | count}} question{{'' if ((questions|count)==1) else 's'}} so far.
-				{% for question in questions | sort(attribute="id") %}
+				{% for question in questions | sort(reverse=true,attribute="created_on") %}
 						<li class="list-group-item mb-1 d-flex justify-content-between align-items-center">
 							<div class="qn-index col-1">{{loop.index}}</div>
 							<div class="col">

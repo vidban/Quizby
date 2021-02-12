@@ -12,7 +12,7 @@
 		{% endif %}
 	{% else %}
 		<div class="quiz-card col col-md-11 col-lg-9 m-auto d-flex flex-row flex-wrap text-center">
-			{% for quiz in quizzes %}
+			{% for quiz in quizzes | sort(reverse=true,attribute="created_on") %}
 				<div class="card col-3 m-1">
 					<img class="card-img-top" src="{{quiz.image_url}}" alt="{{quiz.image_desc}}">
 					<div class="card-body">
