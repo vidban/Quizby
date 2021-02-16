@@ -66,7 +66,8 @@
     let display = $(".test #time");
     $("#start-quiz").toggleClass("hidden");
     $("#test-questions-form").toggleClass("hidden");
-    startTimer(60, display);
+    let numQns = parseInt($("#num-questions").text());
+    startTimer(60 * numQns, display);
   });
 
   $(document).on("click", "#user-statistics-tabs a", function (e) {

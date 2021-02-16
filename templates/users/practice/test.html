@@ -9,7 +9,7 @@
 			<p><b>Description: </b>{{quiz.desc}}</p>
 			<p><b>Type: </b>{{'Multiple Choice' if quiz.mult_choice=='mc' else 'Flash Cards'}}</p>
 			<p><b>Category: </b>{{quiz.category}}</p>
-			<p><b>Questions: </b>{{quiz.questions|length}}</p>
+			<p><b>Questions: </b><span id="num-questions">{{quiz.questions|length}}</span></p>
 		</div>
 		<div class="m-2 col-2">
 			<div class="take-test">
