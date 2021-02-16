@@ -71,7 +71,62 @@
 
   $(document).on("click", "#user-statistics-tabs a", function (e) {
     e.preventDefault();
-    console.log($(this));
     $(this).tab("show");
+  });
+
+  $(document).on("click", "#chart-button", (e) => {
+    let testName = $(e.target).text();
+    $("#chart").text(testName);
+    am4core.useTheme(am4themes_animated);
+
+    let chart = am4core.create("chart", am4charts.XYChart);
+
+    chart.data = [
+      {
+        "date-taken": "2/2/2021",
+        "score(%)": 50,
+      },
+      {
+        "date-taken": "2/5/2021",
+        "score(%)": 75,
+      },
+      {
+        "date-taken": "2/7/2021",
+        "score(%)": 100,
+      },
+      {
+        "date-taken": "2/9/2021",
+        "score(%)": 25,
+      },
+      {
+        "date-taken": "2/11/2021",
+        "score(%)": 75,
+      },
+    ];
+
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "date-taken";
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 30;
+
+    categoryAxis.renderer.labels.template.adapter.add("dy", (dy, target) => {
+      if (target.dataItem && target.dataItem.index & (2 == 2)) {
+        return dy + 25;
+      }
+      return dy;
+    });
+
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    let series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "score(%)";
+    series.dataFields.categoryX = "date-taken";
+    series.name = "Score";
+    series.columns.template.tooltipText = "{categoryX} : [bold]{valueY}[/]";
+    series.columns.template.fillOpacity = 0.8;
+
+    let columnTemplate = series.columns.template;
+    columnTemplate.strokeWidth = 2;
+    columnTemplate.strokeOpacity = 1;
   });
 }

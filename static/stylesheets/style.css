@@ -825,6 +825,11 @@ label[for=answer]{
 }
  
 /* ************ end ***************** */
+.user-statistics #chart{
+  width: 100%;
+  height: 500px;
+}
+/* ************ end ***************** */
 
 .hidden{
   display: none !important;
