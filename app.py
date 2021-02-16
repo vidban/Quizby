@@ -283,6 +283,7 @@ def delete_quiz(quiz_id):
         return redirect("/")
 
     q = Quiz.query.get_or_404(quiz_id)
+    Activity.query.filter_by(quiz_id=quiz_id).delete()
 
     db.session.delete(q)
     db.session.commit()
