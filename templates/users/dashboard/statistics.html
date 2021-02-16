@@ -69,7 +69,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="quizscores" role="tabpanel">
-					{% if g.user.activities %}
+					{% if g.user.activities and g.user.quizzes %}
 						<h3>See scores for:</h3>
 						{% for activity in g.user.activities|unique(attribute="quiz_id") %}
 							<button id="chart-button" type="button" class="btn-outline-secondary">{{activity.quiz.title}}</button>

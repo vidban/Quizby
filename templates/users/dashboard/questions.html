@@ -54,7 +54,7 @@
 											<i class="fas fa-trash"></i>
 										</button>
 									</form>
-									<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="Private">
+									<button class= "btn" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Private' if question.private else 'Public'}}">
 										<a href="{{url_for('update_question', question_id=question.id)}}"><i class="fas fa-{{'lock black' if question.private else 'unlock'}}"></i></a>
 									</button>
 									{% endif %}
