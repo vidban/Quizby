@@ -154,7 +154,6 @@
     chart.scrollbarX.series.push(series);
     chart.scrollbarX.parent = chart.bottomAxesContainer;
 
-    dateAxis.start = 0.79;
     dateAxis.keepSelection = true;
   });
 }

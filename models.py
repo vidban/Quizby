@@ -268,7 +268,7 @@ class Activity(db.Model):
         nullable=False
     )
     quiz_id = db.Column(db.Integer, db.ForeignKey(
-        'quizzes.id', ondelete="CASCADE"))
+        'quizzes.id', ondelete="CASCADE"), nullable=False)
     date_taken = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
     score = db.Column(db.String, nullable=False)
