@@ -30,7 +30,7 @@
 		{% endif %}
 		<div class="date-joined">
 			<b>Date Joined: </b>
-			{{user.date_joined}}
+			{{moment(user.date_joined).format('LL')}}
 		</div>
 
 	<button class="btn"><a href="/users/profile/edit">Edit Information</a> </button>
