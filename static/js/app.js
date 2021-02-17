@@ -111,11 +111,12 @@
     chart.dateFormatter.inputDateFormat = "MM-dd-yyyy";
 
     // Create axes
-    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.min = 0;
 
     // Create series
-    var series = chart.series.push(new am4charts.LineSeries());
+    let series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.valueY = "score(%)";
     series.dataFields.dateX = "date-taken";
     series.tooltipText = "{score(%)}";
@@ -132,12 +133,12 @@
     series.tooltip.label.textValign = "middle";
 
     // Make bullets grow on hover
-    var bullet = series.bullets.push(new am4charts.CircleBullet());
+    let bullet = series.bullets.push(new am4charts.CircleBullet());
     bullet.circle.strokeWidth = 2;
     bullet.circle.radius = 4;
     bullet.circle.fill = am4core.color("#fff");
 
-    var bullethover = bullet.states.create("hover");
+    let bullethover = bullet.states.create("hover");
     bullethover.properties.scale = 1.3;
 
     // Make a panning cursor
