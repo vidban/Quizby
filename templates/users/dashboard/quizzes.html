@@ -30,13 +30,34 @@
 							<button formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
 								<i class="fas fa-edit"></i>
 							</button>
-							<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
+							<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#trashModal">
 								<i class="fas fa-trash"></i>
 							</button>
 							<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Make Public' if quiz.private else 'Make Private'}}">
 								<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
 							</button>
 						</form>
+					</div>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="trashModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p>Are you sure?</p>
+								<p>Deleting the quiz will delete all related history and scores!</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<form style="display:inline-block;">
+									<button formaction="/quizzes/{{quiz.id}}/delete" class="btn btn-primary">Delete</button>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 		{% endfor %}
