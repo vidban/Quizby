@@ -671,18 +671,30 @@ def delete_question(question_id):
 def get_categories():
     """ get category names from database"""
 
-    all_categories = [c.get_name() for c in Category.query.all()]
-    return jsonify(all_categories)
+    request_xhr_key = request.headers.get('X-Requested-With')
+    if request_xhr_key and request_xhr_key == 'XMLHttpRequest':
+        all_categories = [c.get_name() for c in Category.query.all()]
+        return jsonify(all_categories)
+
+    else:
+        return render_template('errors/404.html'), 404
 
 
 @app.route('/api/chartdata/<quiz_id>')
 def get_chart_data(quiz_id):
     """ get chart data for a particular quiz"""
 
-    activities = Activity.query.filter_by(quiz_id=quiz_id).all()
-    chart_data = [{"date-taken": a.date_taken, "score(%)": a.score}
-                  for a in activities]
-    return jsonify(chart_data)
+    request_xhr_key = request.headers.get('X-Requested-With')
+    if request_xhr_key and request_xhr_key == 'XMLHttpRequest':
+        activities = Activity.query.filter_by(quiz_id=quiz_id).all()
+        chart_data = [{"date-taken": a.date_taken, "score(%)": a.score}
+                      for a in activities]
+        return jsonify(chart_data)
+
+    else:
+        return render_template('errors/404.html'), 404
+
+
 ############################################################################
 # Explore Route
 
