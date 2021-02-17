@@ -21,16 +21,19 @@
 					</div>
 					<div class="card-footer text-center">
 						<form style="display:inline-block;">
-							<button formaction="{{url_for('view_quiz', quiz_id=quiz.id)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
+							<button formaction="/quizzes/{{quiz.id}}/test" style="display:inline-block;" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Practice">
+								<i class="fas fa-play"></i>
+							</button>
+							<button formaction="{{url_for('view_quiz', quiz_id=quiz.id)}}" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="View">
 								<i class="fas fa-eye"></i>
 							</button>
-							<button formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
+							<button formaction="{{url_for('edit_quiz', quiz_id=quiz.id)}}" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
 								<i class="fas fa-edit"></i>
 							</button>
-							<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
+							<button formaction="/quizzes/{{quiz.id}}/delete" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete">
 								<i class="fas fa-trash"></i>
 							</button>
-							<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-block btn-sm mb-2" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Make Public' if quiz.private else 'Make Private'}}">
+							<button formaction="/quizzes/{{quiz.id}}/privacy" class= "btn btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="{{'Make Public' if quiz.private else 'Make Private'}}">
 								<i class="fas fa-{{'lock' if quiz.private else 'unlock'}}"></i>
 							</button>
 						</form>
