@@ -49,14 +49,6 @@ class User(db.Model):
         default="/static/images/default-pic.png",
     )
 
-    level = db.Column(
-        db.Integer,
-    )
-
-    points = db.Column(
-        db.Integer,
-    )
-
     date_joined = db.Column(db.DateTime, index=True, nullable=False,
                             default=datetime.utcnow)
 
