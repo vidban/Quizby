@@ -3,10 +3,11 @@
 <div id="questions" class="questions">
 		<h1 class="text-center mb-5">Questions</h1>
 	{% if not questions %}
-		<h2>Other users haven't shared any questions yet &#128577</h2>
 		{%if not g.user%}
+			<h2>No questions available yet &#128577</h2>
 			<h3><a href="/login"> Log In </a> to add questions</h3>
 		{% else %}
+			<h2>Other users haven't shared any questions yet &#128577</h2>
 			<small class="text-center d-block">Only questions by other users will be visible here.</small>
 			<small class="text-center d-block"> To see your own, check out your dashboard!</small>
 		{%endif%}

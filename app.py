@@ -235,7 +235,6 @@ def users_questions_dashboard(user_id):
     else:
         questions = Question.query.filter(
             Question.user_id == g.user.id).all()
-
     return render_template('users/dashboard/questions.html', questions=questions, search=search)
 
 
