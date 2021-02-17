@@ -37,21 +37,7 @@
 						<li class="list-group-item mb-1 d-flex justify-content-between align-items-center">
 							<div class="col-1 qn-index">{{loop.index}}</div>
 							<pre class="col-8 mb-0 ps-2 pe-2 text-wrap"><p class="mb-0">{{question.question}}</p></pre>
-							<div>
-								<a data-toggle="tooltip" data-placement="bottom" title="See Answer" >
-									<button class= "btn" type="button" data-toggle="collapse" data-target="#qn{{question.id}}" aria-expanded="false" aria-controls="qn{{question.id}}">
-										<i class="fas fa-chevron-down"></i>
-									</button>
-								</a>
-							</div>
 						</li>
-						<div id="qn{{question.id}}" class="q-answer collapse" data-parent="#qn-list">
-							<div class="card card-body d-flex flex-wrap justify-content-around">
-								{%for a in question.answers%}
-									<p class="p-2 m-2 col col-md-5 col-lg-2 {{'correct' if a.correct else 'wrong'}}">{{a.answer}}</p>
-								{% endfor %}
-							</div>
-						</div>
 				{% endfor %}
 			</ol>
 		</div>
