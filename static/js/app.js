@@ -107,40 +107,15 @@
 
     chart.data = await getChartData(testId);
 
-    // chart.data = [
-    //   {
-    //     "date-taken": "02/02/2021",
-    //     "score(%)": 50,
-    //   },
-    //   {
-    //     "date-taken": "02/05/2021",
-    //     "score(%)": 75,
-    //   },
-    //   {
-    //     "date-taken": "02/07/2021",
-    //     "score(%)": 100,
-    //   },
-    //   {
-    //     "date-taken": "02/09/2021",
-    //     "score(%)": 25,
-    //   },
-    //   {
-    //     "date-taken": "02/11/2021",
-    //     "score(%)": 75,
-    //   },
-    // ];
-
-    console.log(chart.data);
-
     // Set input format for the dates
     chart.dateFormatter.inputDateFormat = "MM-dd-yyyy";
 
     // Create axes
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
     // Create series
-    let series = chart.series.push(new am4charts.LineSeries());
+    var series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.valueY = "score(%)";
     series.dataFields.dateX = "date-taken";
     series.tooltipText = "{score(%)}";
@@ -157,12 +132,12 @@
     series.tooltip.label.textValign = "middle";
 
     // Make bullets grow on hover
-    let bullet = series.bullets.push(new am4charts.CircleBullet());
+    var bullet = series.bullets.push(new am4charts.CircleBullet());
     bullet.circle.strokeWidth = 2;
     bullet.circle.radius = 4;
     bullet.circle.fill = am4core.color("#fff");
 
-    let bullethover = bullet.states.create("hover");
+    var bullethover = bullet.states.create("hover");
     bullethover.properties.scale = 1.3;
 
     // Make a panning cursor
