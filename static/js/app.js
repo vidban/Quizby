@@ -75,35 +75,62 @@
     $(this).tab("show");
   });
 
-  $(document).on("click", "#chart-button", (e) => {
+  const formatDate = (date) => {
+    let d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    return [year, month, day].join("-");
+  };
+
+  const getChartData = async (testId) => {
+    res = await axios.get(`/api/chartdata/${testId}`);
+    data = res.data;
+    for (d of data) {
+      dTaken = d["date-taken"];
+      d["date-taken"] = formatDate(dTaken);
+    }
+    return data;
+  };
+
+  $(document).on("click", "#chart-button", async (e) => {
     let testName = $(e.target).text();
+    let testId = $(e.target).prev("#chart-quiz-id").text();
     $("#chart").text(testName);
+
     am4core.useTheme(am4themes_animated);
 
     let chart = am4core.create("chart", am4charts.XYChart);
 
-    chart.data = [
-      {
-        "date-taken": "02/02/2021",
-        "score(%)": 50,
-      },
-      {
-        "date-taken": "02/05/2021",
-        "score(%)": 75,
-      },
-      {
-        "date-taken": "02/07/2021",
-        "score(%)": 100,
-      },
-      {
-        "date-taken": "02/09/2021",
-        "score(%)": 25,
-      },
-      {
-        "date-taken": "02/11/2021",
-        "score(%)": 75,
-      },
-    ];
+    chart.data = await getChartData(testId);
+
+    // chart.data = [
+    //   {
+    //     "date-taken": "02/02/2021",
+    //     "score(%)": 50,
+    //   },
+    //   {
+    //     "date-taken": "02/05/2021",
+    //     "score(%)": 75,
+    //   },
+    //   {
+    //     "date-taken": "02/07/2021",
+    //     "score(%)": 100,
+    //   },
+    //   {
+    //     "date-taken": "02/09/2021",
+    //     "score(%)": 25,
+    //   },
+    //   {
+    //     "date-taken": "02/11/2021",
+    //     "score(%)": 75,
+    //   },
+    // ];
+
+    console.log(chart.data);
 
     // Set input format for the dates
     chart.dateFormatter.inputDateFormat = "MM-dd-yyyy";

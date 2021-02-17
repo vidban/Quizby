@@ -72,6 +72,7 @@
 					{% if g.user.activities and g.user.quizzes %}
 						<h3>See scores for:</h3>
 						{% for activity in g.user.activities|unique(attribute="quiz_id") %}
+							<span class="hidden" id="chart-quiz-id">{{activity.quiz_id}}</span>
 							<button id="chart-button" type="button" class="btn-outline-secondary">{{activity.quiz.title}}</button>
 						{% endfor %}
 						<div id="chart">
