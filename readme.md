@@ -1,9 +1,5 @@
 # Quizby App
 
-## Details:
-
-Click [here](https://docs.google.com/document/d/1UX03vmtLDEaC_aLBhUG15_K6iTjF3O1jh8ZUhMs7dlQ/edit)
-
 ## Tech Stack:
 
 - Python-Flask
@@ -18,6 +14,21 @@ Click [here](https://docs.google.com/document/d/1UX03vmtLDEaC_aLBhUG15_K6iTjF3O1
 ## API used:
 
 [Unsplash API](https://unsplash.com/documentation#getting-started)
+
+## About the application:
+
+a system for managing online multiple-choice tests. Supports editing of questions by whoever is in charge of the test, creation of tests from the available set of questions or using pre-built quizzes. Correct Answers and scores are provided at the end of the test.
+
+### Goals:
+- Allow a user sign up/login
+- Allow a user to create a quiz, a question or add questions manually 
+- The user can create a quiz from the available questions and practice. 
+- Display correct answers at the end of each quiz session.
+- If the user has all private quizzes, the leaderboard will show the best score quiz-wise for that user only.
+- The user has a choice to make the quiz public or private. Making it public will allow other users to take that quiz. 
+
+### Database Schema:
+![DB Model](./project_diagrams/database_schema.png)
 
 
 ## Routes
