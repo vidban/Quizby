@@ -38,6 +38,7 @@ A system for managing online multiple-choice tests. Supports editing of question
 ### Database Schema:
 ![DB Model](./project_diagrams/database_schema.png)
 
+### User Model:
 ![User Flow Diagram](./project_diagrams/user_flow.png)
 
 ## Routes
