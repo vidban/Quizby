@@ -1,5 +1,21 @@
 # Quizby App
 
+A system for managing online multiple-choice tests. Supports editing of questions by whoever is in charge of the test, creation of tests from the available set of questions or using pre-built quizzes. Correct Answers and scores are provided at the end of the test.
+
+### Goals:
+- Allow a user sign up/login
+- Allow a user to create a quiz, a question or add questions manually 
+- The user can create a quiz from the available questions and practice. 
+- Display correct answers at the end of each quiz session.
+- If the user has all private quizzes, the leaderboard will show the best score quiz-wise for that user only.
+- The user has a choice to make the quiz public or private. Making it public will allow other users to take that quiz. 
+
+## Starting the Application
+
+1. Download the code via zip file or clone the repo
+2. In the virtual environment, install dependencies with `python install -r requirements.txt `
+3. Add environment variables (See below for the variables list) to `secrets.py`
+3. Run application with `flask run`
 ## Tech Stack:
 
 - Python-Flask
@@ -10,26 +26,19 @@
 
 - CURR_USER_KEY - **string name to hold current user info**
 - SECRET_KEY - **any string**
+- DATABASE_URL - **string url for postgres database**
+- UNSPLASH_API_KEY - **string- API key**
+- UNSPLASH_API_URL - **string - API URL**
 
 ## API used:
 
 [Unsplash API](https://unsplash.com/documentation#getting-started)
 
-## About the application:
-
-a system for managing online multiple-choice tests. Supports editing of questions by whoever is in charge of the test, creation of tests from the available set of questions or using pre-built quizzes. Correct Answers and scores are provided at the end of the test.
-
-### Goals:
-- Allow a user sign up/login
-- Allow a user to create a quiz, a question or add questions manually 
-- The user can create a quiz from the available questions and practice. 
-- Display correct answers at the end of each quiz session.
-- If the user has all private quizzes, the leaderboard will show the best score quiz-wise for that user only.
-- The user has a choice to make the quiz public or private. Making it public will allow other users to take that quiz. 
 
 ### Database Schema:
 ![DB Model](./project_diagrams/database_schema.png)
 
+![User Flow Diagram](./project_diagrams/user_flow.png)
 
 ## Routes
 
@@ -80,10 +89,3 @@ a system for managing online multiple-choice tests. Supports editing of question
   - *POST '/questions/<int:question_id>/delete'*
     - Delete a user's question
 	
-
-
-
-
-## Theme
-
-[#24 - Clean and Modern](https://visme.co/blog/website-color-schemes/)
