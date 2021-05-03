@@ -104,8 +104,8 @@
     am4core.useTheme(am4themes_animated);
 
     let chart = am4core.create("chart", am4charts.XYChart);
-
     chart.data = await getChartData(testId);
+    console.log(chart);
 
     // Set input format for the dates
     chart.dateFormatter.inputDateFormat = "MM-dd-yyyy";

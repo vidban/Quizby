@@ -683,16 +683,10 @@ def get_categories():
 @app.route('/api/chartdata/<quiz_id>')
 def get_chart_data(quiz_id):
     """ get chart data for a particular quiz"""
-
-    request_xhr_key = request.headers.get('X-Requested-With')
-    if request_xhr_key and request_xhr_key == 'XMLHttpRequest':
-        activities = Activity.query.filter_by(quiz_id=quiz_id).all()
-        chart_data = [{"date-taken": a.date_taken, "score(%)": a.score}
-                      for a in activities]
-        return jsonify(chart_data)
-
-    else:
-        return render_template('errors/404.html'), 404
+    activities = Activity.query.filter_by(quiz_id=quiz_id).all()
+    chart_data = [{"date-taken": a.date_taken, "score(%)": a.score}
+                  for a in activities]
+    return jsonify(chart_data)
 
 
 ############################################################################
