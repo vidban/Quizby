@@ -1,9 +1,12 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');**************Navbar**************** */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+
+/* **************Navbar****************  */
 body{
   background-color: #3aafa9;
   max-width: 100vw;
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #17252A;
 }
 

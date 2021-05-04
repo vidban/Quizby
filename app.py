@@ -324,7 +324,7 @@ def add_quiz_create():
         db.session.commit()
 
         return redirect(url_for("edit_quiz", quiz_id=quiz.id))
-
+    flash("Please choose an image first! The other fields will be available after the image has been chosen.", "warning")
     return render_template("users/new/quizzes/create.html")
 
 
@@ -341,10 +341,10 @@ def edit_quiz(quiz_id):
 
     if not search:
         questions = Question.query.filter(
-            or_(Question.user_id == g.user.id, Question.private == False), Question.mult_choice == quiz.mult_choice, Question.category == quiz.category).all()
+            or_(Question.user_id == g.user.id, Question.private == False), Question.mult_choice == quiz.mult_choice).all()
     else:
         questions = Question.query.filter(or_(Question.user_id == g.user.id, Question.private == False),
-                                          Question.category == quiz.category, Question.mult_choice == quiz.mult_choice, Question.question.ilike(f"%{search}%")).all()
+                                          Question.mult_choice == quiz.mult_choice, Question.question.ilike(f"%{search}%")).all()
         if len(questions) == 0:
             flash("No questions found with that term", 'warning')
             return redirect(url_for('edit_quiz', quiz_id=quiz.id))
