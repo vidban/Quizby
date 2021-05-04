@@ -1,9 +1,7 @@
 import os
 import requests
 
-# uncomment this line if running locally
-# from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL, POSTS_PER_PAGE
-
+from dotenv import load_dotenv
 from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for, abort
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
@@ -15,12 +13,14 @@ from werkzeug.utils import secure_filename
 
 from flask_moment import Moment
 
-CURR_USER_KEY = os.environ.get('CURR_USER_KEY', "current_user")
-UNSPLASH_API_KEY = os.environ.get('UNSPLASH_API_KEY', UNSPLASH_API_KEY)
-SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
-DATABASE_URL = os.environ.get('DATABASE_URL', DATABASE_URL)
-UNSPLASH_API_URL = os.environ.get('UNSPLASH_API_URL', UNSPLASH_API_URL)
-POSTS_PER_PAGE = os.environ.get('POSTS_PER_PAGE', POSTS_PER_PAGE)
+load_dotenv()
+
+CURR_USER_KEY = os.environ.get('CURR_USER_KEY')
+UNSPLASH_API_KEY = os.environ.get('UNSPLASH_API_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DATABASE_URL = os.environ.get('DATABASE_URL')
+UNSPLASH_API_URL = os.environ.get('UNSPLASH_API_URL')
+POSTS_PER_PAGE = os.environ.get('POSTS_PER_PAGE')
 
 app = Flask(__name__)
 
