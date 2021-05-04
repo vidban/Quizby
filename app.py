@@ -1,7 +1,8 @@
 import os
 import requests
 
-from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL, POSTS_PER_PAGE
+# uncomment this line if running locally
+# from secrets import UNSPLASH_API_KEY, SECRET_KEY, CURR_USER_KEY, DATABASE_URL, UNSPLASH_API_URL, POSTS_PER_PAGE
 
 from flask import Flask, session, g,  render_template, flash, session, redirect, request, json, jsonify, url_for, abort
 from flask_debugtoolbar import DebugToolbarExtension
