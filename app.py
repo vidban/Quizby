@@ -512,6 +512,10 @@ def add_question_create():
         endpt = request.endpoint
 
     if form.validate_on_submit():
+        if not form.answer_one.data["correct"] and not form.answer_two.data["correct"] and not form.answer_three.data["correct"] and not form.answer_four.data["correct"]:
+            flash(
+                'Question Invalid! No correct choice was selected! Please try again.', "warning")
+            return redirect("/questions/add")
         try:
             new_question = Question(
                 question=form.question.data,
@@ -565,6 +569,7 @@ def add_question_create():
                 db.session.add(answer)
 
             db.session.commit()
+
             flash("Question successfully added", "success")
             if request.args:
                 return redirect(url_for("add_question_to_quiz", quiz_id=request.args["quiz_id"], question_id=question.id))
@@ -572,7 +577,6 @@ def add_question_create():
             return redirect(url_for('users_questions_dashboard', user_id=g.user.id))
 
         except IntegrityError as e:
-            # print(e.orig.args)
             flash('This question already exists! Please enter', 'danger')
             return redirect(url_for(request.endpoint, question=new_question))
     else:
