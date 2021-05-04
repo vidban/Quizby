@@ -90,3 +90,7 @@ A system for managing online multiple-choice tests. Supports editing of question
   - *POST '/questions/<int:question_id>/delete'*
     - Delete a user's question
 	
+
+## Tests
+
+Run tests with `python -m unittest`
