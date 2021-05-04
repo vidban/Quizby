@@ -48,7 +48,7 @@ class AddQuestionForm(FlaskForm):
     question = TextAreaField('Question', validators=[
         DataRequired(), Length(max=200)])
     mult_choice = RadioField('Question Type:', choices=[(
-        'mc', 'Multiple Choice'),  ('f', 'Flash Cards')], default='mc')
+        'mc', 'Multiple Choice')], default='mc')
     answer_one = FormField(AnswerForm)
     answer_two = FormField(AnswerForm)
     answer_three = FormField(AnswerForm)
