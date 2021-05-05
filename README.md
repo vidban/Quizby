@@ -1,5 +1,7 @@
 # Quizby App
 
+See it live [here](https://quizby.herokuapp.com/)
+
 A system for managing online multiple-choice tests. Supports editing of questions by whoever is in charge of the test, creation of tests from the available set of questions or using pre-built quizzes. Correct Answers and scores are provided at the end of the test.
 
 ### Goals:
@@ -14,7 +16,7 @@ A system for managing online multiple-choice tests. Supports editing of question
 
 1. Download the code via zip file or clone the repo
 2. In the virtual environment, install dependencies with `python install -r requirements.txt `
-3. Add environment variables (See below for the variables list) to `secrets.py`
+3. Add environment variables (See below for the variables list) to a `.env` file and place it in the root folder
 3. Run application with `flask run`
 ## Tech Stack:
 
